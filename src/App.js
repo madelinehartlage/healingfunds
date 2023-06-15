@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text, Flex, Stack, Image, Button } from '@chakra-ui/react';
-import './App.css';
+import { Text, Flex, Stack, Image, Button, Link } from '@chakra-ui/react';
 import logoPNG from "./logoPNGAlt4.png";
 import seniorlove2 from "./image-1000x500.jpg";
 
@@ -13,21 +12,31 @@ function App() {
             <Image src={logoPNG}/>
           </Flex>
           <Stack paddingTop={12} direction="row" width="40%" spacing={10} alignItems="center">
-            <Text fontSize="xl" fontWeight="bold">
-              ABOUT
-            </Text>
-            <Text fontSize="xl" fontWeight="bold">
-              SPONSORS
-            </Text>
-            <Text  fontSize="xl" fontWeight="bold">
-              ARTICLES
-            </Text>
-            <Text fontSize="xl" fontWeight="bold">
-              CONTACT
-            </Text>
-            <Text fontSize="xl" fontWeight="bold">
-              DONATE
-            </Text>
+            <Link>
+              <Text fontSize="xl" fontWeight="bold">
+                ABOUT
+              </Text>
+            </Link>
+            <Link>
+              <Text fontSize="xl" fontWeight="bold">
+                SPONSORS
+              </Text>
+            </Link>
+            <Link>
+              <Text fontSize="xl" fontWeight="bold">
+                ARTICLES
+              </Text>
+            </Link>
+            <Link>
+              <Text fontSize="xl" fontWeight="bold">
+                CONTACT
+              </Text>
+            </Link>
+            <Link>
+              <Text fontSize="xl" fontWeight="bold">
+                DONATE
+              </Text>
+            </Link>
           </Stack>
         </Flex>
         <Image src={seniorlove2}/>
@@ -64,28 +73,55 @@ function App() {
           <Stack width="100%" direction="row" justifyContent="center" spacing={20}>
             <Stack direction="column" alignItems="center">
               <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
-              <Text color="white">ARTICLE 1</Text>
+              <Text fontWeight="semibold" color="white">ARTICLE 1</Text>
             </Stack>
             <Stack direction="column" alignItems="center">
               <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
-              <Text color="white">ARTICLE 2</Text>
+              <Text fontWeight="semibold" color="white">ARTICLE 2</Text>
             </Stack>
             <Stack direction="column" alignItems="center">
               <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
-              <Text color="white">ARTICLE 3</Text>
+              <Text fontWeight="semibold" color="white">ARTICLE 3</Text>
             </Stack>
             <Stack direction="column" alignItems="center">
               <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
-              <Text color="white">ARTICLE 4</Text>
+              <Text fontWeight="semibold" color="white">ARTICLE 4</Text>
             </Stack>
           </Stack>
           <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
             LEARN MORE
           </Button>
         </Stack>
+        <Stack width="100%" direction="column" alignItems="center" spacing={8} paddingTop={4} paddingBottom={12}>
+          <Text fontWeight="semibold" fontSize="2xl">
+            SPONSORS
+          </Text>
+          <Stack width="100%" direction="row" justifyContent="center" spacing={20}>
+            <Stack direction="column" alignItems="center">
+              <Flex bgColor="#D9D9D9" height="150px" width="150px" borderRadius="100%"></Flex>
+              <Text fontWeight="semibold">Person Name</Text>
+            </Stack>
+            <Stack direction="column" alignItems="center">
+              <Flex bgColor="#D9D9D9" height="150px" width="150px" borderRadius="100%"></Flex>
+              <Text fontWeight="semibold">Person Name</Text>
+            </Stack>
+            <Stack direction="column" alignItems="center">
+              <Flex bgColor="#D9D9D9" height="150px" width="150px" borderRadius="100%"></Flex>
+              <Text fontWeight="semibold">Person Name</Text>
+            </Stack>
+          </Stack>
+          <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
+            SEE MORE
+          </Button>
+        </Stack>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
+          <Text fontSize="lg" fontWeight="semibold" color="white">Healing Funds Inc.</Text>
+          <Text fontSize="lg" fontWeight="semibold" color="white">Contact Us</Text>
+          <Text fontSize="lg" fontWeight="semibold" color="white">Donate</Text>
+        </Stack>
       </Stack>
     </Flex>
   );
-}
+};
 
 export default App;
