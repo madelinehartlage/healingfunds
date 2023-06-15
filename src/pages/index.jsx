@@ -1,18 +1,16 @@
 import React from 'react';
-import { Text, Flex, Stack, Image, Button, Link } from '@chakra-ui/react';
-import logoPNG from "./logoPNGAlt4.png";
-import seniorlove2 from "./image-1000x500.jpg";
+import { Text, Flex, Stack, Button, Image, Link } from '@chakra-ui/react';
 
-function App() {
+function HealingFundsHome() {
   return (
     <Flex height="100vh">
       <Stack direction="column" width="100%">
         <Flex width="100%" paddingLeft={4}>
           <Flex width="60%">
-            <Image src={logoPNG}/>
+            <Image src="/logoPNGAlt4.png"/>
           </Flex>
           <Stack paddingTop={12} direction="row" width="40%" spacing={10} alignItems="center">
-            <Link>
+            <Link href="/about">
               <Text fontSize="xl" fontWeight="bold">
                 ABOUT
               </Text>
@@ -39,7 +37,7 @@ function App() {
             </Link>
           </Stack>
         </Flex>
-        <Image src={seniorlove2}/>
+        <Image src="/image-1000x500.jpg"/>
         <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
           <Stack direction="column" width="50%">
             <Text fontWeight="bold" fontSize="2xl" textAlign="center">
@@ -124,4 +122,4 @@ function App() {
   );
 };
 
-export default App;
+export default HealingFundsHome;
