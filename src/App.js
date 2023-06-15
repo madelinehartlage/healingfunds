@@ -31,7 +31,7 @@ function App() {
           </Stack>
         </Flex>
         <Image src={seniorlove2}/>
-        <Flex width="100%" justifyContent="center">
+        <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
           <Stack direction="column" width="50%">
             <Text fontWeight="bold" fontSize="2xl" textAlign="center">
               Healing Cancer Holistically
@@ -57,6 +57,32 @@ function App() {
             </Flex>
           </Stack>
         </Flex>
+        <Stack width="100%" direction="column" bgColor="#439298" alignItems="center" spacing={8} paddingTop={4} paddingBottom={12}>
+          <Text color="white" fontWeight="semibold" fontSize="2xl">
+            LATEST ARTICLES
+          </Text>
+          <Stack width="100%" direction="row" justifyContent="center" spacing={20}>
+            <Stack direction="column" alignItems="center">
+              <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
+              <Text color="white">ARTICLE 1</Text>
+            </Stack>
+            <Stack direction="column" alignItems="center">
+              <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
+              <Text color="white">ARTICLE 2</Text>
+            </Stack>
+            <Stack direction="column" alignItems="center">
+              <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
+              <Text color="white">ARTICLE 3</Text>
+            </Stack>
+            <Stack direction="column" alignItems="center">
+              <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
+              <Text color="white">ARTICLE 4</Text>
+            </Stack>
+          </Stack>
+          <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
+            LEARN MORE
+          </Button>
+        </Stack>
       </Stack>
     </Flex>
   );
