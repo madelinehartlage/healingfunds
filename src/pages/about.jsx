@@ -15,7 +15,7 @@ function About() {
                 ABOUT
               </Text>
             </Link>
-            <Link>
+            <Link href="/sponsors">
               <Text fontSize="xl" fontWeight="bold">
                 SPONSORS
               </Text>
@@ -68,9 +68,21 @@ function About() {
         </Grid>
         
         <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
-          <Text fontSize="lg" fontWeight="semibold" color="white">Healing Funds Inc.</Text>
-          <Text fontSize="lg" fontWeight="semibold" color="white">Contact Us</Text>
-          <Text fontSize="lg" fontWeight="semibold" color="white">Donate</Text>
+          <Link href="/"> 
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+                Healing Funds Inc.
+            </Text>
+          </Link> 
+          <Link href="/contact">
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+                Contact Us
+            </Text>
+          </Link>
+          <Link>
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+                Donate
+            </Text>
+          </Link>
         </Stack>
       </Stack>
     </Flex>
