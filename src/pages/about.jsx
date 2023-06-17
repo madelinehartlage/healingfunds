@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid } from '@chakra-ui/react';
 
 function About() {
   return (
@@ -37,33 +37,35 @@ function About() {
             </Link>
           </Stack>
         </Flex>
-        <Image src="/image-1000x500.jpg"/>
-        <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
-          <Stack direction="column" width="50%">
-            <Text fontWeight="bold" fontSize="2xl" textAlign="center">
-              Healing Cancer Holistically
+        <Image src="/woman yoga.jpg"/>
+        <Grid templateColumns="repeat(3, 1fr)" paddingTop={20} paddingBottom={8}>
+          <Stack direction="column" paddingLeft={20} paddingTop={16}>
+            <Flex>
+              <Flex bgColor="#439298" width="150px" height="150px" transform="rotate(45deg) translateX(-15px) translateY(-90px)"></Flex>
+              <Flex bgColor="#F86F8B" width="150px" height="150px" transform="rotate(45deg)"></Flex>
+            </Flex>
+            <Flex>
+              <Flex bgColor="#F86F8B" width="150px" height="150px" transform="rotate(45deg) translateX(-105px) translateY(-75px)"></Flex>
+              <Flex bgColor="#439298" width="150px" height="150px" transform="rotate(45deg) translateX(-90px)"></Flex>
+              <Flex bgColor="lightgray" width="150px" height="150px" transform="rotate(45deg) translateX(-270px) translateY(60px)"></Flex>
+            </Flex>
+          </Stack>
+          <Stack direction="column" spacing={4}>
+            <Text fontWeight="bold" fontSize="3xl">
+              About Healing Funds Inc.
             </Text>
-            <Text textAlign="center" fontWeight="semibold">
-              The mission of Healing Funds is to distribute funds to cancer patients for the purpose of utilizing holistic alternative methods for treatment.
-            </Text>
-            <Text textAlign="center" fontWeight="semibold">
+            <Text fontWeight="semibold" fontSize="lg">
               Healing Funds seeks to provide cancer patients with the financial resources necessary to approach healing naturally. 
+            </Text>
+            <Text fontWeight="semibold" fontSize="lg">
               Whether it be exercise, diet, therapy, or other methods, each patient deserves the ability to fight cancer in a way that protects 
               and enhances their health.
             </Text>
-            <Text textAlign="center" fontWeight="semibold">
+            <Text fontWeight="semibold" fontSize="lg">
               With your donation, Healing Funds can enable a patient in need to receive revitalizing care.
             </Text>
-            <Flex width="100%" justifyContent="space-around" paddingTop={8}>
-              <Button bgColor="#439298" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
-                DONATE NOW
-              </Button>
-              <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
-                REQUEST FUNDS
-              </Button>
-            </Flex>
           </Stack>
-        </Flex>
+        </Grid>
         
         <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
           <Text fontSize="lg" fontWeight="semibold" color="white">Healing Funds Inc.</Text>
