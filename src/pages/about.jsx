@@ -22,7 +22,7 @@ function About() {
                 SPONSORS
               </Text>
             </Link>
-            <Link>
+            <Link href="/articles">
               <Text fontSize="xl" fontWeight="bold">
                 ARTICLES
               </Text>

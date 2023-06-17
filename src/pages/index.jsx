@@ -22,7 +22,7 @@ function HealingFundsHome() {
                 SPONSORS
               </Text>
             </Link>
-            <Link>
+            <Link href="/articles">
               <Text fontSize="xl" fontWeight="bold">
                 ARTICLES
               </Text>
@@ -88,9 +88,11 @@ function HealingFundsHome() {
               <Text fontWeight="semibold" color="white">ARTICLE 4</Text>
             </Stack>
           </Stack>
-          <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
-            LEARN MORE
-          </Button>
+          <Link href="/articles">
+            <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#F86F8B", opacity: "80%"}}>
+              LEARN MORE
+            </Button>
+          </Link>
         </Stack>
         <Stack width="100%" direction="column" alignItems="center" spacing={8} paddingTop={4} paddingBottom={12}>
           <Text fontWeight="semibold" fontSize="2xl">
@@ -110,9 +112,11 @@ function HealingFundsHome() {
               <Text fontWeight="semibold">Person Name</Text>
             </Stack>
           </Stack>
-          <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
-            SEE MORE
-          </Button>
+          <Link href="/sponsors">
+            <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#F86F8B", opacity: "70%"}}>
+              SEE MORE
+            </Button>
+          </Link>
         </Stack>
         <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
           <Link href="/"> 

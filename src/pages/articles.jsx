@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Flex, Stack, Button, Image, Link, Grid } from '@chakra-ui/react';
 
-function Sponsors() {
+function Articles() {
   return (
     <Flex height="100vh">
       <Stack direction="column" width="100%">
@@ -39,45 +39,45 @@ function Sponsors() {
             </Link>
           </Stack>
         </Flex>
-        <Image src="/image-1000x600.jpg"/>
+        <Image src="/researchimage.jpg"/>
         <Flex bgColor="#439298" justifyContent="center" fontWeight="semibold" fontSize="3xl" marginTop={8}>
             <Text color="white">
-                Our Sponsors
+                Latest Articles
             </Text>
         </Flex>
         <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
             <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
+                    <Text fontWeight="semibold">Article</Text>
                 </Stack>
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
+                    <Text fontWeight="semibold">Article</Text>
                 </Stack>
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
+                    <Text fontWeight="semibold">Article</Text>
                 </Stack>
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
+                    <Text fontWeight="semibold">Article</Text>
                 </Stack>
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold"> Person Name</Text>
+                    <Text fontWeight="semibold">Article</Text>
                 </Stack>
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
+                    <Text fontWeight="semibold">Article</Text>
                 </Stack>
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
+                    <Text fontWeight="semibold">Article</Text>
                 </Stack>
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
+                    <Text fontWeight="semibold">Article</Text>
                 </Stack>
                 
             </Stack>
@@ -104,4 +104,4 @@ function Sponsors() {
   );
 };
 
-export default Sponsors;
+export default Articles;
