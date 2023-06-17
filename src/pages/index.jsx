@@ -7,7 +7,9 @@ function HealingFundsHome() {
       <Stack direction="column" width="100%">
         <Flex width="100%" paddingLeft={4}>
           <Flex width="60%">
-            <Image src="/logoPNGAlt4.png"/>
+            <Link href="/">
+              <Image src="/logoPNGAlt4.png"/>
+            </Link>
           </Flex>
           <Stack paddingTop={12} direction="row" width="40%" spacing={10} alignItems="center">
             <Link href="/about">
