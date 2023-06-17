@@ -25,7 +25,7 @@ function HealingFundsHome() {
                 ARTICLES
               </Text>
             </Link>
-            <Link>
+            <Link href="/contact">
               <Text fontSize="xl" fontWeight="bold">
                 CONTACT
               </Text>

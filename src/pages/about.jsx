@@ -10,7 +10,7 @@ function About() {
             <Image src="/logoPNGAlt4.png"/>
           </Flex>
           <Stack paddingTop={12} direction="row" width="40%" spacing={10} alignItems="center">
-            <Link>
+            <Link href="/about">
               <Text fontSize="xl" fontWeight="bold">
                 ABOUT
               </Text>
@@ -25,7 +25,7 @@ function About() {
                 ARTICLES
               </Text>
             </Link>
-            <Link>
+            <Link href="/contact">
               <Text fontSize="xl" fontWeight="bold">
                 CONTACT
               </Text>
