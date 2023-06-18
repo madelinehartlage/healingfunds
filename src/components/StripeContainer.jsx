@@ -16,8 +16,8 @@ export default function StripeContainer() {
     const checkoutOptions = {
         lineItems: [item],
         mode: "payment",
-        successUrl: `http://localhost:3000/success`,
-        cancelUrl: `http://localhost:3000/cancel`
+        successUrl: `http://healing-funds.com/success`,
+        cancelUrl: `http://healing-funds.com`
     };
 
     const redirectToCheckout = async () => {
