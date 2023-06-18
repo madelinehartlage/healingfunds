@@ -9,7 +9,7 @@ export default function StripeContainer() {
     const [isLoading, setLoading] = React.useState(false);
 
     const item = {
-        price: "price_1NKEgqHHKZKLjgUhdOUeirI9",
+        price: "price_1NKHSQHHKZKLjgUhowhAnZqe",
         quantity: 1
     };
 
