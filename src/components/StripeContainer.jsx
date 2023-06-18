@@ -24,7 +24,7 @@ export default function StripeContainer() {
         setLoading(true);
         console.log("redirectToCheckout");
 
-        const stripe = await loadStripe('pk_test_51NIz75HHKZKLjgUh4KjmjgLSTlqllf4d1YPPnT2PErPYU47sdbwrcjM9neeWkCRCU0T1Q4gTsnNzwdHYLgtPg1R2003z18DoxI');
+        const stripe = await loadStripe('pk_live_51NIz75HHKZKLjgUhGDgGlSQDNGEpzWSp3mEQ17rwPsaomNRFGiwxcXyNv82qChufyawj4VtwHutlt5UQ4TeflIKD00sA1vRyU4');
         const { error } = await stripe.redirectToCheckout(checkoutOptions);
         console.log("Stripe checkout error", error);
 
