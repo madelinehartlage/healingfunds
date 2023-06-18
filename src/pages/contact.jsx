@@ -41,16 +41,33 @@ function Contact() {
         </Flex>
         <Image src="/supportsystem.jpg"/>
         <Flex justifyContent="center" paddingTop={50} paddingBottom={50}>
-            <Stack direction="column" spacing={8}>
+            <Stack direction="column" spacing={8} alignItems="center">
                 <Text fontWeight="bold" fontSize="3xl">
-                    Call Us Today
+                    Contact Us Today
                 </Text>
-                <Text fontWeight="semibold" fontSize="lg">
-                    Email: email@example.com
-                </Text>
-                <Text fontWeight="semibold" fontSize="lg">
-                    Phone: (123)-456-7890
-                </Text>
+                <Stack direction="row" spacing={20}>
+                    <Stack direction="column">
+                        <Link href="mailto:healingfunds@gmail.com">
+                            <Text fontWeight="semibold" fontSize="lg">
+                                Email: healingfunds@gmail.com
+                            </Text>
+                        </Link>
+                        <Text fontWeight="semibold" fontSize="lg">
+                            Phone: (937)-750-3305
+                        </Text>
+                    </Stack>
+                    <Stack direction="column">
+                        <Text fontWeight="semibold" fontSize="lg">
+                            Mailing Address
+                        </Text>
+                        <Text fontWeight="semibold" fontSize="lg">
+                            1867 S. Highgate Ct.
+                        </Text>
+                        <Text fontWeight="semibold" fontSize="lg">
+                            Beavercreek, OH 45432
+                        </Text>
+                    </Stack>
+                </Stack>
             </Stack>
         </Flex>
         <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
