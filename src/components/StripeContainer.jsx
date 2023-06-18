@@ -2,15 +2,6 @@ import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Button } from "@chakra-ui/react";
 
-let stripePromise;
-
-const getStripe = () => {
-  if (!stripePromise) {
-    stripePromise = loadStripe(process.env.STRIPE_KEY);
-  }
-
-  return stripePromise;
-};
 
 export default function StripeContainer() {
 
@@ -33,7 +24,7 @@ export default function StripeContainer() {
         setLoading(true);
         console.log("redirectToCheckout");
 
-        const stripe = await getStripe();
+        const stripe = await loadStripe('pk_test_51NIz75HHKZKLjgUh4KjmjgLSTlqllf4d1YPPnT2PErPYU47sdbwrcjM9neeWkCRCU0T1Q4gTsnNzwdHYLgtPg1R2003z18DoxI');
         const { error } = await stripe.redirectToCheckout(checkoutOptions);
         console.log("Stripe checkout error", error);
 
