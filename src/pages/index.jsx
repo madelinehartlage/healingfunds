@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, Flex, Stack, Button, Image, Link } from '@chakra-ui/react';
+import StripeContainer from '@/components/StripeContainer';
 
 function HealingFundsHome() {
   return (
@@ -32,7 +33,7 @@ function HealingFundsHome() {
                 CONTACT
               </Text>
             </Link>
-            <Link>
+            <Link href="/donate">
               <Text fontSize="xl" fontWeight="bold">
                 DONATE
               </Text>
@@ -57,9 +58,11 @@ function HealingFundsHome() {
               With your donation, Healing Funds can enable a patient in need to receive revitalizing care.
             </Text>
             <Flex width="100%" justifyContent="space-around" paddingTop={8}>
-              <Button bgColor="#439298" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
-                DONATE NOW
-              </Button>
+              <Link href="/donate">
+                <Button bgColor="#439298" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#439298", opacity: "60%"}}>
+                  DONATE NOW
+                </Button>
+              </Link>
               <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
                 REQUEST FUNDS
               </Button>
@@ -129,9 +132,9 @@ function HealingFundsHome() {
               Contact Us
             </Text>
           </Link>
-          <Link>
+          <Link href="/donate">
             <Text fontSize="lg" fontWeight="semibold" color="white">
-              Donate
+                Donate
             </Text>
           </Link>
         </Stack>

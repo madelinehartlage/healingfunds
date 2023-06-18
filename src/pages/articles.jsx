@@ -32,7 +32,7 @@ function Articles() {
                 CONTACT
               </Text>
             </Link>
-            <Link>
+            <Link href="/donate">
               <Text fontSize="xl" fontWeight="bold">
                 DONATE
               </Text>
@@ -93,11 +93,11 @@ function Articles() {
                     Contact Us
                 </Text>
             </Link>
-            <Link>
+            <Link href="/donate">
                 <Text fontSize="lg" fontWeight="semibold" color="white">
                     Donate
                 </Text>
-          </Link>
+            </Link>
         </Stack>
       </Stack>
     </Flex>

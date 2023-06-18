@@ -32,7 +32,7 @@ function About() {
                 CONTACT
               </Text>
             </Link>
-            <Link>
+            <Link href="/donate">
               <Text fontSize="xl" fontWeight="bold">
                 DONATE
               </Text>
@@ -80,7 +80,7 @@ function About() {
                 Contact Us
             </Text>
           </Link>
-          <Link>
+          <Link href="/donate">
             <Text fontSize="lg" fontWeight="semibold" color="white">
                 Donate
             </Text>

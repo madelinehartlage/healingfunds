@@ -34,7 +34,7 @@ function Donate() {
                 CONTACT
               </Text>
             </Link>
-            <Link>
+            <Link href="/donate">
               <Text fontSize="xl" fontWeight="bold">
                 DONATE
               </Text>
@@ -43,7 +43,7 @@ function Donate() {
         </Flex>
         <StripeContainer />
         
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10} position="absolute" bottom={0}>
             <Link href="/"> 
                 <Text fontSize="lg" fontWeight="semibold" color="white">
                     Healing Funds Inc.
@@ -54,7 +54,7 @@ function Donate() {
                     Contact Us
                 </Text>
             </Link>
-            <Link>
+            <Link href="/donate">
                 <Text fontSize="lg" fontWeight="semibold" color="white">
                     Donate
                 </Text>
