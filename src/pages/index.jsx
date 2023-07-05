@@ -84,11 +84,11 @@ function HealingFundsHome() {
               With your donation, Healing Funds can enable a patient in need to receive revitalizing care.
             </Text>
             <Flex width="100%" justifyContent="space-around" paddingTop={8}>
-              <Link href="/donate">
-                <Button bgColor="#439298" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#439298", opacity: "60%"}}>
+              
+                <Button bgColor="#439298" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#439298", opacity: "60%"}} onClick={handleSubmit}>
                   DONATE NOW
                 </Button>
-              </Link>
+              
               <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
                 REQUEST FUNDS
               </Button>
