@@ -20,7 +20,7 @@ export default async function handler(
         mode: 'payment',
         line_items: [
           {
-            price: 'price_1NLYnOHHKZKLjgUh3H5usBAN',
+            price: 'price_1NQc7DHHKZKLjgUhR4NrCU1L',
             quantity: 1,
           },
         ],
