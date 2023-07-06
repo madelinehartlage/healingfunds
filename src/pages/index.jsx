@@ -88,10 +88,11 @@ function HealingFundsHome() {
                 <Button bgColor="#439298" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#439298", opacity: "60%"}} onClick={handleSubmit}>
                   DONATE NOW
                 </Button>
-              
-              <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
-                REQUEST FUNDS
-              </Button>
+              <Link href="/request">
+                <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4}>
+                  REQUEST FUNDS
+                </Button>
+              </Link>
             </Flex>
           </Stack>
         </Flex>

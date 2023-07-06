@@ -1,10 +1,10 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
+import RequestForm from "@/components/RequestForm"
 
-function Success() {
-
+function Request() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Create a Checkout Session.
@@ -67,12 +67,31 @@ function Success() {
             </Link>
           </Stack>
         </Flex>
-        <Flex justifyContent="center" paddingTop={50} paddingBottom={50}>
-            <Text fontWeight="bold" fontSize="3xl">Thank you for your donation!</Text>
-        </Flex>
+        
+        <Stack alignItems="center" direction="column" spacing={5}>
+            <Text fontSize="3xl" fontWeight="semibold" padding={4}>Request Funds</Text>
+            <RequestForm />
+        </Stack>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
+          <Link href="/"> 
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+              Healing Funds Inc.
+            </Text>
+          </Link> 
+          <Link href="/contact">
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+              Contact Us
+            </Text>
+          </Link>
+          <Link onClick={handleSubmit}>
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+                Donate
+            </Text>
+          </Link>
+        </Stack>
       </Stack>
     </Flex>
   );
 };
 
-export default Success;
+export default Request;

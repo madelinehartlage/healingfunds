@@ -28,7 +28,7 @@ export default async function handler(
           "enabled": true,
         },
         billing_address_collection: 'required',
-        success_url: `${req.headers.origin}/`,
+        success_url: `${req.headers.origin}/success`,
         cancel_url: `${req.headers.origin}/`,
       }
       const checkoutSession =
