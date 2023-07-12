@@ -96,16 +96,6 @@ function Request() {
         <Stack alignItems="center" direction="column" spacing={5}>
             <Text fontSize="3xl" fontWeight="semibold" padding={4}>Request Funds</Text>
             <RequestForm />
-            <Button onClick={() => getProps()
-              .then(function(result) {
-                console.log(result);})}
-            >
-              GetData
-            </Button>
-            <Button onClick={() => postProps()}
-            >
-              PostData
-            </Button>
         </Stack>
         <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
           <Link href="/"> 
