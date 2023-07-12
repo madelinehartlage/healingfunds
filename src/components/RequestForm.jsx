@@ -30,7 +30,7 @@ export default function RequestForm() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-        })
+        }).catch(e=>{console.warn(e); return null;});
         if (response.ok) {
             console.log("Message sent successfully")
             setLoading(false)
