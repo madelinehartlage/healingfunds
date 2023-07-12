@@ -44,12 +44,40 @@ export default function RequestForm() {
             e.target.cancer.value="";
             e.target.date.value="";
             e.target.therapy.value="";
+            let res = await fetch("/api/posts", {
+                method: "POST",
+                body: JSON.stringify({
+                  name: data.name,
+                  email: data.email,
+                  phone: data.phone,
+                  street: data.street,
+                  city: data.city,
+                  state: data.state,
+                  zip: data.zip,
+                  cancer: data.cancer,
+                  date: data.date,
+                  therapy: data.therapy,
+                }),
+              });
+              res = await res.json();
         }
         if (!response.ok) {
             console.log("Error sending message")
             setLoading(false)
         }
     }
+
+    const postProps = async () => {
+        let res = await fetch("/api/posts", {
+          method: "POST",
+          body: JSON.stringify({
+            name: data.name,
+            therapy: data.therapy,
+          }),
+        });
+        res = await res.json();
+      }
+
     return (
         <form onSubmit={handleRequest}>
             <Stack spacing={5} bgColor="white" borderRadius="16px" padding={4} border="1px solid black">

@@ -30,6 +30,31 @@ function Request() {
     console.warn(error.message)
   }
 
+  const getProps = async () => {
+    let res = await fetch("/api/posts", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    let allPosts = await res.json();
+
+    return {
+      props: { allPosts },
+    };
+  }
+
+  const postProps = async () => {
+    let res = await fetch("/api/posts", {
+      method: "POST",
+      body: JSON.stringify({
+        title: "Madeline",
+        content: "Form",
+      }),
+    });
+    res = await res.json();
+  }
+
   return (
     <Flex height="100vh">
       <Stack direction="column" width="100%">
@@ -71,6 +96,16 @@ function Request() {
         <Stack alignItems="center" direction="column" spacing={5}>
             <Text fontSize="3xl" fontWeight="semibold" padding={4}>Request Funds</Text>
             <RequestForm />
+            <Button onClick={() => getProps()
+              .then(function(result) {
+                console.log(result);})}
+            >
+              GetData
+            </Button>
+            <Button onClick={() => postProps()}
+            >
+              PostData
+            </Button>
         </Stack>
         <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
           <Link href="/"> 
