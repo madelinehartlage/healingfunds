@@ -5,6 +5,15 @@ import 'react-phone-input-2/lib/style.css'
 
 export default function RequestForm() {
     const [value, setValue] = React.useState('')
+    const [name, setName] = React.useState('')
+    const [email, setEmail] = React.useState('')
+    const [street, setStreet] = React.useState('')
+    const [city, setCity] = React.useState('')
+    const [state, setState] = React.useState('')
+    const [zip, setZip] = React.useState('')
+    const [cancer, setCancer] = React.useState('')
+    const [date, setDate] = React.useState('')
+    const [therapy, setTherapy] = React.useState('')
     const [loading, setLoading] = React.useState(false)
 
     const handleRequest = async (e) => {
@@ -12,54 +21,18 @@ export default function RequestForm() {
         setLoading(true)
         // Create a Checkout Session.
         
-        const data = {
-            name: e.target.name.value,
-            email: e.target.email.value,
-            phone: value,
-            street: e.target.street.value,
-            city: e.target.city.value,
-            state: e.target.state.value,
-            zip: e.target.zip.value,
-            cancer: e.target.cancer.value,
-            date: e.target.date.value,
-            therapy: e.target.therapy.value,
-        }
-        const response = await fetch("/api/requestForm", {
+        
+        const response = await fetch("/api/posts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({name, email, value, street, city, state, zip, cancer, date, therapy}),
         })
         if (response.ok) {
             console.log("Message sent successfully")
             setLoading(false)
-            e.target.name.value="";
-            e.target.email.value="";
-            setValue("")
-            e.target.street.value="";
-            e.target.city.value="";
-            e.target.state.value="";
-            e.target.zip.value="";
-            e.target.cancer.value="";
-            e.target.date.value="";
-            e.target.therapy.value="";
-            let res = await fetch("/api/posts", {
-                method: "POST",
-                body: JSON.stringify({
-                  name: data.name,
-                  email: data.email,
-                  phone: data.phone,
-                  street: data.street,
-                  city: data.city,
-                  state: data.state,
-                  zip: data.zip,
-                  cancer: data.cancer,
-                  date: data.date,
-                  therapy: data.therapy,
-                }),
-              });
-              res = await res.json();
+            
         }
         if (!response.ok) {
             console.log("Error sending message")
@@ -83,11 +56,11 @@ export default function RequestForm() {
             <Stack spacing={5} bgColor="white" borderRadius="16px" padding={4} border="1px solid black">
                 <Stack>
                     <FormLabel>Name</FormLabel>
-                    <Input type="text" required id="name" placeholder="Name"></Input>
+                    <Input type="text" required onChange={(e) => setName(e.target.value)} value={name} placeholder="Name"></Input>
                 </Stack>   
                 <Stack>
                     <FormLabel>Email</FormLabel>
-                    <Input type="email" required id="email" placeholder="email@example.com"></Input>
+                    <Input type="email" required onChange={(e) => setEmail(e.target.value)} value={email} placeholder="email@example.com"></Input>
                 </Stack> 
                 <Stack>
                     <FormLabel>Phone</FormLabel>
@@ -104,22 +77,22 @@ export default function RequestForm() {
                 </Stack> 
                 <Stack>
                     <FormLabel>Address</FormLabel>
-                    <Input required id="street" placeholder="Street Address"></Input>
-                    <Input required id="city" placeholder="City"></Input>
-                    <Input required id="state" placeholder="State"></Input>
-                    <Input required id="zip" placeholder="Zipcode"></Input>
+                    <Input required onChange={(e) => setStreet(e.target.value)} value={street} placeholder="Street Address"></Input>
+                    <Input required onChange={(e) => setCity(e.target.value)} value={city} placeholder="City"></Input>
+                    <Input required onChange={(e) => setState(e.target.value)} value={state} placeholder="State"></Input>
+                    <Input required onChange={(e) => setZip(e.target.value)} value={zip} placeholder="Zipcode"></Input>
                 </Stack>
                 <Stack>
                     <FormLabel>Cancer Type</FormLabel>
-                    <Input required id="cancer" placeholder="Cancer type"></Input>
+                    <Input required onChange={(e) => setCancer(e.target.value)} value={cancer} placeholder="Cancer type"></Input>
                 </Stack>
                 <Stack>
                     <FormLabel>Diagnosis Date</FormLabel>
-                    <Input required id="date" type="month"></Input>
+                    <Input required onChange={(e) => setDate(e.target.value)} value={date} type="month"></Input>
                 </Stack>
                 <Stack>
                     <FormLabel>Future Therapies Planned</FormLabel>
-                    <Textarea placeholder="List of planned therapies" required name="therapy"></Textarea>
+                    <Textarea placeholder="List of planned therapies" required onChange={(e) => setTherapy(e.target.value)} value={therapy}></Textarea>
                 </Stack>
                 
                 <Button type="submit" disabled={loading}>Submit</Button>

@@ -1,14 +1,13 @@
-import clientPromise from "../../db/mongodb";
+import connectMongoDB from "../../db/mongodb";
+import Form from "../../models/form";
 
 export default async function handler(req, res) {
-  const client = await clientPromise;
-  const db = client.db("nextjs-mongodb-demo");
   try {
     switch (req.method) {
       case "POST":
-        let bodyObject = JSON.parse(req.body);
-        let myPost = await db.collection("posts").insertOne(bodyObject);
-        res.json(myPost);
+        await connectMongoDB();
+        await Form.create(req.body);
+        res.json(req.body);
         break;
       case "GET":
         const allPosts = await db.collection("posts").find({}).toArray();

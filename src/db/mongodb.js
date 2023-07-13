@@ -1,14 +1,12 @@
-import { MongoClient } from 'mongodb'
+import mongoose from "mongoose";
 
-const uri = process.env.MONGODB_URI
+const connectMongoDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log("Connected to MongoDB.");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-
-let client
-let clientPromise
-
-
-client = new MongoClient(uri)
-clientPromise = client.connect()
- 
-
-export default clientPromise
+export default connectMongoDB;
