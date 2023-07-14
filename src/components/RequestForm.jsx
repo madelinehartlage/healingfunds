@@ -55,7 +55,18 @@ export default function RequestForm() {
            // setTitle('');
             //setContent('');
             // set the message
-            return setMessage(data.message);
+            let res = await fetch("/.netlify/functions/email", {
+                method: 'POST',
+                body: JSON.stringify(post),
+            });
+
+            let data = await res.json();
+            if (data.success) {
+                return setMessage(data.message);
+            }
+            else {
+                return setError(data.message);
+            }
         } else {
             // set the error
             return setError(data.message);
