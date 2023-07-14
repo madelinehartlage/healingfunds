@@ -42,7 +42,7 @@ export default function RequestForm() {
         };
 
         // save the post
-        let response = await fetch('/api/posts', {
+        let response = await fetch("/.netlify/functions/get_movies", {
             method: 'POST',
             body: JSON.stringify(post),
         });
