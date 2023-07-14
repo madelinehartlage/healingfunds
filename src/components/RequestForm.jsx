@@ -14,42 +14,53 @@ export default function RequestForm() {
     const [cancer, setCancer] = React.useState('')
     const [date, setDate] = React.useState('')
     const [therapy, setTherapy] = React.useState('')
+    const [error, setError] = React.useState('')
+    const [message, setMessage] = React.useState('')
     const [loading, setLoading] = React.useState(false)
 
     const handleRequest = async (e) => {
-        e.preventDefault()
-        setLoading(true)
-        // Create a Checkout Session.
-        
-        
-        const response = await fetch("/api/posts", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({name, email, value, street, city, state, zip, cancer, date, therapy}),
-        })
-        if (response.ok) {
-            console.log("Message sent successfully")
-            setLoading(false)
-            
-        }
-        if (!response.ok) {
-            console.log("Error sending message")
-            setLoading(false)
-        }
-    }
+        e.preventDefault();
 
-    const postProps = async () => {
-        let res = await fetch("/api/posts", {
-          method: "POST",
-          body: JSON.stringify({
-            name: data.name,
-            therapy: data.therapy,
-          }),
+        // reset error and message
+        setError('');
+        setMessage('');
+
+        // post structure
+        let post = {
+            name,
+            email,
+            value,
+            street,
+            city,
+            state,
+            zip,
+            cancer,
+            date,
+            therapy,
+            published: false,
+            createdAt: new Date().toISOString(),
+        };
+
+        // save the post
+        let response = await fetch('/api/posts', {
+            method: 'POST',
+            body: JSON.stringify(post),
         });
-        res = await res.json();
-      }
+
+        // get the data
+        let data = await response.json();
+
+        if (data.success) {
+            // reset the fields
+           // setTitle('');
+            //setContent('');
+            // set the message
+            return setMessage(data.message);
+        } else {
+            // set the error
+            return setError(data.message);
+        }
+    };
 
     return (
         <form onSubmit={handleRequest}>
