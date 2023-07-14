@@ -50,7 +50,7 @@ export default function RequestForm() {
         // get the data
         let data = await response.json();
 
-        if (data.success) {
+        if (data.status == "success") {
             // reset the fields
            // setTitle('');
             //setContent('');
@@ -61,7 +61,7 @@ export default function RequestForm() {
             });
 
             let data = await res.json();
-            if (data.success) {
+            if (data.status == "success") {
                 return setMessage(data.message);
             }
             else {
