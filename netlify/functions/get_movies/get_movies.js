@@ -7,12 +7,14 @@ const clientPromise = mongoClient.connect();
 
 const handler = async (event) => {
     try {
+        
         const database = (await clientPromise).db(process.env.MONGODB_DATABASE);
         const collection = database.collection("posts");
-        const results = await collection.find({}).limit(10).toArray();
+        const post = await collection.insertOne(event.body);
         return {
             statusCode: 200,
-            body: JSON.stringify(results),
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({status: "sucess", data: post,}),
         }
     } catch (error) {
         return { statusCode: 500, body: error.toString() }
