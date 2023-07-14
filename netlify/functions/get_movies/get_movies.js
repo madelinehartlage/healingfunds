@@ -14,7 +14,7 @@ const handler = async (event) => {
         return {
             statusCode: 200,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({status: "sucess", data: post,}),
+            body: JSON.stringify({status: "success", data: post,}),
         }
     } catch (error) {
         return { statusCode: 500, body: error.toString() }

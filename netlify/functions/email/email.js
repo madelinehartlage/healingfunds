@@ -1,12 +1,10 @@
-import nodemailer from "nodemailer";
+const  nodemailer = require("nodemailer");
 
 const handler = async (event) => {
-  
-  const {name, email, phone, street, city, state, zip, cancer, date, therapy, published, createdAt} = event.body
+  const body = JSON.parse(event.body)
+  console.log(body.name)
   const user = "madeline.hartlage37@gmail.com"
-  const data = {
-    name, phone, street, city, state, zip, cancer, date, therapy, createdAt,
-  }
+ 
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -22,20 +20,20 @@ const handler = async (event) => {
     const mail = await transporter.sendMail({
       from: user,
       to: "eaglekeeper37@gmail.com",
-      replyTo: email,
-      subject: `Contact form submission from ${name}`,
+      replyTo: body.email,
+      subject: `Contact form submission from ${body.name}`,
       html:`
-          <p>Name: ${name}</p>
-          <p>Email: ${email}</p>
-          <p>Phone: ${phone}</p>
-          <p>Address: ${street}</p>
-          <p> ${city}</p>
-          <p> ${state}</p>
-          <p> ${zip}</p>
-          <p>Cancer Type: ${cancer}</p>
-          <p>Diagnosis Date: ${date}</p>
-          <p>Future Therapies: ${therapy}</p>
-          <p>Created at: ${createdAt}</p>
+          <p>Name: ${body.name}</p>
+          <p>Email: ${body.email}</p>
+          <p>Phone: ${body.value}</p>
+          <p>Address: ${body.street}</p>
+          <p> ${body.city}</p>
+          <p> ${body.state}</p>
+          <p> ${body.zip}</p>
+          <p>Cancer Type: ${body.cancer}</p>
+          <p>Diagnosis Date: ${body.date}</p>
+          <p>Future Therapies: ${body.therapy}</p>
+          <p>Created at: ${body.createdAt}</p>
       `,
     });
 
@@ -43,7 +41,7 @@ const handler = async (event) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ status: "sucess", message: `Hello ${subject}` }),
+      body: JSON.stringify({ status: "success", message: `Hello ${subject}` }),
       // // more keys you can return:
       // headers: { "headerName": "headerValue", ... },
       // isBase64Encoded: true,

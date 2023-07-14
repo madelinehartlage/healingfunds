@@ -49,6 +49,7 @@ export default function RequestForm() {
 
         // get the data
         let data = await response.json();
+        console.log(data.status);
 
         if (data.status == "success") {
             // reset the fields
