@@ -36,7 +36,7 @@ function About() {
         <Flex width="100%" paddingLeft={4}>
           <Flex width="60%">
             <Link href="/">
-              <Image src="/logoPNGAlt4.png"/>
+              <Image src="/logoHealing2.jpg"/>
             </Link>
           </Flex>
           <Stack paddingTop={12} direction="row" width="40%" spacing={10} alignItems="center">
