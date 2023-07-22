@@ -68,7 +68,7 @@ function Articles() {
           </Stack>
         </Flex>
         <Flex width="100%" maxHeight="700px">
-          <Image src="/researchimage.jpg" width="100%"/>
+          <Image src="/researchimage.jpg" width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
         <Flex bgColor="#439298" justifyContent="center" fontWeight="semibold" fontSize="3xl" marginTop={8}>
             <Text color="white">

@@ -68,7 +68,7 @@ function Contact() {
           </Stack>
         </Flex>
         <Flex width="100%" maxHeight="650px">
-          <Image src="/rocks2.jpg" width="100%"/>
+          <Image src="/rocks2.jpg" width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
         <Flex justifyContent="center" paddingTop={50} paddingBottom={50}>
             <Stack direction="column" spacing={8} alignItems="center">

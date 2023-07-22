@@ -68,7 +68,7 @@ function About() {
           </Stack>
         </Flex>
         <Flex width="100%" maxHeight="650px">
-          <Image src="/supportsystem.jpg" width="100%"/>
+          <Image src="/supportsystem.jpg" width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
         <Grid templateColumns="repeat(3, 1fr)" paddingTop={20} paddingBottom={8}>
           <Stack direction="column" paddingLeft={20} paddingTop={16}>
