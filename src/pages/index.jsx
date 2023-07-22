@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text, Flex, Stack, Button, Link, Image } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Link, Image, Box } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 
@@ -68,7 +68,7 @@ function HealingFundsHome() {
           </Stack>
         </Flex>
         <Flex width="100%" maxHeight="650px">
-          <Image src="/image-1000x500.jpg" width="100%" fallbackSrc='https://via.placeholder.com/150'/>
+          <Image src="/image-1000x500.jpg" width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
         <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
           <Stack direction="column" width="50%">
