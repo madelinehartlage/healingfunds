@@ -68,7 +68,7 @@ function HealingFundsHome() {
           </Stack>
         </Flex>
         <Flex width="100%" maxHeight="650px">
-          <Image src="/image-1000x500.jpg" width="100%"/>
+          <Image src="/image-1000x500.jpg" width="100%" fallbackSrc='https://via.placeholder.com/150'/>
         </Flex>
         <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
           <Stack direction="column" width="50%">
