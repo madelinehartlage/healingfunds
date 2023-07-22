@@ -31,43 +31,45 @@ function Contact() {
   }
 
   return (
-    <Flex height="100vh">
+    <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
-        <Flex width="100%" paddingLeft={4}>
-          <Flex width="60%">
-            <Link href="/">
-              <Image src="/logoHealing2.jpg"/>
-            </Link>
-          </Flex>
-          <Stack paddingTop={12} direction="row" width="40%" spacing={10} alignItems="center">
-            <Link href="/about">
-              <Text fontSize="xl" fontWeight="bold">
-                ABOUT
-              </Text>
-            </Link>
+      <Flex width="100%" paddingLeft={4} paddingRight={10} justifyContent="space-between" alignItems="center">
+          
+          <Link href="/">
+            <Image src="/logoHealing2.jpg"/>
+          </Link>
+        
+        <Stack paddingTop={12} direction="row" spacing={10} alignItems="center">
+          <Link href="/about">
+            <Text fontSize="xl" fontWeight="bold" color="black">
+              ABOUT
+            </Text>
+          </Link>
             <Link href="/sponsors">
-              <Text fontSize="xl" fontWeight="bold">
+              <Text fontSize="xl" fontWeight="bold" color="black">
                 SPONSORS
               </Text>
             </Link>
             <Link href="/articles">
-              <Text fontSize="xl" fontWeight="bold">
+              <Text fontSize="xl" fontWeight="bold" color="black">
                 ARTICLES
               </Text>
             </Link>
             <Link href="/contact">
-              <Text fontSize="xl" fontWeight="bold">
+              <Text fontSize="xl" fontWeight="bold" color="black">
                 CONTACT
               </Text>
             </Link>
             <Link onClick={handleSubmit}>
-              <Text fontSize="xl" fontWeight="bold">
+              <Text fontSize="xl" fontWeight="bold" color="black">
                 DONATE
               </Text>
             </Link>
           </Stack>
         </Flex>
-        <Image src="/supportsystem.jpg"/>
+        <Flex width="100%" maxHeight="650px">
+          <Image src="/rocks2.jpg" width="100%"/>
+        </Flex>
         <Flex justifyContent="center" paddingTop={50} paddingBottom={50}>
             <Stack direction="column" spacing={8} alignItems="center">
                 <Text fontWeight="bold" fontSize="3xl">
