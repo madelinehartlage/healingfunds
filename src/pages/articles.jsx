@@ -108,7 +108,7 @@ function Articles() {
             <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">{articles[0].title}</Text>
+                    <Text fontWeight="semibold">{articles == [] ? "Article 1" : articles[0].title}</Text>
                 </Stack>
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
