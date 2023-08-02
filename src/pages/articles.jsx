@@ -134,14 +134,15 @@ function Articles() {
             <Text color="white">
                 Latest Articles
             </Text>
-            <Button onClick={handleRequest}>Get Articles</Button>
         </Flex>
         <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
             <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
                 {articles && articles.map((article) => (
                 <Stack key={article.title} direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Article</Text>
+                    <Link href={article.link}>
+                      <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
+                    </Link>
+                    <Text fontWeight="semibold">{article.title}</Text>
                 </Stack>))}
                 
                 
