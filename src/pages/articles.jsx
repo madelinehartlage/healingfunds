@@ -138,11 +138,11 @@ function Articles() {
         </Flex>
         <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
             <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
-                {articles && articles.map(
+                {articles && articles.map((article) => (
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
                     <Text fontWeight="semibold">Article</Text>
-                </Stack>)}
+                </Stack>))}
                 
                 
             </Stack>
