@@ -40,31 +40,6 @@ function Articles() {
 
   }, [])
 
-  const handleRequest = async (e) => {
-    e.preventDefault();
-
-    // reset error and message
-    setError('');
-    setMessage('');
-
-    let res = await fetch("/.netlify/functions/getArticles", {
-        method: 'GET',
-        headers: {
-          "Content-Type": "application/json",
-        },
-    });
-
-    let data = await res.json();
-    if (data.status == "success") {
-        console.log(data.data);
-        console.log(data.data[0].title)
-        return setMessage(data.message);
-    }
-    else {
-        return setError(data.message);
-    }
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Create a Checkout Session.

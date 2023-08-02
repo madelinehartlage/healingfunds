@@ -5,6 +5,42 @@ import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 
 function HealingFundsHome() {
+
+  const [articles, setArticles] = React.useState([]);
+
+  React.useEffect(() => {
+    async function loadArticles() {
+
+    
+    let res = await fetch("/.netlify/functions/getArticles", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    
+    let data = await res.json();
+
+    if (data.status == "success") {
+        console.log(data.data);
+        setArticles(data.data);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+
+    }
+
+    loadArticles().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
+
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Create a Checkout Session.
@@ -105,22 +141,13 @@ function HealingFundsHome() {
             LATEST ARTICLES
           </Text>
           <Stack width="100%" direction="row" justifyContent="center" spacing={20}>
-            <Stack direction="column" alignItems="center">
-              <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
-              <Text fontWeight="semibold" color="white">ARTICLE 1</Text>
-            </Stack>
-            <Stack direction="column" alignItems="center">
-              <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
-              <Text fontWeight="semibold" color="white">ARTICLE 2</Text>
-            </Stack>
-            <Stack direction="column" alignItems="center">
-              <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
-              <Text fontWeight="semibold" color="white">ARTICLE 3</Text>
-            </Stack>
-            <Stack direction="column" alignItems="center">
-              <Flex bgColor="#D9D9D9" height="150px" width="150px"></Flex>
-              <Text fontWeight="semibold" color="white">ARTICLE 4</Text>
-            </Stack>
+            {articles && articles.slice(0, 4).map((article) => (
+                <Stack key={article.title} direction="column" alignItems="center">
+                    <Link href={article.link}>
+                      <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
+                    </Link>
+                    <Text fontWeight="semibold" color="white">{article.title}</Text>
+                </Stack>))}
           </Stack>
           <Link href="/articles">
             <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#F86F8B", opacity: "80%"}}>
