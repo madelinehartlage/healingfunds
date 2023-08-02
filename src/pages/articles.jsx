@@ -8,6 +8,38 @@ function Articles() {
   const [message, setMessage] = React.useState('')
   const [articles, setArticles] = React.useState([]);
 
+  React.useEffect(() => {
+    async function loadArticles() {
+
+    
+    let res = await fetch("/.netlify/functions/getArticles", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    
+    let data = await res.json();
+
+    if (data.status == "success") {
+        console.log(data.data);
+        setArticles(data.data);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+
+    }
+
+    loadArticles().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
+
   const handleRequest = async (e) => {
     e.preventDefault();
 
@@ -106,38 +138,12 @@ function Articles() {
         </Flex>
         <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
             <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
+                {articles && articles.map(
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
                     <Text fontWeight="semibold">Article</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Article</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Article</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Article</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Article</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Article</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Article</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Article</Text>
-                </Stack>
+                </Stack>)}
+                
                 
             </Stack>
         </Flex>
