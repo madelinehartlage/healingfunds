@@ -24,8 +24,8 @@ function Articles() {
 
     let data = await res.json();
     if (data.status == "success") {
-        setArticles(data.data);
         console.log(data.data);
+        console.log(data.data[0].title)
         return setMessage(data.message);
     }
     else {
@@ -108,7 +108,7 @@ function Articles() {
             <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">{articles == [] ? "Article 1" : articles[0].title}</Text>
+                    <Text fontWeight="semibold">Article</Text>
                 </Stack>
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
