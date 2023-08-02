@@ -4,6 +4,32 @@ import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 
 function Articles() {
+  const [error, setError] = React.useState('')
+  const [message, setMessage] = React.useState('')
+
+  const handleRequest = async (e) => {
+    e.preventDefault();
+
+    // reset error and message
+    setError('');
+    setMessage('');
+
+    let res = await fetch("/.netlify/functions/getArticles", {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+        },
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+        console.log(data.data);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -74,6 +100,7 @@ function Articles() {
             <Text color="white">
                 Latest Articles
             </Text>
+            <Button onClick={() => handleRequest}>Get Articles</Button>
         </Flex>
         <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
             <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
