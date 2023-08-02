@@ -6,6 +6,7 @@ import { fetchPostJSON } from '../utils/api-helpers'
 function Articles() {
   const [error, setError] = React.useState('')
   const [message, setMessage] = React.useState('')
+  const [articles, setArticles] = React.useState([]);
 
   const handleRequest = async (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ function Articles() {
 
     let data = await res.json();
     if (data.status == "success") {
+        setArticles(data.data);
         console.log(data.data);
         return setMessage(data.message);
     }
@@ -106,7 +108,7 @@ function Articles() {
             <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Article</Text>
+                    <Text fontWeight="semibold">{articles[0].title}</Text>
                 </Stack>
                 <Stack direction="column" alignItems="center">
                     <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
