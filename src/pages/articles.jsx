@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid, Box } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Icon } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
-import {IoNewspaperOutline} from "react-icons/io";
+import {ImNewspaper} from "react-icons/im";
 
 function Articles() {
   const [error, setError] = React.useState('')
@@ -116,7 +116,7 @@ function Articles() {
                 {articles && articles.map((article) => (
                 <Stack key={article.title} direction="column" alignItems="center">
                     <Link href={article.link}>
-                      <IoNewspaperOutline size="150px"/>
+                     <Icon as={ImNewspaper} boxSize={20}></Icon>
                     </Link>
                     <Text fontWeight="semibold">{article.title}</Text>
                 </Stack>))}
