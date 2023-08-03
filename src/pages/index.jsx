@@ -196,24 +196,13 @@ function HealingFundsHome() {
             {sponsors && sponsors.slice(0, 3).map((sponsor) => (
                 <Stack key={sponsor.name} direction="column" alignItems="center">
                     
-                      <Flex bgColor="lightGray" height="150px" width="150px">
+                      <Flex bgColor="lightGray" height="150px" width="150px" borderRadius="100%">
                         <Image src={sponsor.image}></Image>
                       </Flex>
                     
-                    <Text fontWeight="semibold" color="white">{sponsor.name}</Text>
+                    <Text fontWeight="semibold" color="black">{sponsor.name}</Text>
                 </Stack>))}
-            <Stack direction="column" alignItems="center">
-              <Flex bgColor="#D9D9D9" height="150px" width="150px" borderRadius="100%"></Flex>
-              <Text fontWeight="semibold" color="black">Person Name</Text>
-            </Stack>
-            <Stack direction="column" alignItems="center">
-              <Flex bgColor="#D9D9D9" height="150px" width="150px" borderRadius="100%"></Flex>
-              <Text fontWeight="semibold" color="black">Person Name</Text>
-            </Stack>
-            <Stack direction="column" alignItems="center">
-              <Flex bgColor="#D9D9D9" height="150px" width="150px" borderRadius="100%"></Flex>
-              <Text fontWeight="semibold" color="black">Person Name</Text>
-            </Stack>
+            
           </Stack>
           <Link href="/sponsors">
             <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#F86F8B", opacity: "70%"}}>
