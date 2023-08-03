@@ -7,6 +7,39 @@ import { fetchPostJSON } from '../utils/api-helpers'
 function HealingFundsHome() {
 
   const [articles, setArticles] = React.useState([]);
+  const [sponsors, setSponsors] = React.useState([]);
+
+  React.useEffect(() => {
+    async function loadSponsors() {
+
+    
+    let res = await fetch("/.netlify/functions/getSponsors", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    
+    let data = await res.json();
+
+    if (data.status == "success") {
+        console.log(data.data);
+        setSponsors(data.data);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+
+    }
+
+    loadSponsors().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
 
   React.useEffect(() => {
     async function loadArticles() {
@@ -160,6 +193,15 @@ function HealingFundsHome() {
             SPONSORS
           </Text>
           <Stack width="100%" direction="row" justifyContent="center" spacing={20}>
+            {sponsors && sponsors.slice(0, 3).map((sponsor) => (
+                <Stack key={sponsor.name} direction="column" alignItems="center">
+                    
+                      <Flex bgColor="lightGray" height="150px" width="150px">
+                        <Image src={sponsor.image}></Image>
+                      </Flex>
+                    
+                    <Text fontWeight="semibold" color="white">{sponsor.name}</Text>
+                </Stack>))}
             <Stack direction="column" alignItems="center">
               <Flex bgColor="#D9D9D9" height="150px" width="150px" borderRadius="100%"></Flex>
               <Text fontWeight="semibold" color="black">Person Name</Text>

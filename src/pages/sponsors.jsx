@@ -115,9 +115,11 @@ function Sponsors() {
             <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
               {sponsors && sponsors.map((sponsor) => (
                 <Stack key={sponsor.name} direction="column" alignItems="center">
-                    <Link href={sponsor.image}>
-                      <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    </Link>
+                    
+                      <Flex height="150px" width="150px">
+                        <Image src={sponsor.image}></Image>
+                      </Flex>
+                    
                     <Text fontWeight="semibold">{sponsor.name}</Text>
                 </Stack>))}
                 
