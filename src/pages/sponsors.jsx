@@ -5,6 +5,42 @@ import { fetchPostJSON } from '../utils/api-helpers'
 
 function Sponsors() {
 
+  const [error, setError] = React.useState('')
+  const [message, setMessage] = React.useState('')
+  const [sponsors, setSponsors] = React.useState([]);
+
+  React.useEffect(() => {
+    async function loadSponsors() {
+
+    
+    let res = await fetch("/.netlify/functions/getSponsors", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    
+    let data = await res.json();
+
+    if (data.status == "success") {
+        console.log(data.data);
+        setSponsors(data.data);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+
+    }
+
+    loadSponsors().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Create a Checkout Session.
@@ -77,38 +113,14 @@ function Sponsors() {
         </Flex>
         <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
             <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold"> Person Name</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
-                </Stack>
-                <Stack direction="column" alignItems="center">
-                    <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
-                    <Text fontWeight="semibold">Person Name</Text>
-                </Stack>
+              {sponsors && sponsors.map((sponsor) => (
+                <Stack key={sponsor.name} direction="column" alignItems="center">
+                    <Link href={sponsor.image}>
+                      <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
+                    </Link>
+                    <Text fontWeight="semibold">{sponsor.name}</Text>
+                </Stack>))}
+                
                 
             </Stack>
         </Flex>

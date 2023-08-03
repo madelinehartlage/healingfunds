@@ -4,8 +4,9 @@ import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, 
 
 function Admin() {
   const [adding, setAdding] = React.useState(false);
-  const [title, setTitle] = React.useState('');
-  const [link, setLink] = React.useState('');
+  const [addingSponsors, setAddingSponsors] = React.useState(false);
+  const [name, setName] = React.useState('');
+  const [image, setImage] = React.useState('');
   const [error, setError] = React.useState('')
   const [message, setMessage] = React.useState('')
 
@@ -29,6 +30,33 @@ function Admin() {
     let data = await res.json();
     if (data.status == "success") {
         setAdding(false);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+  }
+
+  const addSponsors = async (e) => {
+    e.preventDefault();
+
+    // reset error and message
+    setError('');
+    setMessage('');
+
+    let sponsor = {
+        name,
+        image,
+    };
+
+    let res = await fetch("/.netlify/functions/postSponsors", {
+        method: 'POST',
+        body: JSON.stringify(sponsor),
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+        setAddingSponsors(false);
         return setMessage(data.message);
     }
     else {
@@ -122,7 +150,24 @@ function Admin() {
                             Add New Article
                         </Button>
                     }
-                    <Button bgColor="#439298" color="white">Manage Sponsors</Button>
+                    {addingSponsors  ? 
+                        <form onSubmit={addSponsors}>
+                            <Stack spacing={5} border="1px solid gray" padding={4} borderRadius="16px">
+                                <Stack>
+                                    <FormLabel>Sponsor Name</FormLabel>
+                                    <Input required placeholder="Sponsor Name" onChange={(e) => setName(e.target.value)}></Input>
+                                </Stack>
+                                <Stack>
+                                    <FormLabel>Image Link</FormLabel>
+                                    <Input required placeholder="Image Link" onChange={(e) => setImage(e.target.value)}></Input>
+                                </Stack>
+                                <Button type="submit" bgColor="#439298" color="white">Add</Button>
+                            </Stack>
+                        </form> : 
+                        <Button bgColor="#439298" color="white" onClick={() => setAddingSponsors(true)}>
+                            Manage Sponsors
+                        </Button>
+                    }
                 </Stack>
             </Stack>
         </Flex>
