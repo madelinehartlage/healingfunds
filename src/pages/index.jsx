@@ -3,6 +3,7 @@ import React from 'react';
 import { Text, Flex, Stack, Button, Link, Image, Box } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
+import {IoNewspaperOutline} from "react-icons/io";
 
 function HealingFundsHome() {
 
@@ -177,7 +178,9 @@ function HealingFundsHome() {
             {articles && articles.slice(0, 4).map((article) => (
                 <Stack key={article.title} direction="column" alignItems="center">
                     <Link href={article.link}>
-                      <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
+                      <Flex height="150px" width="150px">
+                        <IoNewspaperOutline size="150px"/>
+                      </Flex>
                     </Link>
                     <Text fontWeight="semibold" color="white">{article.title}</Text>
                 </Stack>))}

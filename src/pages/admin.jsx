@@ -7,6 +7,8 @@ function Admin() {
   const [addingSponsors, setAddingSponsors] = React.useState(false);
   const [name, setName] = React.useState('');
   const [image, setImage] = React.useState('');
+  const [title, setTitle] = React.useState('');
+  const [link, setLink] = React.useState('');
   const [error, setError] = React.useState('')
   const [message, setMessage] = React.useState('')
 
