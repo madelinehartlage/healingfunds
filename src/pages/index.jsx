@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text, Flex, Stack, Button, Link, Image, Box } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Link, Image, Box, Icon } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import {ImNewspaper} from "react-icons/im";
