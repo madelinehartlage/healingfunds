@@ -196,9 +196,11 @@ function HealingFundsHome() {
             {sponsors && sponsors.slice(0, 3).map((sponsor) => (
                 <Stack key={sponsor.name} direction="column" alignItems="center">
                     
-                      <Flex bgColor="lightGray" height="150px" width="150px" borderRadius="100%">
-                        <Image src={sponsor.image}></Image>
-                      </Flex>
+                    <Image
+                      boxSize='200px'
+                      objectFit='cover'
+                      src={sponsor.image}
+                    />
                     
                     <Text fontWeight="semibold" color="black">{sponsor.name}</Text>
                 </Stack>))}
