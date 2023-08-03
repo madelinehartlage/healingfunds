@@ -179,7 +179,7 @@ function HealingFundsHome() {
                 <Stack key={article.title} direction="column" alignItems="center">
                     <Link href={article.link}>
                       
-                        <Icon as={ImNewspaper} boxSize={20}></Icon>
+                        <Icon as={ImNewspaper} boxSize={20} color="white"></Icon>
                       
                     </Link>
                     <Text fontWeight="semibold" color="white">{article.title}</Text>
