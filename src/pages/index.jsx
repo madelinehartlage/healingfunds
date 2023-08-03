@@ -199,6 +199,7 @@ function HealingFundsHome() {
                     <Image
                       boxSize='200px'
                       objectFit='cover'
+                      borderRadius="100%"
                       src={sponsor.image}
                     />
                     
