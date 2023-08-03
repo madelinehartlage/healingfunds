@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, Flex, Stack, Button, Image, Link, Grid, Box } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
+import {IoNewspaperOutline} from "react-icons/io";
 
 function Articles() {
   const [error, setError] = React.useState('')
@@ -115,7 +116,7 @@ function Articles() {
                 {articles && articles.map((article) => (
                 <Stack key={article.title} direction="column" alignItems="center">
                     <Link href={article.link}>
-                      <Flex bgColor="lightGray" height="150px" width="150px"></Flex>
+                      <IoNewspaperOutline size="150px"/>
                     </Link>
                     <Text fontWeight="semibold">{article.title}</Text>
                 </Stack>))}
