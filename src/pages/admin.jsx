@@ -1,6 +1,8 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel } from '@chakra-ui/react';
-
+import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, IconButton } from '@chakra-ui/react';
+import {ChevronDownIcon} from "@chakra-ui/icons";
+import {DeleteIcon} from "@chakra-ui/icons";
+import {EditIcon} from "@chakra-ui/icons";
 
 function Admin() {
   const [adding, setAdding] = React.useState(false);
@@ -11,6 +13,73 @@ function Admin() {
   const [link, setLink] = React.useState('');
   const [error, setError] = React.useState('')
   const [message, setMessage] = React.useState('')
+  const [articles, setArticles] = React.useState([]);
+  const [sponsors, setSponsors] = React.useState([]);
+
+  
+  React.useEffect(() => {
+    async function loadArticles() {
+
+    
+    let res = await fetch("/.netlify/functions/getArticles", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    
+    let data = await res.json();
+
+    if (data.status == "success") {
+        console.log(data.data);
+        setArticles(data.data);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+
+    }
+
+    loadArticles().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
+
+  React.useEffect(() => {
+    async function loadSponsors() {
+
+    
+    let res = await fetch("/.netlify/functions/getSponsors", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    
+    let data = await res.json();
+
+    if (data.status == "success") {
+        console.log(data.data);
+        setSponsors(data.data);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+
+    }
+
+    loadSponsors().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
 
   const handleRequest = async (e) => {
     e.preventDefault();
@@ -135,24 +204,43 @@ function Admin() {
                 </Text>
                 <Stack direction="row" spacing={20}>
                     {adding  ? 
-                        <form onSubmit={handleRequest}>
-                            <Stack spacing={5} border="1px solid gray" padding={4} borderRadius="16px">
-                                <Stack>
-                                    <FormLabel>Article Title</FormLabel>
-                                    <Input required placeholder="Article Title" onChange={(e) => setTitle(e.target.value)}></Input>
-                                </Stack>
-                                <Stack>
-                                    <FormLabel>Article Link</FormLabel>
-                                    <Input required placeholder="Article Link" onChange={(e) => setLink(e.target.value)}></Input>
-                                </Stack>
-                                <Button type="submit" bgColor="#439298" color="white">Add</Button>
-                            </Stack>
-                        </form> : 
+                      <Stack direction="row">
+                          <form onSubmit={handleRequest}>
+                              <Stack spacing={5} border="1px solid gray" padding={4} borderRadius="16px">
+                                  <Stack>
+                                      <FormLabel>Article Title</FormLabel>
+                                      <Input required placeholder="Article Title" onChange={(e) => setTitle(e.target.value)}></Input>
+                                  </Stack>
+                                  <Stack>
+                                      <FormLabel>Article Link</FormLabel>
+                                      <Input required placeholder="Article Link" onChange={(e) => setLink(e.target.value)}></Input>
+                                  </Stack>
+                                  <Button type="submit" bgColor="#439298" color="white">Add</Button>
+                              </Stack>
+                          </form>
+                          <Menu autoSelect={false} closeOnSelect={false} closeOnBlur={false}>
+                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                              Manage Articles
+                            </MenuButton>
+                            <MenuList overflowY="scroll" maxHeight="200px">
+                              {articles && articles.map((article) => (
+                              
+                              <MenuItem justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
+                                  {article.title}
+                                  <Stack direction="row">
+                                    <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => console.log("H")}></IconButton>
+                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => console.log("H")} color='red'></IconButton>
+                                  </Stack>
+                                </MenuItem>))}
+                            </MenuList>
+                          </Menu>
+                        </Stack> : 
                         <Button bgColor="#439298" color="white" onClick={() => setAdding(true)}>
                             Add New Article
                         </Button>
                     }
                     {addingSponsors  ? 
+                      <Stack direction="row">
                         <form onSubmit={addSponsors}>
                             <Stack spacing={5} border="1px solid gray" padding={4} borderRadius="16px">
                                 <Stack>
@@ -165,15 +253,33 @@ function Admin() {
                                 </Stack>
                                 <Button type="submit" bgColor="#439298" color="white">Add</Button>
                             </Stack>
-                        </form> : 
-                        <Button bgColor="#439298" color="white" onClick={() => setAddingSponsors(true)}>
-                            Manage Sponsors
-                        </Button>
+                        </form>
+                        <Menu autoSelect={false} closeOnSelect={false} closeOnBlur={false}>
+                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                              Manage Sponsors
+                            </MenuButton>
+                            <MenuList overflowY="scroll" maxHeight="200px">
+                              {sponsors && sponsors.map((sponsor) => (
+                              
+                              <MenuItem justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
+                                  {sponsor.name}
+                                  <Stack direction="row">
+                                    <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => console.log("H")}></IconButton>
+                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => console.log("H")} color='red'></IconButton>
+                                  </Stack>
+                                </MenuItem>))}
+                            </MenuList>
+                          </Menu>
+                      </Stack>
+                        : 
+                      <Button bgColor="#439298" color="white" onClick={() => setAddingSponsors(true)}>
+                          Manage Sponsors
+                      </Button>
                     }
                 </Stack>
             </Stack>
         </Flex>
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10} position="absolute" bottom={0}>
             <Link href="/"> 
                 <Text fontSize="lg" fontWeight="semibold" color="white">
                     Healing Funds Inc.
