@@ -108,6 +108,27 @@ function Admin() {
     }
   }
 
+  const deleteArticles = async (articleTitle) => {
+
+
+    // reset error and message
+    setError('');
+    setMessage('');
+
+    let res = await fetch("/.netlify/functions/deleteArticles", {
+        method: 'DELETE',
+        body: JSON.stringify({title: articleTitle}),
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+  }
+
   const addSponsors = async (e) => {
     e.preventDefault();
 
@@ -229,7 +250,7 @@ function Admin() {
                                   {article.title}
                                   <Stack direction="row">
                                     <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => console.log("H")}></IconButton>
-                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => console.log("H")} color='red'></IconButton>
+                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={deleteArticles} color='red'></IconButton>
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
