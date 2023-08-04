@@ -225,7 +225,7 @@ function Admin() {
                             <MenuList overflowY="scroll" maxHeight="200px">
                               {articles && articles.map((article) => (
                               
-                              <MenuItem justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
+                              <MenuItem key={article.title} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
                                   {article.title}
                                   <Stack direction="row">
                                     <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => console.log("H")}></IconButton>
@@ -261,7 +261,7 @@ function Admin() {
                             <MenuList overflowY="scroll" maxHeight="200px">
                               {sponsors && sponsors.map((sponsor) => (
                               
-                              <MenuItem justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
+                              <MenuItem key={sponsor.name} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
                                   {sponsor.name}
                                   <Stack direction="row">
                                     <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => console.log("H")}></IconButton>
