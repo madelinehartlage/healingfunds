@@ -250,7 +250,7 @@ function Admin() {
                                   {article.title}
                                   <Stack direction="row">
                                     <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => console.log("H")}></IconButton>
-                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={deleteArticles(article.title)} color='red'></IconButton>
+                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => deleteArticles(article.title)} color='red'></IconButton>
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
