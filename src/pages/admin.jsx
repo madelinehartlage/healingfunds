@@ -129,6 +129,27 @@ function Admin() {
     }
   }
 
+  const deleteSponsors = async (sponsorName) => {
+
+
+    // reset error and message
+    setError('');
+    setMessage('');
+
+    let res = await fetch("/.netlify/functions/deleteSponsors", {
+        method: 'DELETE',
+        body: JSON.stringify({name: sponsorName}),
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+  }
+
   const addSponsors = async (e) => {
     e.preventDefault();
 
@@ -286,7 +307,7 @@ function Admin() {
                                   {sponsor.name}
                                   <Stack direction="row">
                                     <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => console.log("H")}></IconButton>
-                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => console.log("H")} color='red'></IconButton>
+                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => console.log("H")} color='red' onClickCapture={() => deleteSponsors(sponsor.name)}></IconButton>
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
