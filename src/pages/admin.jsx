@@ -135,7 +135,7 @@ function Admin() {
     }
   }
 
-  const updateArticles = async (e) => {
+  const updateArticles = async (articleTitle) => {
 
 
     // reset error and message
@@ -144,7 +144,7 @@ function Admin() {
 
     let res = await fetch("/.netlify/functions/updateArticles", {
         method: 'PUT',
-        body: JSON.stringify({ title: title }, { $set: { title: title, link: link  } }),
+        body: JSON.stringify({ title: articleTitle }, { $set: { title: title, link: link  } },),
     });
 
     let data = await res.json();
@@ -317,7 +317,7 @@ function Admin() {
                                         </ModalBody>
 
                                         <ModalFooter>
-                                          <Button colorScheme='blue' mr={3} onClick={() => {onClose(); updateArticles()}}>
+                                          <Button colorScheme='blue' mr={3} onClick={() => {onClose(); updateArticles(article.title)}}>
                                             Submit
                                           </Button>
                                         </ModalFooter>
