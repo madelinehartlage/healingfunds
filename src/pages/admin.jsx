@@ -137,8 +137,8 @@ function Admin() {
 
   const updateArticles = async (articleTitle, articleLink) => {
 
-    if (title == "") {title = articleTitle}
-    if (link == "") {link = articleLink}
+    if (title == "") {setTitle(articleTitle)}
+    if (link == "") {setLink(articleLink)}
     // reset error and message
     setError('');
     setMessage('');
