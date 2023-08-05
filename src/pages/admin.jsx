@@ -292,10 +292,10 @@ function Admin() {
                               Manage Articles
                             </MenuButton>
                             <MenuList overflowY="scroll" maxHeight="200px">
-                              {testArticles && testArticles.map((testArticle) => (
+                              {articles && articles.map((article) => (
                               
-                              <MenuItem key={testArticle.title} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
-                                  {testArticle.title}
+                              <MenuItem key={article.title} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
+                                  {article.title}
                                   <Stack direction="row">
                                     <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={onOpen}></IconButton>
                                     <Modal isOpen={isOpen} onClose={onClose}>
@@ -307,11 +307,11 @@ function Admin() {
                                           <Stack spacing={5}>
                                             <Stack>
                                               <Text fontWeight="semibold">Article Title</Text>
-                                              <Input placeholder={testArticle.title} onChange={(e) => setTitle(e.target.value)}></Input>
+                                              <Input placeholder={article.title} onChange={(e) => setTitle(e.target.value)}></Input>
                                             </Stack>
                                             <Stack>
                                               <Text fontWeight="semibold">Article Link</Text>
-                                              <Input placeholder={testArticle.link} onChange={(e) => setTitle(e.target.value)}></Input>
+                                              <Input placeholder={article.link} onChange={(e) => setTitle(e.target.value)}></Input>
                                             </Stack>
                                           </Stack>
                                         </ModalBody>
@@ -323,7 +323,7 @@ function Admin() {
                                         </ModalFooter>
                                       </ModalContent>
                                     </Modal>
-                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => deleteArticles(testArticle.title)} color='red'></IconButton>
+                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => deleteArticles(article.title)} color='red'></IconButton>
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
