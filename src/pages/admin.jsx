@@ -135,9 +135,10 @@ function Admin() {
     }
   }
 
-  const updateArticles = async (articleTitle) => {
+  const updateArticles = async (articleTitle, articleLink) => {
 
-
+    if (title == "") {title = articleTitle}
+    if (link == "") {link = articleLink}
     // reset error and message
     setError('');
     setMessage('');
@@ -307,7 +308,7 @@ function Admin() {
                                           <Stack spacing={5}>
                                             <Stack>
                                               <Text fontWeight="semibold">Article Title</Text>
-                                              <Input placeholder={article.title} onChange={(e) => {if (e.target.value != "") {setTitle(e.target.value)} else {setTitle(article.title)}}}></Input>
+                                              <Input placeholder={article.title} onChange={(e) => setTitle(e.target.value)}></Input>
                                             </Stack>
                                             <Stack>
                                               <Text fontWeight="semibold">Article Link</Text>
@@ -317,7 +318,7 @@ function Admin() {
                                         </ModalBody>
 
                                         <ModalFooter>
-                                          <Button colorScheme='blue' mr={3} onClick={() => {onClose(); updateArticles(article.title)}}>
+                                          <Button colorScheme='blue' mr={3} onClick={() => {onClose(); updateArticles(article.title, article.link)}}>
                                             Submit
                                           </Button>
                                         </ModalFooter>
