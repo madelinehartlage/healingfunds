@@ -140,6 +140,8 @@ function Admin() {
     if (title == "") {setTitle(articleTitle)}
     console.log(title);
     console.log(link);
+    console.log(articleTitle);
+    console.log(articleLink);
     if (link == "") {setLink(articleLink)}
     // reset error and message
     setError('');
