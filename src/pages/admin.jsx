@@ -137,12 +137,19 @@ function Admin() {
 
   const updateArticles = async (articleTitle, articleLink) => {
 
-    if (title == "") {setTitle(articleTitle)}
+    if (title == "") {
+      await setTitle(articleTitle);
+    }
     console.log(title);
+    if (link == "") {
+      await setLink(articleLink);
+    }
     console.log(link);
     console.log(articleTitle);
     console.log(articleLink);
-    if (link == "") {setLink(articleLink)}
+    console.log(title);
+    console.log(link);
+    
     // reset error and message
     setError('');
     setMessage('');
