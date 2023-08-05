@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, IconButton } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, IconButton, Modal, ModalBody, ModalCloseButton, ModalOverlay, ModalHeader, ModalContent, ModalFooter, useDisclosure } from '@chakra-ui/react';
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {DeleteIcon} from "@chakra-ui/icons";
 import {EditIcon} from "@chakra-ui/icons";
@@ -15,8 +15,13 @@ function Admin() {
   const [message, setMessage] = React.useState('')
   const [articles, setArticles] = React.useState([]);
   const [sponsors, setSponsors] = React.useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  
+  const testArticles = [{
+    title: "Meep",
+    link: "mmmmm"
+  }]
+
   React.useEffect(() => {
     async function loadArticles() {
 
@@ -114,10 +119,32 @@ function Admin() {
     // reset error and message
     setError('');
     setMessage('');
+    
 
     let res = await fetch("/.netlify/functions/deleteArticles", {
         method: 'DELETE',
         body: JSON.stringify({title: articleTitle}),
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+  }
+
+  const updateArticles = async (e) => {
+
+
+    // reset error and message
+    setError('');
+    setMessage('');
+
+    let res = await fetch("/.netlify/functions/updateArticles", {
+        method: 'PUT',
+        body: JSON.stringify({ title: title }, { $set: { title: title, link: link  } }),
     });
 
     let data = await res.json();
@@ -265,13 +292,38 @@ function Admin() {
                               Manage Articles
                             </MenuButton>
                             <MenuList overflowY="scroll" maxHeight="200px">
-                              {articles && articles.map((article) => (
+                              {testArticles && testArticles.map((testArticle) => (
                               
-                              <MenuItem key={article.title} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
-                                  {article.title}
+                              <MenuItem key={testArticle.title} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
+                                  {testArticle.title}
                                   <Stack direction="row">
-                                    <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => console.log("H")}></IconButton>
-                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => deleteArticles(article.title)} color='red'></IconButton>
+                                    <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={onOpen}></IconButton>
+                                    <Modal isOpen={isOpen} onClose={onClose}>
+                                      <ModalOverlay />
+                                      <ModalContent>
+                                        <ModalHeader>Edit Article</ModalHeader>
+                                        <ModalCloseButton />
+                                        <ModalBody>
+                                          <Stack spacing={5}>
+                                            <Stack>
+                                              <Text fontWeight="semibold">Article Title</Text>
+                                              <Input placeholder={testArticle.title} onChange={(e) => setTitle(e.target.value)}></Input>
+                                            </Stack>
+                                            <Stack>
+                                              <Text fontWeight="semibold">Article Link</Text>
+                                              <Input placeholder={testArticle.link} onChange={(e) => setTitle(e.target.value)}></Input>
+                                            </Stack>
+                                          </Stack>
+                                        </ModalBody>
+
+                                        <ModalFooter>
+                                          <Button colorScheme='blue' mr={3} onClick={() => {onClose(); updateArticles()}}>
+                                            Submit
+                                          </Button>
+                                        </ModalFooter>
+                                      </ModalContent>
+                                    </Modal>
+                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => deleteArticles(testArticle.title)} color='red'></IconButton>
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
