@@ -16,6 +16,7 @@ function Admin() {
   const [articles, setArticles] = React.useState([]);
   const [sponsors, setSponsors] = React.useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure();
 
   const testArticles = [{
     title: "Meep",
@@ -156,6 +157,45 @@ function Admin() {
       res = await fetch("/.netlify/functions/updateArticles", {
         method: 'PUT',
         body: JSON.stringify({ title1: articleTitle, title2: title, link: link }),
+      });
+    }
+    
+    // reset error and message
+    setError('');
+    setMessage('');
+
+    
+
+    let data = await res.json();
+    if (data.status == "success") {
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+  }
+
+  const updateSponsors = async (sponsorName, sponsorImage) => {
+    let res;
+    if (name == "" && image == "") {
+      res = await fetch("/.netlify/functions/updateSponsors", {
+        method: 'PUT',
+        body: JSON.stringify({ name1: sponsorName, name2: sponsorName, image: sponsorImage }),
+      });
+    } else if (name == "") {
+      res = await fetch("/.netlify/functions/updateSponsors", {
+        method: 'PUT',
+        body: JSON.stringify({ name1: sponsorName, name2: sponsorName, image: image }),
+      });
+    } else if (image == "") {
+      res = await fetch("/.netlify/functions/updateSponsors", {
+        method: 'PUT',
+        body: JSON.stringify({ name1: sponsorName, name2: name, image: sponsorImage }),
+      });
+    } else {
+      res = await fetch("/.netlify/functions/updateArticles", {
+        method: 'PUT',
+        body: JSON.stringify({ name1: sponsorName, name2: name, image: image }),
       });
     }
     
@@ -376,8 +416,33 @@ function Admin() {
                               <MenuItem key={sponsor.name} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
                                   {sponsor.name}
                                   <Stack direction="row">
-                                    <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => console.log("H")}></IconButton>
-                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => console.log("H")} color='red' onClickCapture={() => deleteSponsors(sponsor.name)}></IconButton>
+                                    <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={onOpenModal}></IconButton>
+                                    <Modal isOpen={isOpenModal} onClose={onCloseModal}>
+                                      <ModalOverlay />
+                                      <ModalContent>
+                                        <ModalHeader>Edit Sponsor</ModalHeader>
+                                        <ModalCloseButton />
+                                        <ModalBody>
+                                          <Stack spacing={5}>
+                                            <Stack>
+                                              <Text fontWeight="semibold">Sponsor Name</Text>
+                                              <Input placeholder={sponsor.name} onChange={(e) => setName(e.target.value)}></Input>
+                                            </Stack>
+                                            <Stack>
+                                              <Text fontWeight="semibold">Sponsor Image</Text>
+                                              <Input placeholder={sponsor.image} onChange={(e) => setImage(e.target.value)}></Input>
+                                            </Stack>
+                                          </Stack>
+                                        </ModalBody>
+
+                                        <ModalFooter>
+                                          <Button colorScheme='blue' mr={3} onClick={() => {onCloseModal(); updateSponsors(sponsor.name, sponsor.image)}}>
+                                            Submit
+                                          </Button>
+                                        </ModalFooter>
+                                      </ModalContent>
+                                    </Modal>
+                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => deleteSponsors(sponsor.name)} color='red'></IconButton>
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
