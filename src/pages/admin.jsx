@@ -311,7 +311,7 @@ function Admin() {
                                             </Stack>
                                             <Stack>
                                               <Text fontWeight="semibold">Article Link</Text>
-                                              <Input placeholder={article.link} onChange={(e) => setTitle(e.target.value)}></Input>
+                                              <Input placeholder={article.link} onChange={(e) => setLink(e.target.value)}></Input>
                                             </Stack>
                                           </Stack>
                                         </ModalBody>
