@@ -9,7 +9,7 @@ const handler = async (event) => {
         const eventBody = JSON.parse(event.body);
         const database = (await clientPromise).db(process.env.MONGODB_DATABASE);
         const collection = database.collection("articles");
-        const article = await collection.updateOne(eventBody);
+        const article = await collection.updateOne({title: eventBody.title1}, {$set: {title: eventBody.title2, link: eventBody.link}});
         return {
             statusCode: 200,
             headers: { "Content-Type": "application/json" },

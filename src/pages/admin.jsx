@@ -144,7 +144,7 @@ function Admin() {
 
     let res = await fetch("/.netlify/functions/updateArticles", {
         method: 'PUT',
-        body: JSON.stringify({ title: articleTitle }, { $set: { title: title, link: link  } },),
+        body: JSON.stringify({ title1: articleTitle, title2: title, link: link }),
     });
 
     let data = await res.json();
