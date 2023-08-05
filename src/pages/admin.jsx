@@ -136,29 +136,34 @@ function Admin() {
   }
 
   const updateArticles = async (articleTitle, articleLink) => {
-
-    if (title == "") {
-      await setTitle(articleTitle);
-      console.log("fail")
+    let res;
+    if (title == "" && link == "") {
+      res = await fetch("/.netlify/functions/updateArticles", {
+        method: 'PUT',
+        body: JSON.stringify({ title1: articleTitle, title2: articleTitle, link: articleLink }),
+      });
+    } else if (title == "") {
+      res = await fetch("/.netlify/functions/updateArticles", {
+        method: 'PUT',
+        body: JSON.stringify({ title1: articleTitle, title2: articleTitle, link: link }),
+      });
+    } else if (link == "") {
+      res = await fetch("/.netlify/functions/updateArticles", {
+        method: 'PUT',
+        body: JSON.stringify({ title1: articleTitle, title2: title, link: articleLink }),
+      });
+    } else {
+      res = await fetch("/.netlify/functions/updateArticles", {
+        method: 'PUT',
+        body: JSON.stringify({ title1: articleTitle, title2: title, link: link }),
+      });
     }
-    console.log(title);
-    if (link == "") {
-      await setLink(articleLink);
-    }
-    console.log(link);
-    console.log(articleTitle);
-    console.log(articleLink);
-    console.log(title);
-    console.log(link);
     
     // reset error and message
     setError('');
     setMessage('');
 
-    let res = await fetch("/.netlify/functions/updateArticles", {
-        method: 'PUT',
-        body: JSON.stringify({ title1: articleTitle, title2: title, link: link }),
-    });
+    
 
     let data = await res.json();
     if (data.status == "success") {
