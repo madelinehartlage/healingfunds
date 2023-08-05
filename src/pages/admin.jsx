@@ -307,7 +307,7 @@ function Admin() {
                                           <Stack spacing={5}>
                                             <Stack>
                                               <Text fontWeight="semibold">Article Title</Text>
-                                              <Input placeholder={article.title} onChange={(e) => setTitle(e.target.value)}></Input>
+                                              <Input placeholder={article.title} onChange={(e) => {if (e.target.value != "") {setTitle(e.target.value)} else {setTitle(article.title)}}}></Input>
                                             </Stack>
                                             <Stack>
                                               <Text fontWeight="semibold">Article Link</Text>
