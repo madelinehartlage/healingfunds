@@ -139,6 +139,7 @@ function Admin() {
 
     if (title == "") {
       await setTitle(articleTitle);
+      console.log("fail")
     }
     console.log(title);
     if (link == "") {
