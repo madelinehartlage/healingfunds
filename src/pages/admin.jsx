@@ -3,7 +3,7 @@ import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, 
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {DeleteIcon} from "@chakra-ui/icons";
 import {EditIcon} from "@chakra-ui/icons";
-import {AdminEditModal} from "../components/AdminEditModal";
+import AdminEditModal from "@/components/AdminEditModal";
 
 function Admin() {
   const [adding, setAdding] = React.useState(false);
