@@ -3,6 +3,7 @@ import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, 
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {DeleteIcon} from "@chakra-ui/icons";
 import {EditIcon} from "@chakra-ui/icons";
+import {AdminEditModal} from "../components/AdminEditModal";
 
 function Admin() {
   const [adding, setAdding] = React.useState(false);
@@ -355,32 +356,7 @@ function Admin() {
                               <MenuItem key={article.title} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
                                   {article.title}
                                   <Stack direction="row">
-                                    <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={onOpen}></IconButton>
-                                    <Modal isOpen={isOpen} onClose={onClose}>
-                                      <ModalOverlay />
-                                      <ModalContent>
-                                        <ModalHeader>Edit Article</ModalHeader>
-                                        <ModalCloseButton />
-                                        <ModalBody>
-                                          <Stack spacing={5}>
-                                            <Stack>
-                                              <Text fontWeight="semibold">Article Title</Text>
-                                              <Input placeholder={article.title} onChange={(e) => setTitle(e.target.value)}></Input>
-                                            </Stack>
-                                            <Stack>
-                                              <Text fontWeight="semibold">Article Link</Text>
-                                              <Input placeholder={article.link} onChange={(e) => setLink(e.target.value)}></Input>
-                                            </Stack>
-                                          </Stack>
-                                        </ModalBody>
-
-                                        <ModalFooter>
-                                          <Button colorScheme='blue' mr={3} onClick={() => {onClose(); updateArticles(article.title, article.link)}}>
-                                            Submit
-                                          </Button>
-                                        </ModalFooter>
-                                      </ModalContent>
-                                    </Modal>
+                                    <AdminEditModal header="Edit Article" title1="Article Title" title2="Article Link" place1={article.title} place2={article.link} setFunc1={setTitle} setFunc2={setLink} updateFunc={updateArticles}/>
                                     <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => deleteArticles(article.title)} color='red'></IconButton>
                                   </Stack>
                                 </MenuItem>))}
