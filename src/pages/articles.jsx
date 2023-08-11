@@ -99,7 +99,7 @@ function Articles() {
       const error = e;
       console.log(error.message);
     });
-  }, []);
+  }, [articles]);
 
   return (
     <Flex height="100vh" bgColor="white">
