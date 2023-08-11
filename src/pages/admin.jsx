@@ -194,7 +194,7 @@ function Admin() {
         body: JSON.stringify({ name1: sponsorName, name2: name, image: sponsorImage }),
       });
     } else {
-      res = await fetch("/.netlify/functions/updateArticles", {
+      res = await fetch("/.netlify/functions/updateSponsors", {
         method: 'PUT',
         body: JSON.stringify({ name1: sponsorName, name2: name, image: image }),
       });
