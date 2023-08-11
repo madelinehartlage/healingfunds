@@ -8,6 +8,17 @@ function Articles() {
   const [error, setError] = React.useState('')
   const [message, setMessage] = React.useState('')
   const [articles, setArticles] = React.useState([]);
+  const [images, setImages] = React.useState([]);
+
+
+  const testArticles = [{
+    title: "Meep",
+    link: "https://pubmed.ncbi.nlm.nih.gov/19056595/",
+  },
+  {title: "Test 2",
+  link: "https://pubmed.ncbi.nlm.nih.gov/11588898/",
+}
+]
 
   React.useEffect(() => {
     async function loadArticles() {
@@ -66,6 +77,30 @@ function Articles() {
     console.warn(error.message)
   }
 
+
+  React.useEffect(() => {
+    async function loadMetaData() {
+      let tempArray = [];
+      for (let i = 0; i < articles.length; i++) {
+       // fetch(`/api/opengraph?url=${testArticles[i].link}`).then( (response) => response.json() )
+        //.then( (image) => setImage(image) )
+        let res = await fetch(`/api/opengraph?url=${articles[i].link}`)
+        let image = await res.json();
+        tempArray.push(image.image.url);
+        console.log(tempArray);
+        setImages(tempArray);
+        //setImage(image.data.image.url);
+        //images.push(image.message);
+      }
+      //console.log(images);
+    }
+
+    loadMetaData().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+  }, []);
+
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
@@ -116,9 +151,11 @@ function Articles() {
                 {articles && articles.map((article) => (
                 <Stack key={article.title} direction="column" alignItems="center">
                     <Link href={article.link}>
-                     <Icon as={ImNewspaper} boxSize={20}></Icon>
+                    <Image src={images[articles.indexOf(article)]} width={100} height={100}/>
+                     
                     </Link>
                     <Text fontWeight="semibold">{article.title}</Text>
+                    
                 </Stack>))}
                 
                 
