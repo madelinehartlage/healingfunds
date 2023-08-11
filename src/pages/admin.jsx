@@ -364,7 +364,7 @@ function Admin() {
                           </Menu>
                         </Stack> : 
                         <Button bgColor="#439298" color="white" onClick={() => setAdding(true)}>
-                            Add New Article
+                            Manage Articles
                         </Button>
                     }
                     {addingSponsors  ? 
@@ -392,32 +392,8 @@ function Admin() {
                               <MenuItem key={sponsor.name} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
                                   {sponsor.name}
                                   <Stack direction="row">
-                                    <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={onOpenModal}></IconButton>
-                                    <Modal isOpen={isOpenModal} onClose={onCloseModal}>
-                                      <ModalOverlay />
-                                      <ModalContent>
-                                        <ModalHeader>Edit Sponsor</ModalHeader>
-                                        <ModalCloseButton />
-                                        <ModalBody>
-                                          <Stack spacing={5}>
-                                            <Stack>
-                                              <Text fontWeight="semibold">Sponsor Name</Text>
-                                              <Input placeholder={sponsor.name} onChange={(e) => setName(e.target.value)}></Input>
-                                            </Stack>
-                                            <Stack>
-                                              <Text fontWeight="semibold">Sponsor Image</Text>
-                                              <Input placeholder={sponsor.image} onChange={(e) => setImage(e.target.value)}></Input>
-                                            </Stack>
-                                          </Stack>
-                                        </ModalBody>
-
-                                        <ModalFooter>
-                                          <Button colorScheme='blue' mr={3} onClick={() => {onCloseModal(); updateSponsors(sponsor.name, sponsor.image)}}>
-                                            Submit
-                                          </Button>
-                                        </ModalFooter>
-                                      </ModalContent>
-                                    </Modal>
+                                    <AdminEditModal header="Edit Sponsor" title1="Sponsor Name" title2="Sponsor Image" place1={sponsor.name} place2={sponsor.image} setFunc1={setName} setFunc2={setImage} updateFunc={updateSponsors}/>
+                                    
                                     <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => deleteSponsors(sponsor.name)} color='red'></IconButton>
                                   </Stack>
                                 </MenuItem>))}
