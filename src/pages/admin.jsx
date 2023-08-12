@@ -16,6 +16,7 @@ function Admin() {
   const [message, setMessage] = React.useState('')
   const [articles, setArticles] = React.useState([]);
   const [sponsors, setSponsors] = React.useState([]);
+  const [imageData, setImageData] = React.useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure();
 
@@ -288,6 +289,57 @@ function Admin() {
     console.warn(error.message)
   }
 
+  const getMetaData = async (e) => {
+    e.preventDefault();
+
+    // reset error and message
+    setError('');
+    setMessage('');
+
+    let article = {
+        title,
+        link,
+    };
+
+    
+    let res = await fetch(`/api/opengraph?url=${article.link}`);
+    
+    
+
+    if (res.ok) {
+       let data = await res.json();
+       setImageData(data.image.url);
+       console.log(imageData);
+
+       let article = {
+        title,
+        link,
+        imageData,
+      };
+
+       let response = await fetch("/.netlify/functions/articles", {
+        method: 'POST',
+        body: JSON.stringify(article),
+      });
+
+      let articleData = await response.json();
+
+      if (articleData.status == "success") {
+        
+        setAdding(false);
+        console.log("success") 
+        return setMessage(articleData.message);
+      }
+      else {
+          return setError(articleData.message);
+      }
+        
+    }
+    else {
+        return setError(data.message);
+    }
+  }
+
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
@@ -333,7 +385,7 @@ function Admin() {
                 <Stack direction="row" spacing={20}>
                     {adding  ? 
                       <Stack direction="row">
-                          <form onSubmit={handleRequest}>
+                          <form onSubmit={getMetaData}>
                               <Stack spacing={5} border="1px solid gray" padding={4} borderRadius="16px">
                                   <Stack>
                                       <FormLabel>Article Title</FormLabel>
