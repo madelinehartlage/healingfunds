@@ -210,8 +210,8 @@ function HealingFundsHome() {
           
           <Grid templateColumns={tempColumns} gap={6}>
             {articles && articles.slice(0, 4).map((article) => (
-              <GridItem>
-                <Stack key={article.title} direction="column" alignItems="center" height="100%">
+              <GridItem key={article.title}>
+                <Stack  direction="column" alignItems="center" height="100%">
                   <Flex maxHeight={150} height="100%" alignItems="flex-end">
                     <Link href={article.link}>
                       

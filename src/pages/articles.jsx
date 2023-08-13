@@ -169,8 +169,8 @@ function Articles() {
         <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
           <Grid templateColumns={tempColumns} gap={6}>
                 {articles && articles.map((article) => (
-                <GridItem>
-                <Stack key={article.title} direction="column" alignItems="center" height="100%">
+                <GridItem key={article.title}>
+                <Stack  direction="column" alignItems="center" height="100%">
                   <Flex maxHeight={150} height="100%" alignItems="flex-end">
                     <Link href={article.link}>
                       
