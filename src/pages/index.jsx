@@ -178,9 +178,9 @@ function HealingFundsHome() {
             {articles && articles.slice(0, 4).map((article) => (
                 <Stack key={article.title} direction="column" alignItems="center">
                     <Link href={article.link}>
-                      <Flex bgColor="white" padding={3} borderRadius="12px">
+                      
                       {article.imageData && (<Image src={article.imageData} width={100} height={100}/>)}
-                      </Flex>
+                      
                       
                     </Link>
                     <Text fontWeight="semibold" color="white">{article.title}</Text>
