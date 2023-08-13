@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Icon } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Icon, GridItem } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import {ImNewspaper} from "react-icons/im";
@@ -10,15 +10,29 @@ function Articles() {
   const [articles, setArticles] = React.useState([]);
   const [images, setImages] = React.useState([]);
 
+  
 
-  const testArticles = [{
-    title: "Meep",
-    link: "https://pubmed.ncbi.nlm.nih.gov/19056595/",
-  },
-  {title: "Test 2",
-  link: "https://pubmed.ncbi.nlm.nih.gov/11588898/",
-}
-]
+  const testArticles = [
+    {
+      title: "Dietary patterns and ovarian cancer risk",
+      link: "https://pubmed.ncbi.nlm.nih.gov/19056595/",
+      imageData: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image.png",
+
+
+    },
+    {
+      title: "Intakes of selected nutrients and food groups and risk of ovarian cancer",
+      link: "https://pubmed.ncbi.nlm.nih.gov/11588898/",
+      imageData: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image.png",
+    },
+
+    
+
+
+  ]
+
+  //let tempColumns = "repeat(" + testArticles.length % 4 + ", 1fr)"
+  let tempColumns = 0;
 
   React.useEffect(() => {
     async function loadArticles() {
@@ -35,8 +49,14 @@ function Articles() {
     let data = await res.json();
 
     if (data.status == "success") {
-        console.log(data.data);
+        
         setArticles(data.data);
+        if (data.data.length < 4) {
+          tempColumns = "repeat(" + data.data.length + ", 1fr)"
+        }
+        else {
+          tempColumns = "repeat(4, 1fr)"
+        }
         return setMessage(data.message);
     }
     else {
@@ -147,19 +167,26 @@ function Articles() {
             </Text>
         </Flex>
         <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
-            <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
+          <Grid templateColumns={tempColumns} gap={6}>
                 {articles && articles.map((article) => (
-                <Stack key={article.title} direction="column" alignItems="center">
+                <GridItem>
+                <Stack key={article.title} direction="column" alignItems="center" height="100%">
+                  <Flex maxHeight={150} height="100%" alignItems="flex-end">
                     <Link href={article.link}>
-                    {article.imageData && (<Image src={article.imageData} width={100} height={100}/>)}
-                     
+                      
+                      {article.imageData && (<Image src={article.imageData} maxHeight={150}  />)}
+                      
+                      
                     </Link>
-                    <Text fontWeight="semibold">{article.title}</Text>
-                    
-                </Stack>))}
+                  </Flex>
+                  <Flex>
+                    <Text fontWeight="semibold" color="black"maxWidth={400}>{article.title}</Text>
+                  </Flex>
+                </Stack></GridItem>
+                ))}
                 
                 
-            </Stack>
+            </Grid>
         </Flex>
         <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
             <Link href="/"> 

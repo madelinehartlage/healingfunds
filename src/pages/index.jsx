@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text, Flex, Stack, Button, Link, Image, Box, Icon } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Link, Image, Box, Icon, Grid, GridItem } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import {ImNewspaper} from "react-icons/im";
@@ -9,6 +9,39 @@ function HealingFundsHome() {
 
   const [articles, setArticles] = React.useState([]);
   const [sponsors, setSponsors] = React.useState([]);
+
+  
+
+  const testArticles = [
+    {
+      title: "Dietary patterns and ovarian cancer risk",
+      link: "https://pubmed.ncbi.nlm.nih.gov/19056595/",
+      imageData: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image.png",
+
+
+    },
+    {
+      title: "Intakes of selected nutrients and food groups and risk of ovarian cancer",
+      link: "https://pubmed.ncbi.nlm.nih.gov/11588898/",
+      imageData: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image.png",
+    },
+
+    {
+      title: "Github",
+      link: "https://github.com",
+      imageData: "https://github.githubassets.com/images/modules/site/social-cards/campaign-social.png",
+    },
+    {
+      title: "Netlify",
+      link: "https://netlify.com",
+      imageData: "https://www.netlify.com/v3/static/og-image.png",
+    },
+
+
+  ]
+
+  //let tempColumns = "repeat(" + testArticles.length + ", 1fr)"
+  let tempColumns = 0;
 
   React.useEffect(() => {
     async function loadSponsors() {
@@ -57,8 +90,8 @@ function HealingFundsHome() {
     let data = await res.json();
 
     if (data.status == "success") {
-        console.log(data.data);
         setArticles(data.data);
+        tempColumns = "repeat(" + data.data.length + ", 1fr)"
         return setMessage(data.message);
     }
     else {
@@ -174,18 +207,25 @@ function HealingFundsHome() {
           <Text color="white" fontWeight="semibold" fontSize="2xl">
             LATEST ARTICLES
           </Text>
-          <Stack width="100%" direction="row" justifyContent="center" spacing={20}>
+          
+          <Grid templateColumns={tempColumns} gap={6}>
             {articles && articles.slice(0, 4).map((article) => (
-                <Stack key={article.title} direction="column" alignItems="center">
+              <GridItem>
+                <Stack key={article.title} direction="column" alignItems="center" height="100%">
+                  <Flex maxHeight={150} height="100%" alignItems="flex-end">
                     <Link href={article.link}>
                       
-                      {article.imageData && (<Image src={article.imageData} width={100} height={100}/>)}
+                      {article.imageData && (<Image src={article.imageData} maxHeight={150}  />)}
                       
                       
                     </Link>
-                    <Text fontWeight="semibold" color="white">{article.title}</Text>
-                </Stack>))}
-          </Stack>
+                  </Flex>
+                  <Flex>
+                    <Text fontWeight="semibold" color="white"maxWidth={400}>{article.title}</Text>
+                  </Flex>
+                </Stack>
+                </GridItem>))}
+          </Grid>
           <Link href="/articles">
             <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#F86F8B", opacity: "80%"}}>
               LEARN MORE
