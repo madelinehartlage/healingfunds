@@ -179,7 +179,7 @@ function HealingFundsHome() {
                 <Stack key={article.title} direction="column" alignItems="center">
                     <Link href={article.link}>
                       <Flex bgColor="white" padding={3} borderRadius="12px">
-                        <Icon as={ImNewspaper} boxSize={20} color="black"></Icon>
+                      {article.imageData && (<Image src={article.imageData} width={100} height={100}/>)}
                       </Flex>
                       
                     </Link>
