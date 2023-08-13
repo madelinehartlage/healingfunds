@@ -309,7 +309,7 @@ function Admin() {
     if (res.ok) {
        let data = await res.json();
        setImageData(data.image.url);
-       console.log(imageData);
+       
 
        let article = {
         title,

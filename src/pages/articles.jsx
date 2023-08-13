@@ -78,7 +78,7 @@ function Articles() {
   }
 
 
-  React.useEffect(() => {
+ /* React.useEffect(() => {
     async function loadMetaData() {
       let tempArray = [];
       for (let i = 0; i < articles.length; i++) {
@@ -99,7 +99,7 @@ function Articles() {
       const error = e;
       console.log(error.message);
     });
-  }, [articles]);
+  }, [articles]);*/
 
   return (
     <Flex height="100vh" bgColor="white">
@@ -151,7 +151,7 @@ function Articles() {
                 {articles && articles.map((article) => (
                 <Stack key={article.title} direction="column" alignItems="center">
                     <Link href={article.link}>
-                    <Image src={images[articles.indexOf(article)]} width={100} height={100}/>
+                    {article.imageData && (<Image src={article.imageData} width={100} height={100}/>)}
                      
                     </Link>
                     <Text fontWeight="semibold">{article.title}</Text>
