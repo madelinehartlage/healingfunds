@@ -9,7 +9,7 @@ function HealingFundsHome() {
 
   const [articles, setArticles] = React.useState([]);
   const [sponsors, setSponsors] = React.useState([]);
-  const [articleLength, setArticleLength] = React.useState(0);
+  
 
   
 
@@ -92,9 +92,9 @@ function HealingFundsHome() {
 
     if (data.status == "success") {
         console.log(data.data)
-        console.log(data.data.length)
+        
         setArticles(data.data);
-        setArticleLength(data.data.length)
+        
         //tempColumns = "repeat(" + data.data.length + ", 1fr)"
         
         return setMessage(data.message);
@@ -213,7 +213,7 @@ function HealingFundsHome() {
             LATEST ARTICLES
           </Text>
           
-          <Grid templateColumns={"repeat(" + articleLength + "), 1fr)"} gap={6}>
+          <Grid templateColumns={"repeat(4, 1fr)"} gap={6}>
             {articles && articles.slice(0, 4).map((article) => (
               <GridItem key={article.title}>
                 <Stack  direction="column" alignItems="center" height="100%">

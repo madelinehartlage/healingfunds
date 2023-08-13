@@ -32,7 +32,7 @@ function Articles() {
   ]
 
   //let tempColumns = "repeat(" + testArticles.length % 4 + ", 1fr)"
-  let tempColumns = 0;
+  
 
   React.useEffect(() => {
     async function loadArticles() {
@@ -51,12 +51,6 @@ function Articles() {
     if (data.status == "success") {
         
         setArticles(data.data);
-        if (data.data.length < 4) {
-          tempColumns = "repeat(" + data.data.length + ", 1fr)"
-        }
-        else {
-          tempColumns = "repeat(4, 1fr)"
-        }
         return setMessage(data.message);
     }
     else {
@@ -167,7 +161,7 @@ function Articles() {
             </Text>
         </Flex>
         <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
-          <Grid templateColumns={tempColumns} gap={6}>
+          <Grid templateColumns="repeat(4, 1fr)" gap={6}>
                 {articles && articles.map((article) => (
                 <GridItem key={article.title}>
                 <Stack  direction="column" alignItems="center" height="100%">
