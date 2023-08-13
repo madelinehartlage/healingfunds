@@ -41,7 +41,7 @@ function HealingFundsHome() {
   ]
 
   //let tempColumns = "repeat(" + testArticles.length + ", 1fr)"
-  let tempColumns = 0;
+  
 
   React.useEffect(() => {
     async function loadSponsors() {
@@ -90,8 +90,10 @@ function HealingFundsHome() {
     let data = await res.json();
 
     if (data.status == "success") {
+        console.log(data.data)
         setArticles(data.data);
-        tempColumns = "repeat(" + data.data.length + ", 1fr)"
+        //tempColumns = "repeat(" + data.data.length + ", 1fr)"
+        
         return setMessage(data.message);
     }
     else {
@@ -208,7 +210,7 @@ function HealingFundsHome() {
             LATEST ARTICLES
           </Text>
           
-          <Grid templateColumns={tempColumns} gap={6}>
+          <Grid templateColumns="repeat(4, 1fr)" gap={6}>
             {articles && articles.slice(0, 4).map((article) => (
               <GridItem key={article.title}>
                 <Stack  direction="column" alignItems="center" height="100%">
