@@ -308,13 +308,14 @@ function Admin() {
 
     if (res.ok) {
        let data = await res.json();
+       console.log(data.image.url)
        setImageData(data.image.url);
        console.log(imageData)
 
        let article = {
         title,
         link,
-        imageData,
+        imageData: data.image.url,
       };
 
        let response = await fetch("/.netlify/functions/articles", {
