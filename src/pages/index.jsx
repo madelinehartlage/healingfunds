@@ -213,7 +213,7 @@ function HealingFundsHome() {
             LATEST ARTICLES
           </Text>
           
-          <Grid templateColumns={"repeat(" + articles.length + "), 1fr)"} gap={6}>
+          <Grid templateColumns={"repeat(" + articleLength + "), 1fr)"} gap={6}>
             {articles && articles.slice(0, 4).map((article) => (
               <GridItem key={article.title}>
                 <Stack  direction="column" alignItems="center" height="100%">
