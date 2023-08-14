@@ -32,7 +32,7 @@ function Contact() {
 
   return (
     <Flex height="100vh" bgColor="white">
-      <Stack direction="column" width="100%">
+      <Stack direction="column" width="100%" spacing={0}>
       <Flex width="100%" paddingLeft={4} paddingRight={10} justifyContent="space-between" alignItems="center">
           
           <Link href="/">
@@ -67,10 +67,11 @@ function Contact() {
             </Link>
           </Stack>
         </Flex>
-        <Flex width="100%" maxHeight="650px">
+        <Stack direction="row" spacing={8}>
+        <Flex width="100%" maxWidth="50%" maxHeight="650px">
           <Image src="/rocks2.jpg" width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
-        <Flex justifyContent="center" paddingTop={50} paddingBottom={50}>
+        <Flex justifyContent="center" paddingTop={50} paddingBottom={50} alignItems="center" width="100%">
             <Stack direction="column" spacing={8} alignItems="center">
                 <Text fontWeight="bold" fontSize="3xl">
                     Contact Us Today
@@ -100,7 +101,8 @@ function Contact() {
                 </Stack>
             </Stack>
         </Flex>
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
+        </Stack>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10} position="absolute" bottom={0}>
             <Link href="/"> 
                 <Text fontSize="lg" fontWeight="semibold" color="white">
                     Healing Funds Inc.

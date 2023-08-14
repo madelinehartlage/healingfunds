@@ -25,7 +25,30 @@ function Articles() {
       link: "https://pubmed.ncbi.nlm.nih.gov/11588898/",
       imageData: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image.png",
     },
+    {
+      title: "Dietary patterns and ovarian cancer risk",
+      link: "https://pubmed.ncbi.nlm.nih.gov/19056595/",
+      imageData: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image.png",
 
+
+    },
+    {
+      title: "Intakes of selected nutrients and food groups and risk of ovarian cancer",
+      link: "https://pubmed.ncbi.nlm.nih.gov/11588898/",
+      imageData: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image.png",
+    },
+    {
+      title: "Dietary patterns and ovarian cancer risk",
+      link: "https://pubmed.ncbi.nlm.nih.gov/19056595/",
+      imageData: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image.png",
+
+
+    },
+    {
+      title: "Intakes of selected nutrients and food groups and risk of ovarian cancer",
+      link: "https://pubmed.ncbi.nlm.nih.gov/11588898/",
+      imageData: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image.png",
+    },
     
 
 
@@ -152,9 +175,7 @@ function Articles() {
             </Link>
           </Stack>
         </Flex>
-        <Flex width="100%" maxHeight="700px">
-          <Image src="/researchimage.jpg" width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
-        </Flex>
+        
         <Flex bgColor="#439298" justifyContent="center" fontWeight="semibold" fontSize="3xl" marginTop={8}>
             <Text color="white">
                 Latest Articles

@@ -9,6 +9,41 @@ function Sponsors() {
   const [message, setMessage] = React.useState('')
   const [sponsors, setSponsors] = React.useState([]);
 
+  const testSponsors = [
+    {
+      name: "Test Image 1",
+      image: "https://t3.ftcdn.net/jpg/01/91/85/06/360_F_191850653_IkzN9vZTtOtJ8NTKLKOp8PlaY8iCk6Ls.jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 3",
+      image: "https://media.istockphoto.com/id/1386217759/photo/portrait-of-a-confident-young-businesswoman-standing-against-an-urban-background.webp?b=1&s=170667a&w=0&k=20&c=oikPwsT7yx_9XIsNQYte82Fiqg7rBE1tHrlBXWye5jc=",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+  ]
+
   React.useEffect(() => {
     async function loadSponsors() {
 
@@ -103,35 +138,40 @@ function Sponsors() {
             </Link>
           </Stack>
         </Flex>
-        <Flex width="100%" maxHeight="700px">
-          <Image src="/image-1000x600.jpg" width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
+        <Flex width="100%" direction="row">
+          
+          <Flex direction="column" width="100%">
+            <Flex bgColor="#439298" justifyContent="center" fontWeight="semibold" fontSize="3xl" marginLeft={4} marginRight={4} marginBottom={4}>
+                <Text color="white">
+                    Our Sponsors
+                </Text>
+            </Flex>
+            <Flex justifyContent="center" paddingTop={12} paddingBottom={12} width="100%">
+              <Grid templateColumns="repeat(4, 1fr)" gap={6} width="100%">
+                  {sponsors && sponsors.map((sponsor) => (
+                    <GridItem key={sponsor.name}>
+                    <Stack direction="column" alignItems="center" height="100%">
+                      <Flex maxHeight={200} height="100%" alignItems="flex-end">
+                        <Image
+                          boxSize='200px'
+                          objectFit='cover'
+                          src={sponsor.image}
+                        />
+                      </Flex>
+                        <Flex>
+                          <Text fontWeight="semibold" maxWidth={400}>{sponsor.name}</Text>
+                        </Flex>
+                    </Stack>
+                    </GridItem>))}
+                    
+                    
+              </Grid>
+            </Flex>
+          </Flex>
         </Flex>
-        <Flex bgColor="#439298" justifyContent="center" fontWeight="semibold" fontSize="3xl" marginTop={8}>
-            <Text color="white">
-                Our Sponsors
-            </Text>
-        </Flex>
-        <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
-          <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-              {sponsors && sponsors.map((sponsor) => (
-                <GridItem key={sponsor.name}>
-                <Stack direction="column" alignItems="center" height="100%">
-                  <Flex maxHeight={200} height="100%" alignItems="flex-end">
-                    <Image
-                      boxSize='200px'
-                      objectFit='cover'
-                      src={sponsor.image}
-                    />
-                  </Flex>
-                    <Flex>
-                      <Text fontWeight="semibold" maxWidth={400}>{sponsor.name}</Text>
-                    </Flex>
-                </Stack>
-                </GridItem>))}
-                
-                
-            </Grid>
-        </Flex>
+            
+        
+        
         <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
             <Link href="/"> 
                 <Text fontSize="lg" fontWeight="semibold" color="white">
