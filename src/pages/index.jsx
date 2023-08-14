@@ -241,21 +241,24 @@ function HealingFundsHome() {
           <Text fontWeight="semibold" fontSize="2xl" color="black">
             SPONSORS
           </Text>
-          <Stack width="100%" direction="row" justifyContent="center" spacing={20}>
+          <Grid templateColumns={"repeat(3, 1fr)"} gap={6}>
             {sponsors && sponsors.slice(0, 3).map((sponsor) => (
-                <Stack key={sponsor.name} direction="column" alignItems="center">
-                    
+              <GridItem key={sponsor.name}>
+                <Stack key={sponsor.name} direction="column" alignItems="center" height="100%">
+                  <Flex maxHeight={200} height="100%" alignItems="flex-end">
                     <Image
                       boxSize='200px'
                       objectFit='cover'
                       borderRadius="100%"
                       src={sponsor.image}
                     />
-                    
+                  </Flex> 
+                  <Flex>
                     <Text fontWeight="semibold" color="black">{sponsor.name}</Text>
-                </Stack>))}
+                  </Flex>
+                </Stack></GridItem>))}
             
-          </Stack>
+          </Grid>
           <Link href="/sponsors">
             <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#F86F8B", opacity: "70%"}}>
               SEE MORE

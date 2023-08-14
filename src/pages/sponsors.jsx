@@ -112,21 +112,25 @@ function Sponsors() {
             </Text>
         </Flex>
         <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
-            <Stack direction="row" spacing={4} maxW="40%" wrap="wrap">
+          <Grid templateColumns="repeat(4, 1fr)" gap={6}>
               {sponsors && sponsors.map((sponsor) => (
-                <Stack key={sponsor.name} direction="column" alignItems="center">
-                    
+                <GridItem key={sponsor.name}>
+                <Stack direction="column" alignItems="center" height="100%">
+                  <Flex maxHeight={200} height="100%" alignItems="flex-end">
                     <Image
                       boxSize='200px'
                       objectFit='cover'
                       src={sponsor.image}
                     />
-                    
-                    <Text fontWeight="semibold">{sponsor.name}</Text>
-                </Stack>))}
+                  </Flex>
+                    <Flex>
+                      <Text fontWeight="semibold" maxWidth={400}>{sponsor.name}</Text>
+                    </Flex>
+                </Stack>
+                </GridItem>))}
                 
                 
-            </Stack>
+            </Grid>
         </Flex>
         <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
             <Link href="/"> 
