@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid, Box } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid, Box, GridItem } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 
