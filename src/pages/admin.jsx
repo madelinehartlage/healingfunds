@@ -446,7 +446,7 @@ function Admin() {
                                   {article.title}
                                   <Stack direction="row">
                                     <AdminEditModal header="Edit Article" title1="Article Title" title2="Article Link" place1={article.title} place2={article.link} setFunc1={setTitle} setFunc2={setLink} updateFunc={updateArticles}/>
-                                    <DeleteModal deleteFunc={deleteArticles} value={article.title} />
+                                    <DeleteModal deleteFunc={deleteArticles} value={article.title} title={"Delete Articles"}/>
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
@@ -483,7 +483,7 @@ function Admin() {
                                   <Stack direction="row">
                                     <AdminEditModal header="Edit Sponsor" title1="Sponsor Name" title2="Sponsor Image" place1={sponsor.name} place2={sponsor.image} setFunc1={setName} setFunc2={setImage} updateFunc={updateSponsors}/>
                                     
-                                    <DeleteModal deleteFunc={deleteArticles} value={sponsor.name} />
+                                    <DeleteModal deleteFunc={deleteSponsors} value={sponsor.name} title={"Delete Sponsors"}/>
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
