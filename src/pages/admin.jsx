@@ -4,6 +4,7 @@ import {ChevronDownIcon} from "@chakra-ui/icons";
 import {DeleteIcon} from "@chakra-ui/icons";
 import {EditIcon} from "@chakra-ui/icons";
 import AdminEditModal from "@/components/AdminEditModal";
+import DeleteModal from "@/components/DeleteModal";
 
 function Admin() {
   const [adding, setAdding] = React.useState(false);
@@ -24,6 +25,41 @@ function Admin() {
     title: "Meep",
     link: "mmmmm"
   }]
+
+  const testSponsors = [
+    {
+      name: "Test Image 1",
+      image: "https://t3.ftcdn.net/jpg/01/91/85/06/360_F_191850653_IkzN9vZTtOtJ8NTKLKOp8PlaY8iCk6Ls.jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 3",
+      image: "https://media.istockphoto.com/id/1386217759/photo/portrait-of-a-confident-young-businesswoman-standing-against-an-urban-background.webp?b=1&s=170667a&w=0&k=20&c=oikPwsT7yx_9XIsNQYte82Fiqg7rBE1tHrlBXWye5jc=",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+  ]
 
   React.useEffect(() => {
     async function loadArticles() {
@@ -410,7 +446,7 @@ function Admin() {
                                   {article.title}
                                   <Stack direction="row">
                                     <AdminEditModal header="Edit Article" title1="Article Title" title2="Article Link" place1={article.title} place2={article.link} setFunc1={setTitle} setFunc2={setLink} updateFunc={updateArticles}/>
-                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => deleteArticles(article.title)} color='red'></IconButton>
+                                    <DeleteModal deleteFunc={deleteArticles} value={article.title} />
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
@@ -447,7 +483,7 @@ function Admin() {
                                   <Stack direction="row">
                                     <AdminEditModal header="Edit Sponsor" title1="Sponsor Name" title2="Sponsor Image" place1={sponsor.name} place2={sponsor.image} setFunc1={setName} setFunc2={setImage} updateFunc={updateSponsors}/>
                                     
-                                    <IconButton isRound={true} variant="outline" icon={<DeleteIcon />} pointerEvents="initial" onClick={() => deleteSponsors(sponsor.name)} color='red'></IconButton>
+                                    <DeleteModal deleteFunc={deleteArticles} value={sponsor.name} />
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
