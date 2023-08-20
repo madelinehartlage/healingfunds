@@ -66,8 +66,7 @@ function Admin() {
     },
   ]
 
-  React.useEffect(() => {
-    async function loadArticles() {
+  async function loadArticles() {
 
     
     let res = await fetch("/.netlify/functions/getArticles", {
@@ -90,6 +89,8 @@ function Admin() {
     }
 
     }
+
+  React.useEffect(() => {
 
     loadArticles().catch((e) => {
       const error = e;
@@ -156,7 +157,8 @@ function Admin() {
         duration: 5000,
         isClosable: true,
       })
-        return setMessage(data.message);
+      loadArticles();
+      return setMessage(data.message);
     }
     else {
       setModalLoading(false);
@@ -212,7 +214,8 @@ function Admin() {
         duration: 5000,
         isClosable: true,
       })
-        return setMessage(data.message);
+      loadArticles();
+      return setMessage(data.message);
     }
     else {
       setModalLoading(false);
@@ -442,6 +445,7 @@ function Admin() {
           duration: 5000,
           isClosable: true,
         })
+        loadArticles();
         return setMessage(articleData.message);
       }
       else {
