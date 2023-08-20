@@ -43,7 +43,19 @@ const handler = async (event) => {
       from: user,
       to: "eaglekeeper37@gmail.com",
       subject: `Contact form submission from ${body.name}`,
-      text: "test"
+      text:`
+      Name: ${body.name}
+      Email: ${body.email}
+      Phone: ${body.value}
+      Address: ${body.street}
+       ${body.city}
+       ${body.state}
+       ${body.zip}
+      Cancer Type: ${body.cancer}
+      Diagnosis Date: ${body.date}
+      Future Therapies: ${body.therapy}
+      Created at: ${body.createdAt}
+  `,
     })
     return {
       statusCode: 200,
