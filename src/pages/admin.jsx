@@ -352,6 +352,7 @@ function Admin() {
           duration: 5000,
           isClosable: true,
         })
+        loadSponsors();
         return setMessage(data.message);
     }
     else {
