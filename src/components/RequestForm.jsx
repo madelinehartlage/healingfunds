@@ -1,5 +1,5 @@
 import React from "react"
-import { FormLabel, Input, Button, Textarea, Form, FormControl, Stack } from "@chakra-ui/react"
+import { FormLabel, Input, Button, Textarea, Form, FormControl, Stack, useToast } from "@chakra-ui/react"
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
@@ -17,6 +17,8 @@ export default function RequestForm() {
     const [error, setError] = React.useState('')
     const [message, setMessage] = React.useState('')
     const [loading, setLoading] = React.useState(false)
+
+    const toast = useToast()
 
     const handleRequest = async (e) => {
         e.preventDefault();
@@ -156,7 +158,7 @@ export default function RequestForm() {
                     <Textarea placeholder="List of planned therapies" required onChange={(e) => setTherapy(e.target.value)} value={therapy}></Textarea>
                 </Stack>
                 
-                <Button type="submit" disabled={loading}>Submit</Button>
+                <Button type="submit" loading={loading}>Submit</Button>
                 
             </Stack>
             
