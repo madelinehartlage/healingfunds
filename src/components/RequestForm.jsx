@@ -158,7 +158,7 @@ export default function RequestForm() {
                     <Textarea placeholder="List of planned therapies" required onChange={(e) => setTherapy(e.target.value)} value={therapy}></Textarea>
                 </Stack>
                 
-                <Button type="submit" loading={loading}>Submit</Button>
+                <Button type="submit" isLoading={loading}>Submit</Button>
                 
             </Stack>
             
