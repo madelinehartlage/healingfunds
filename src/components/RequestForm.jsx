@@ -64,6 +64,7 @@ export default function RequestForm() {
 
             let data = await res.json();
             if (data.status == "success") {
+                console.log("sent email");
                 /*setLoading(false);
                 toast({
                     title: 'Success.',
