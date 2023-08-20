@@ -147,6 +147,7 @@ function Admin() {
     let data = await res.json();
     if (data.status == "success") {
       setModalLoading(false);
+      onClose();
       toast({
         title: 'Success.',
         description: "You've successfully deleted the article.",
@@ -158,6 +159,7 @@ function Admin() {
     }
     else {
       setModalLoading(false);
+      onClose();
       toast({
         title: 'Error.',
         description: "Failed to delete article.",
@@ -203,6 +205,7 @@ function Admin() {
     let data = await res.json();
     if (data.status == "success") {
       setModalLoading(false);
+      onClose();
       toast({
         title: 'Success.',
         description: "You've successfully edited the article.",
@@ -214,6 +217,7 @@ function Admin() {
     }
     else {
       setModalLoading(false);
+      onClose();
       toast({
         title: 'Error.',
         description: "Failed to edit article.",
@@ -259,6 +263,7 @@ function Admin() {
     let data = await res.json();
     if (data.status == "success") {
       setModalLoading(false);
+      onClose();
       toast({
         title: 'Success.',
         description: "You've successfully edited the sponsor.",
@@ -270,6 +275,7 @@ function Admin() {
     }
     else {
       setModalLoading(false);
+      onClose();
       toast({
         title: 'Error.',
         description: "Failed to edit sponsor.",
@@ -297,6 +303,7 @@ function Admin() {
     let data = await res.json();
     if (data.status == "success") {
       setModalLoading(false);
+      onClose();
       toast({
         title: 'Success.',
         description: "You've successfully deleted the sponsor.",
@@ -308,6 +315,7 @@ function Admin() {
     }
     else {
       setModalLoading(false);
+      onClose();
       toast({
         title: 'Error.',
         description: "Failed to delete sponsor.",
