@@ -42,6 +42,7 @@ const handler = async (event) => {
     const mail = await transporter.sendMail({
       from: user,
       to: "eaglekeeper37@gmail.com",
+      replyTo: body.email,
       subject: `Contact form submission from ${body.name}`,
       text:`
       Name: ${body.name}
