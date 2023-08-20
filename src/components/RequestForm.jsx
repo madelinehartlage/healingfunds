@@ -20,6 +20,7 @@ export default function RequestForm() {
 
     const handleRequest = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         // reset error and message
         setError('');
@@ -63,13 +64,37 @@ export default function RequestForm() {
 
             let data = await res.json();
             if (data.status == "success") {
+                setLoading(false);
+                toast({
+                    title: 'Success.',
+                    description: "Request sent successfully.",
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                  })
                 return setMessage(data.message);
             }
             else {
+                setLoading(false);
+                toast({
+                    title: 'Error.',
+                    description: "Failed to send request email.",
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                  })
                 return setError(data.message);
             }
         } else {
             // set the error
+            setLoading(false);
+            toast({
+                title: 'Error.',
+                description: "Failed to send request.",
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+              })
             return setError(data.message);
         }
     };
@@ -118,7 +143,7 @@ export default function RequestForm() {
                     <Textarea placeholder="List of planned therapies" required onChange={(e) => setTherapy(e.target.value)} value={therapy}></Textarea>
                 </Stack>
                 
-                <Button type="submit" disabled={loading}>Submit</Button>
+                <Button type="submit" isLoading={loading}>Submit</Button>
                 
             </Stack>
             
