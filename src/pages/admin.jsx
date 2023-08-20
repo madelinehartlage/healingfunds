@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, IconButton, Modal, ModalBody, ModalCloseButton, ModalOverlay, ModalHeader, ModalContent, ModalFooter, useDisclosure } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, IconButton, Modal, ModalBody, ModalCloseButton, ModalOverlay, ModalHeader, ModalContent, ModalFooter, useDisclosure, useToast } from '@chakra-ui/react';
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {DeleteIcon} from "@chakra-ui/icons";
 import {EditIcon} from "@chakra-ui/icons";
@@ -20,6 +20,8 @@ function Admin() {
   const [imageData, setImageData] = React.useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure();
+
+  const toast = useToast()
 
   const testArticles = [{
     title: "Meep",
@@ -365,6 +367,13 @@ function Admin() {
         
         setAdding(false);
         console.log("success") 
+        toast({
+          title: 'Success.',
+          description: "You've successfully added an article.",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        })
         return setMessage(articleData.message);
       }
       else {
