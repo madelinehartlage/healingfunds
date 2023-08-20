@@ -127,33 +127,6 @@ function Admin() {
 
   }, [])
 
-  const handleRequest = async (e) => {
-    e.preventDefault();
-
-    // reset error and message
-    setError('');
-    setMessage('');
-
-    let article = {
-        title,
-        link,
-    };
-
-    let res = await fetch("/.netlify/functions/articles", {
-        method: 'POST',
-        body: JSON.stringify(article),
-    });
-
-    let data = await res.json();
-    if (data.status == "success") {
-        setAdding(false);
-        return setMessage(data.message);
-    }
-    else {
-        return setError(data.message);
-    }
-  }
-
   const deleteArticles = async (articleTitle) => {
 
 
@@ -169,9 +142,23 @@ function Admin() {
 
     let data = await res.json();
     if (data.status == "success") {
+      toast({
+        title: 'Success.',
+        description: "You've successfully deleted the article.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
         return setMessage(data.message);
     }
     else {
+      toast({
+        title: 'Error.',
+        description: "Failed to delete article.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
         return setError(data.message);
     }
   }
@@ -208,9 +195,23 @@ function Admin() {
 
     let data = await res.json();
     if (data.status == "success") {
+      toast({
+        title: 'Success.',
+        description: "You've successfully edited the article.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
         return setMessage(data.message);
     }
     else {
+      toast({
+        title: 'Error.',
+        description: "Failed to edit article.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
         return setError(data.message);
     }
   }
@@ -247,9 +248,23 @@ function Admin() {
 
     let data = await res.json();
     if (data.status == "success") {
+      toast({
+        title: 'Success.',
+        description: "You've successfully edited the sponsor.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
         return setMessage(data.message);
     }
     else {
+      toast({
+        title: 'Error.',
+        description: "Failed to edit sponsor.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
         return setError(data.message);
     }
   }
@@ -268,9 +283,23 @@ function Admin() {
 
     let data = await res.json();
     if (data.status == "success") {
+      toast({
+        title: 'Success.',
+        description: "You've successfully deleted the sponsor.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
         return setMessage(data.message);
     }
     else {
+      toast({
+        title: 'Error.',
+        description: "Failed to delete sponsor.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
         return setError(data.message);
     }
   }
@@ -295,9 +324,23 @@ function Admin() {
     let data = await res.json();
     if (data.status == "success") {
         setAddingSponsors(false);
+        toast({
+          title: 'Success.',
+          description: "You've successfully added a sponsor.",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
         return setMessage(data.message);
     }
     else {
+      toast({
+        title: 'Error.',
+        description: "Failed to add sponsor.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
         return setError(data.message);
     }
   }
@@ -371,17 +414,31 @@ function Admin() {
           title: 'Success.',
           description: "You've successfully added an article.",
           status: 'success',
-          duration: 9000,
+          duration: 5000,
           isClosable: true,
         })
         return setMessage(articleData.message);
       }
       else {
+        toast({
+          title: 'Error.',
+          description: "Failed to add article.",
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
           return setError(articleData.message);
       }
         
     }
     else {
+      toast({
+        title: 'Error.',
+        description: "Failed to retrieve meta data.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
         return setError(data.message);
     }
   }
