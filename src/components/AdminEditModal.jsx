@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, IconButton, Modal, ModalBody, ModalCloseButton, ModalOverlay, ModalHeader, ModalContent, ModalFooter, useDisclosure } from '@chakra-ui/react';
 import {EditIcon} from "@chakra-ui/icons";
-export default function AdminEditModel({ header, title1, title2, place1, place2, setFunc1, setFunc2, updateFunc}) {
+export default function AdminEditModel({ header, title1, title2, place1, place2, setFunc1, setFunc2, updateFunc, loading}) {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -27,7 +27,7 @@ export default function AdminEditModel({ header, title1, title2, place1, place2,
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button colorScheme='blue' mr={3} onClick={() => {onClose(); updateFunc(place1, place2)}}>
+                    <Button colorScheme='blue' mr={3} isLoading={loading} onClick={() => {onClose(); updateFunc(place1, place2)}}>
                     Submit
                     </Button>
                 </ModalFooter>

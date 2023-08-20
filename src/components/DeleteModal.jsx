@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, IconButton, AlertDialog, AlertDialogBody, AlertDialogOverlay, AlertDialogHeader, AlertDialogContent, AlertDialogFooter, useDisclosure } from '@chakra-ui/react';
 import {DeleteIcon} from "@chakra-ui/icons";
 
-export default function AlertDialogExample({deleteFunc, value, title}) {
+export default function AlertDialogExample({deleteFunc, value, title, loading}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = React.useRef()
   
@@ -29,7 +29,7 @@ export default function AlertDialogExample({deleteFunc, value, title}) {
                 <Button ref={cancelRef} onClick={onClose}>
                   Cancel
                 </Button>
-                <Button colorScheme='red' onClick={() => {onClose(); deleteFunc(value)}} ml={3}>
+                <Button colorScheme='red' isLoading={loading} onClick={() => {onClose(); deleteFunc(value)}} ml={3}>
                   Delete
                 </Button>
               </AlertDialogFooter>

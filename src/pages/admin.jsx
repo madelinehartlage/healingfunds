@@ -20,6 +20,7 @@ function Admin() {
   const [imageData, setImageData] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
   const [isArticleLoading, setArticleLoading] = React.useState(false);
+  const [isModalLoading, setModalLoading] = React.useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure();
 
@@ -130,6 +131,7 @@ function Admin() {
   }, [])
 
   const deleteArticles = async (articleTitle) => {
+    setModalLoading(true);
 
 
     // reset error and message
@@ -144,6 +146,7 @@ function Admin() {
 
     let data = await res.json();
     if (data.status == "success") {
+      setModalLoading(false);
       toast({
         title: 'Success.',
         description: "You've successfully deleted the article.",
@@ -154,6 +157,7 @@ function Admin() {
         return setMessage(data.message);
     }
     else {
+      setModalLoading(false);
       toast({
         title: 'Error.',
         description: "Failed to delete article.",
@@ -166,6 +170,7 @@ function Admin() {
   }
 
   const updateArticles = async (articleTitle, articleLink) => {
+    setModalLoading(true);
     let res;
     if (title == "" && link == "") {
       res = await fetch("/.netlify/functions/updateArticles", {
@@ -197,6 +202,7 @@ function Admin() {
 
     let data = await res.json();
     if (data.status == "success") {
+      setModalLoading(false);
       toast({
         title: 'Success.',
         description: "You've successfully edited the article.",
@@ -207,6 +213,7 @@ function Admin() {
         return setMessage(data.message);
     }
     else {
+      setModalLoading(false);
       toast({
         title: 'Error.',
         description: "Failed to edit article.",
@@ -219,6 +226,7 @@ function Admin() {
   }
 
   const updateSponsors = async (sponsorName, sponsorImage) => {
+    setModalLoading(true);
     let res;
     if (name == "" && image == "") {
       res = await fetch("/.netlify/functions/updateSponsors", {
@@ -250,6 +258,7 @@ function Admin() {
 
     let data = await res.json();
     if (data.status == "success") {
+      setModalLoading(false);
       toast({
         title: 'Success.',
         description: "You've successfully edited the sponsor.",
@@ -260,6 +269,7 @@ function Admin() {
         return setMessage(data.message);
     }
     else {
+      setModalLoading(false);
       toast({
         title: 'Error.',
         description: "Failed to edit sponsor.",
@@ -272,6 +282,7 @@ function Admin() {
   }
 
   const deleteSponsors = async (sponsorName) => {
+    setModalLoading(true);
 
 
     // reset error and message
@@ -285,6 +296,7 @@ function Admin() {
 
     let data = await res.json();
     if (data.status == "success") {
+      setModalLoading(false);
       toast({
         title: 'Success.',
         description: "You've successfully deleted the sponsor.",
@@ -295,6 +307,7 @@ function Admin() {
         return setMessage(data.message);
     }
     else {
+      setModalLoading(false);
       toast({
         title: 'Error.',
         description: "Failed to delete sponsor.",
@@ -520,8 +533,8 @@ function Admin() {
                               <MenuItem key={article.title} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
                                   {article.title}
                                   <Stack direction="row">
-                                    <AdminEditModal header="Edit Article" title1="Article Title" title2="Article Link" place1={article.title} place2={article.link} setFunc1={setTitle} setFunc2={setLink} updateFunc={updateArticles}/>
-                                    <DeleteModal deleteFunc={deleteArticles} value={article.title} title={"Delete Articles"}/>
+                                    <AdminEditModal header="Edit Article" title1="Article Title" title2="Article Link" place1={article.title} place2={article.link} setFunc1={setTitle} setFunc2={setLink} updateFunc={updateArticles} loading={isModalLoading}/>
+                                    <DeleteModal deleteFunc={deleteArticles} value={article.title} title={"Delete Articles"} loading={isModalLoading}/>
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
@@ -552,9 +565,9 @@ function Admin() {
                               <MenuItem key={sponsor.name} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
                                   {sponsor.name}
                                   <Stack direction="row">
-                                    <AdminEditModal header="Edit Sponsor" title1="Sponsor Name" title2="Sponsor Image" place1={sponsor.name} place2={sponsor.image} setFunc1={setName} setFunc2={setImage} updateFunc={updateSponsors}/>
+                                    <AdminEditModal header="Edit Sponsor" title1="Sponsor Name" title2="Sponsor Image" place1={sponsor.name} place2={sponsor.image} setFunc1={setName} setFunc2={setImage} updateFunc={updateSponsors} loading={isModalLoading}/>
                                     
-                                    <DeleteModal deleteFunc={deleteSponsors} value={sponsor.name} title={"Delete Sponsors"}/>
+                                    <DeleteModal deleteFunc={deleteSponsors} value={sponsor.name} title={"Delete Sponsors"} loading={isModalLoading}/>
                                   </Stack>
                                 </MenuItem>))}
                             </MenuList>
