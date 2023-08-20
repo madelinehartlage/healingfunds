@@ -29,7 +29,7 @@ export default function AlertDialogExample({deleteFunc, value, title, loading}) 
                 <Button ref={cancelRef} onClick={onClose}>
                   Cancel
                 </Button>
-                <Button colorScheme='red' isLoading={loading} onClick={() => {deleteFunc(value)}} ml={3}>
+                <Button colorScheme='red' isLoading={loading} onClick={() => {deleteFunc(value); onClose();}} ml={3}>
                   Delete
                 </Button>
               </AlertDialogFooter>

@@ -27,7 +27,7 @@ export default function AdminEditModel({ header, title1, title2, place1, place2,
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button colorScheme='blue' mr={3} isLoading={loading} onClick={() => {updateFunc(place1, place2)}}>
+                    <Button colorScheme='blue' mr={3} isLoading={loading} onClick={() => {updateFunc(place1, place2); onClose();}}>
                     Submit
                     </Button>
                 </ModalFooter>
