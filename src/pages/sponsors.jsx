@@ -136,6 +136,11 @@ function Sponsors() {
                 DONATE
               </Text>
             </Link>
+            <Link href="/request">
+              <Text fontSize="xl" fontWeight="bold" color="black">
+                REQUEST
+              </Text>
+            </Link>
           </Stack>
         </Flex>
         <Flex width="100%" direction="row">
@@ -188,11 +193,7 @@ function Sponsors() {
                     Donate
                 </Text>
             </Link>
-            <Link href="/request">
-              <Text fontSize="xl" fontWeight="bold" color="black">
-                REQUEST
-              </Text>
-            </Link>
+            
             
         </Stack>
       </Stack>

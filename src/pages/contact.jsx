@@ -65,6 +65,11 @@ function Contact() {
                 DONATE
               </Text>
             </Link>
+            <Link href="/request">
+              <Text fontSize="xl" fontWeight="bold" color="black">
+                REQUEST
+              </Text>
+            </Link>
           </Stack>
         </Flex>
         <Stack direction="row" spacing={8}>
@@ -118,11 +123,7 @@ function Contact() {
                     Donate
                 </Text>
           </Link>
-          <Link href="/request">
-              <Text fontSize="xl" fontWeight="bold" color="black">
-                REQUEST
-              </Text>
-            </Link>
+          
         </Stack>
       </Stack>
     </Flex>
