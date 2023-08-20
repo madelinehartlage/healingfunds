@@ -26,10 +26,34 @@ function Admin() {
 
   const toast = useToast()
 
-  const testArticles = [{
-    title: "Meep",
-    link: "mmmmm"
-  }]
+  const testArticles = [
+    {
+      title: "Dietary patterns and ovarian cancer risk",
+      link: "https://pubmed.ncbi.nlm.nih.gov/19056595/",
+      imageData: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image.png",
+
+
+    },
+    {
+      title: "Intakes of selected nutrients and food groups and risk of ovarian cancer",
+      link: "https://pubmed.ncbi.nlm.nih.gov/11588898/",
+      imageData: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image.png",
+    },
+
+    {
+      title: "Github",
+      link: "https://github.com",
+      imageData: "https://github.githubassets.com/images/modules/site/social-cards/campaign-social.png",
+    },
+    {
+      title: "Netlify",
+      link: "https://netlify.com",
+      imageData: "https://www.netlify.com/v3/static/og-image.png",
+    },
+    
+
+
+  ]
 
   const testSponsors = [
     {
@@ -43,26 +67,6 @@ function Admin() {
     {
       name: "Test Image 3",
       image: "https://media.istockphoto.com/id/1386217759/photo/portrait-of-a-confident-young-businesswoman-standing-against-an-urban-background.webp?b=1&s=170667a&w=0&k=20&c=oikPwsT7yx_9XIsNQYte82Fiqg7rBE1tHrlBXWye5jc=",
-    },
-    {
-      name: "Test Image 2",
-      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
-    },
-    {
-      name: "Test Image 2",
-      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
-    },
-    {
-      name: "Test Image 2",
-      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
-    },
-    {
-      name: "Test Image 2",
-      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
-    },
-    {
-      name: "Test Image 2",
-      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
     },
   ]
 
@@ -512,11 +516,11 @@ function Admin() {
           </Stack>
         </Flex>
         <Flex justifyContent="center" paddingTop={50} paddingBottom={50}>
-            <Stack direction="column" spacing={8} alignItems="center">
+            <Stack direction="column" spacing={8} alignItems="center" width="100%" >
                 <Text fontWeight="bold" fontSize="3xl">
                     Admin
                 </Text>
-                <Stack direction="row" spacing={20}>
+                <Stack direction="row" spacing={10} width="100%" justifyContent="space-evenly">
                     
                       <Stack direction="row">
                           <form onSubmit={getMetaData}>
@@ -532,14 +536,14 @@ function Admin() {
                                   <Button type="submit" bgColor="#439298" isLoading={isArticleLoading} color="white">Add</Button>
                               </Stack>
                           </form>
-                          <Menu autoSelect={false} closeOnSelect={false} closeOnBlur={false}>
+                          <Menu autoSelect={false} closeOnSelect={false} closeOnBlur={false} >
                             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                               Manage Articles
                             </MenuButton>
-                            <MenuList overflowY="scroll" maxHeight="200px">
+                            <MenuList overflowY="scroll" maxHeight="250px" marginRight={50}>
                               {articles && articles.map((article) => (
                               
-                              <MenuItem key={article.title} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
+                              <MenuItem maxWidth={400} key={article.title} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
                                   {article.title}
                                   <Stack direction="row">
                                     <AdminEditModal header="Edit Article" title1="Article Title" title2="Article Link" place1={article.title} place2={article.link} setFunc1={setTitle} setFunc2={setLink} updateFunc={updateArticles} loading={isModalLoading}/>
@@ -564,14 +568,14 @@ function Admin() {
                                 <Button type="submit" bgColor="#439298" isLoading={isLoading} color="white">Add</Button>
                             </Stack>
                         </form>
-                        <Menu autoSelect={false} closeOnSelect={false} closeOnBlur={false}>
+                        <Menu autoSelect={false} closeOnSelect={false} closeOnBlur={false} flip={false}>
                             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                               Manage Sponsors
                             </MenuButton>
-                            <MenuList overflowY="scroll" maxHeight="200px">
+                            <MenuList overflowY="scroll" maxHeight="250px">
                               {sponsors && sponsors.map((sponsor) => (
                               
-                              <MenuItem key={sponsor.name} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
+                              <MenuItem key={sponsor.name} maxWidth={400}justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
                                   {sponsor.name}
                                   <Stack direction="row">
                                     <AdminEditModal header="Edit Sponsor" title1="Sponsor Name" title2="Sponsor Image" place1={sponsor.name} place2={sponsor.image} setFunc1={setName} setFunc2={setImage} updateFunc={updateSponsors} loading={isModalLoading}/>
