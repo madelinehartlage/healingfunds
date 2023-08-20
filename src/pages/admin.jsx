@@ -128,7 +128,7 @@ function Admin() {
       console.log(error.message);
     });
 
-  }, [])
+  }, [sponsors])
 
   const deleteArticles = async (articleTitle) => {
     setModalLoading(true);
