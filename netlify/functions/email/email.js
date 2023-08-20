@@ -1,6 +1,7 @@
 const  nodemailer = require("nodemailer");
 
 const handler = async (event) => {
+  console.log(event.body);
   const body = JSON.parse(event.body)
   console.log(body.name)
   const user = "madeline.hartlage37@gmail.com"
