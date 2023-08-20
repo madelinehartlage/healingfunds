@@ -119,7 +119,7 @@ export default function RequestForm() {
                 </Stack>
                 
                 <Button type="submit" disabled={loading}>Submit</Button>
-                <Button onClick={async () => {let post = await fetch("/.netlify/functions/get_movies", {body: JSON.stringify(post),}).then(response => response.json()); console.log(post)}}>Test</Button>
+                
             </Stack>
             
         

@@ -513,6 +513,11 @@ function Admin() {
                 DONATE
               </Text>
             </Link>
+            <Link href="/request">
+              <Text fontSize="xl" fontWeight="bold" color="black">
+                REQUEST
+              </Text>
+            </Link>
           </Stack>
         </Flex>
         <Flex justifyContent="center" paddingTop={50} paddingBottom={50}>
