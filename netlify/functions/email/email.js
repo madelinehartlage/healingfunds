@@ -3,8 +3,7 @@ const  nodemailer = require("nodemailer");
 const handler = async (event) => {
   console.log(event.body);
   const body = JSON.parse(event.body)
-  console.log(body.name)
-  /*const user = "madeline.hartlage37@gmail.com"
+  const user = "madeline.hartlage37@gmail.com"
  
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -14,7 +13,7 @@ const handler = async (event) => {
     },
 
   });
-
+/*
   try {
     const mail = await transporter.sendMail({
       from: user,
@@ -38,16 +37,24 @@ const handler = async (event) => {
 
     console.log("Message sent:", mail.messageId)
     */
+
+  try {
+    const mail = await transporter.sendMail({
+      from: user,
+      to: "eaglekeeper37@gmail.com",
+      subject: "Hi",
+      text: "test"
+    })
     return {
       statusCode: 200,
       body: JSON.stringify({ status: "success", message: "Hello" }),
       // // more keys you can return:
       // headers: { "headerName": "headerValue", ... },
       // isBase64Encoded: true,
-    }/*
+    }
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
-  }*/
+  }
 }
 
 module.exports = { handler }
