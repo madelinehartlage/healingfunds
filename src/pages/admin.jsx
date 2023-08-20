@@ -19,6 +19,7 @@ function Admin() {
   const [sponsors, setSponsors] = React.useState([]);
   const [imageData, setImageData] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
+  const [isArticleLoading, setArticleLoading] = React.useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure();
 
@@ -376,6 +377,7 @@ function Admin() {
 
   const getMetaData = async (e) => {
     e.preventDefault();
+    setArticleLoading(true);
 
     // reset error and message
     setError('');
@@ -412,7 +414,8 @@ function Admin() {
 
       if (articleData.status == "success") {
         
-        setAdding(false);
+        //setAdding(false);
+        setArticleLoading(false);
         console.log("success") 
         toast({
           title: 'Success.',
@@ -424,6 +427,7 @@ function Admin() {
         return setMessage(articleData.message);
       }
       else {
+        setArticleLoading(false);
         toast({
           title: 'Error.',
           description: "Failed to add article.",
@@ -431,7 +435,8 @@ function Admin() {
           duration: 5000,
           isClosable: true,
         })
-          return setError(articleData.message);
+        
+        return setError(articleData.message);
       }
         
     }
@@ -490,7 +495,7 @@ function Admin() {
                     Admin
                 </Text>
                 <Stack direction="row" spacing={20}>
-                    {adding  ? 
+                    
                       <Stack direction="row">
                           <form onSubmit={getMetaData}>
                               <Stack spacing={5} border="1px solid gray" padding={4} borderRadius="16px">
@@ -502,7 +507,7 @@ function Admin() {
                                       <FormLabel>Article Link</FormLabel>
                                       <Input required placeholder="Article Link" onChange={(e) => setLink(e.target.value)}></Input>
                                   </Stack>
-                                  <Button type="submit" bgColor="#439298" color="white">Add</Button>
+                                  <Button type="submit" bgColor="#439298" isLoading={isArticleLoading} color="white">Add</Button>
                               </Stack>
                           </form>
                           <Menu autoSelect={false} closeOnSelect={false} closeOnBlur={false}>
@@ -521,11 +526,7 @@ function Admin() {
                                 </MenuItem>))}
                             </MenuList>
                           </Menu>
-                        </Stack> : 
-                        <Button bgColor="#439298" color="white" onClick={() => setAdding(true)}>
-                            Manage Articles
-                        </Button>
-                    }
+                        </Stack> 
                     
                       <Stack direction="row">
                         <form onSubmit={addSponsors}>
@@ -538,11 +539,11 @@ function Admin() {
                                     <FormLabel>Image Link</FormLabel>
                                     <Input required placeholder="Image Link" onChange={(e) => setImage(e.target.value)}></Input>
                                 </Stack>
-                                <Button type="submit" bgColor="#439298" color="white">Add</Button>
+                                <Button type="submit" bgColor="#439298" isLoading={isLoading} color="white">Add</Button>
                             </Stack>
                         </form>
                         <Menu autoSelect={false} closeOnSelect={false} closeOnBlur={false}>
-                            <MenuButton as={Button} isLoading={isLoading} rightIcon={<ChevronDownIcon />}>
+                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                               Manage Sponsors
                             </MenuButton>
                             <MenuList overflowY="scroll" maxHeight="200px">
