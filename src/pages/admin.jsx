@@ -98,8 +98,7 @@ function Admin() {
 
   }, [])
 
-  React.useEffect(() => {
-    async function loadSponsors() {
+  async function loadSponsors() {
 
     
     let res = await fetch("/.netlify/functions/getSponsors", {
@@ -123,12 +122,15 @@ function Admin() {
 
     }
 
+  React.useEffect(() => {
+    
+
     loadSponsors().catch((e) => {
       const error = e;
       console.log(error.message);
     });
 
-  }, [sponsors])
+  }, [])
 
   const deleteArticles = async (articleTitle) => {
     setModalLoading(true);
@@ -266,7 +268,8 @@ function Admin() {
         duration: 5000,
         isClosable: true,
       })
-        return setMessage(data.message);
+      loadSponsors();
+      return setMessage(data.message);
     }
     else {
       setModalLoading(false);
@@ -304,7 +307,8 @@ function Admin() {
         duration: 5000,
         isClosable: true,
       })
-        return setMessage(data.message);
+      loadSponsors();
+      return setMessage(data.message);
     }
     else {
       setModalLoading(false);
