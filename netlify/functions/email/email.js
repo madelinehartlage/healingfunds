@@ -4,7 +4,7 @@ const handler = async (event) => {
   console.log(event.body);
   const body = JSON.parse(event.body)
   console.log(body.name)
-  const user = "madeline.hartlage37@gmail.com"
+  /*const user = "madeline.hartlage37@gmail.com"
  
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -37,17 +37,17 @@ const handler = async (event) => {
     });
 
     console.log("Message sent:", mail.messageId)
-
+    */
     return {
       statusCode: 200,
-      body: JSON.stringify({ status: "success", message: `Hello ${subject}` }),
+      body: JSON.stringify({ status: "success", message: "Hello" }),
       // // more keys you can return:
       // headers: { "headerName": "headerValue", ... },
       // isBase64Encoded: true,
-    }
+    }/*
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
-  }
+  }*/
 }
 
 module.exports = { handler }

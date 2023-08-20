@@ -59,7 +59,7 @@ export default function RequestForm() {
             // set the message
             let res = await fetch("/.netlify/functions/email", {
                 method: 'POST',
-                body: JSON.stringify(post),
+                body: JSON.stringify({name: "Madeline"}),
             });
 
             let data = await res.json();
