@@ -7,12 +7,10 @@ const handler = async (event) => {
   const user = "madeline.hartlage37@gmail.com"
  
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
+    service: "gmail",
     auth: {
         user: user,
-        pass: "blvyrvdoxylapcyd",
+        pass: "gdvfqhmvtigzrzkl",
     },
 
   });
@@ -23,18 +21,18 @@ const handler = async (event) => {
       to: "eaglekeeper37@gmail.com",
       replyTo: body.email,
       subject: `Contact form submission from ${body.name}`,
-      html:`
-          <p>Name: ${body.name}</p>
-          <p>Email: ${body.email}</p>
-          <p>Phone: ${body.value}</p>
-          <p>Address: ${body.street}</p>
-          <p> ${body.city}</p>
-          <p> ${body.state}</p>
-          <p> ${body.zip}</p>
-          <p>Cancer Type: ${body.cancer}</p>
-          <p>Diagnosis Date: ${body.date}</p>
-          <p>Future Therapies: ${body.therapy}</p>
-          <p>Created at: ${body.createdAt}</p>
+      text:`
+          Name: ${body.name}
+          Email: ${body.email}
+          Phone: ${body.value}
+          Address: ${body.street}
+           ${body.city}
+           ${body.state}
+           ${body.zip}
+          Cancer Type: ${body.cancer}
+          Diagnosis Date: ${body.date}
+          Future Therapies: ${body.therapy}
+          Created at: ${body.createdAt}
       `,
     });
 
