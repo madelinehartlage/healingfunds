@@ -18,6 +18,7 @@ function Admin() {
   const [articles, setArticles] = React.useState([]);
   const [sponsors, setSponsors] = React.useState([]);
   const [imageData, setImageData] = React.useState("");
+  const [isLoading, setLoading] = React.useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure();
 
@@ -306,6 +307,7 @@ function Admin() {
 
   const addSponsors = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     // reset error and message
     setError('');
@@ -323,7 +325,8 @@ function Admin() {
 
     let data = await res.json();
     if (data.status == "success") {
-        setAddingSponsors(false);
+       // setAddingSponsors(false);
+       setLoading(false);
         toast({
           title: 'Success.',
           description: "You've successfully added a sponsor.",
@@ -334,6 +337,7 @@ function Admin() {
         return setMessage(data.message);
     }
     else {
+      setLoading(false);
       toast({
         title: 'Error.',
         description: "Failed to add sponsor.",
@@ -522,7 +526,7 @@ function Admin() {
                             Manage Articles
                         </Button>
                     }
-                    {addingSponsors  ? 
+                    
                       <Stack direction="row">
                         <form onSubmit={addSponsors}>
                             <Stack spacing={5} border="1px solid gray" padding={4} borderRadius="16px">
@@ -538,7 +542,7 @@ function Admin() {
                             </Stack>
                         </form>
                         <Menu autoSelect={false} closeOnSelect={false} closeOnBlur={false}>
-                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                            <MenuButton as={Button} isLoading={isLoading} rightIcon={<ChevronDownIcon />}>
                               Manage Sponsors
                             </MenuButton>
                             <MenuList overflowY="scroll" maxHeight="200px">
@@ -555,11 +559,7 @@ function Admin() {
                             </MenuList>
                           </Menu>
                       </Stack>
-                        : 
-                      <Button bgColor="#439298" color="white" onClick={() => setAddingSponsors(true)}>
-                          Manage Sponsors
-                      </Button>
-                    }
+                       
                 </Stack>
             </Stack>
         </Flex>
