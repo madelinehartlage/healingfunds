@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, IconButton, Modal, ModalBody, ModalCloseButton, ModalOverlay, ModalHeader, ModalContent, ModalFooter, useDisclosure, useToast } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, Modal, ModalBody, ModalCloseButton, ModalOverlay, ModalHeader, ModalContent, ModalFooter, useDisclosure, useToast, IconButton } from '@chakra-ui/react';
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {DeleteIcon} from "@chakra-ui/icons";
 import {EditIcon} from "@chakra-ui/icons";
 import AdminEditModal from "@/components/AdminEditModal";
 import DeleteModal from "@/components/DeleteModal";
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 function Admin() {
   const [adding, setAdding] = React.useState(false);
@@ -481,13 +482,13 @@ function Admin() {
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
-      <Flex width="100%" paddingLeft={4} paddingRight={10} justifyContent="space-between" alignItems="center">
+      <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
           <Link href="/">
-            <Image src="/logoHealing2.jpg"/>
+            <Image src="/logoHealing2.jpg" maxWidth={[200, 800]}/>
           </Link>
         
-        <Stack paddingTop={12} direction="row" spacing={10} alignItems="center">
+          <Stack paddingTop={12} direction="row" spacing={10} alignItems="center" display={["none", "flex"]}>
           <Link href="/about">
             <Text fontSize="xl" fontWeight="bold" color="black">
               ABOUT
@@ -518,16 +519,49 @@ function Admin() {
                 REQUEST
               </Text>
             </Link>
-          </Stack>
+        </Stack>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            icon={<HamburgerIcon boxSize={"30px"}/>}
+            bgColor="white"
+            _hover={{bgColor: "white"}}
+            _active={{bgColor: "white"}}
+            display={["flex","none"]}
+            boxSize={"30px"}
+          />
+          <MenuList>
+            <MenuItem as='a' href="/about">
+              About
+            </MenuItem>
+            <MenuItem as='a' href="/sponsors">
+              Sponsors
+            </MenuItem>
+            <MenuItem as='a' href="/articles">
+              Articles
+            </MenuItem>
+            <MenuItem as='a' href="/contact">
+              Contact
+            </MenuItem>
+            <Link onClick={handleSubmit}>
+              <MenuItem>
+                Donate
+              </MenuItem>
+            </Link>
+            <MenuItem as='a' href="/request">
+              Request
+            </MenuItem>
+          </MenuList>
+        </Menu>
         </Flex>
         <Flex justifyContent="center" paddingTop={50} paddingBottom={50}>
             <Stack direction="column" spacing={8} alignItems="center" width="100%">
                 <Text fontWeight="bold" fontSize="3xl">
                     Admin
                 </Text>
-                <Stack direction="row" spacing={10} justifyContent="center" width='100%' >
+                <Stack direction={["column","row"]} spacing={10} justifyContent="center" width='100%' >
                     
-                      <Stack direction="row">
+                      <Stack direction={["column","row"]}>
                           <form onSubmit={getMetaData}>
                               <Stack spacing={5} border="1px solid gray" padding={4} borderRadius="16px">
                                   <Stack>
@@ -544,7 +578,7 @@ function Admin() {
                           
                           <Flex borderRadius="16px" overflow="hidden" border="1px solid gray">
                             <Stack maxHeight="280px" overflowY="scroll" borderRadius="16px">
-                              {articles && articles.map((article) => (
+                              {testArticles && testArticles.map((article) => (
                                 <Stack direction="row" maxWidth={400} key={article.title} justifyContent="space-between" borderBottom="1px solid lightgray" padding={4} alignItems="center">
                                   <Text>{article.title}</Text>
                                   <Stack direction="row">
@@ -558,7 +592,7 @@ function Admin() {
                         </Stack> 
                         
                     
-                      <Stack direction="row">
+                      <Stack direction={["column","row"]}>
                         <form onSubmit={addSponsors}>
                             <Stack spacing={5} border="1px solid gray" padding={4} borderRadius="16px">
                                 <Stack>
@@ -573,9 +607,9 @@ function Admin() {
                             </Stack>
                         </form>
                         <Flex borderRadius="16px" overflow="hidden" border="1px solid gray">
-                          <Stack maxHeight="280px" overflowY="scroll">
-                            {sponsors && sponsors.map((sponsor) => (
-                              <Stack direction="row" maxWidth={400} key={sponsor.name} justifyContent="space-between" borderBottom="1px solid lightgray" padding={4} alignItems="center">
+                          <Stack maxHeight="280px" overflowY="scroll" width="100%">
+                            {testSponsors && testSponsors.map((sponsor) => (
+                              <Stack direction="row" maxWidth={400} width="100%" key={sponsor.name} justifyContent="space-between" borderBottom="1px solid lightgray" padding={4} alignItems="center">
                                 <Text>{sponsor.name}</Text>
                                 <Stack direction="row">
                                   <AdminEditModal header="Edit Sponsor" title1="Sponsor Name" title2="Sponsor Image" place1={sponsor.name} place2={sponsor.image} setFunc1={setName} setFunc2={setImage} updateFunc={updateSponsors} loading={isModalLoading}/>
@@ -590,21 +624,21 @@ function Admin() {
                 </Stack>
             </Stack>
         </Flex>
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10} position="absolute" bottom={0}>
-            <Link href="/"> 
-                <Text fontSize="lg" fontWeight="semibold" color="white">
-                    Healing Funds Inc.
-                </Text>
-            </Link> 
-            <Link href="/contact">
-                <Text fontSize="lg" fontWeight="semibold" color="white">
-                    Contact Us
-                </Text>
-            </Link>
-            <Link onClick={handleSubmit}>
-                <Text fontSize="lg" fontWeight="semibold" color="white">
-                    Donate
-                </Text>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10}>
+          <Link href="/"> 
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+              Healing Funds Inc.
+            </Text>
+          </Link> 
+          <Link href="/contact">
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+              Contact Us
+            </Text>
+          </Link>
+          <Link onClick={handleSubmit}>
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+                Donate
+            </Text>
           </Link>
         </Stack>
       </Stack>
