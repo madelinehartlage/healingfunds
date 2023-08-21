@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid, Box, GridItem } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid, Box, GridItem, Menu, MenuItem, MenuButton, MenuList, IconButton } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 function Sponsors() {
 
@@ -104,13 +105,13 @@ function Sponsors() {
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
-      <Flex width="100%" paddingLeft={4} paddingRight={10} justifyContent="space-between" alignItems="center">
+      <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
-          <Link href="/">
-            <Image src="/logoHealing2.jpg"/>
-          </Link>
+      <Link href="/">
+          <Image src="/logoHealing2.jpg" maxWidth={[200, 800]}/>
+        </Link>
         
-        <Stack paddingTop={12} direction="row" spacing={10} alignItems="center">
+        <Stack paddingTop={12} direction="row" spacing={10} alignItems="center" display={["none", "flex"]}>
           <Link href="/about">
             <Text fontSize="xl" fontWeight="bold" color="black">
               ABOUT
@@ -141,18 +142,51 @@ function Sponsors() {
                 REQUEST
               </Text>
             </Link>
-          </Stack>
+        </Stack>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            icon={<HamburgerIcon boxSize={"30px"}/>}
+            bgColor="white"
+            _hover={{bgColor: "white"}}
+            _active={{bgColor: "white"}}
+            display={["flex","none"]}
+            boxSize={"30px"}
+          />
+          <MenuList>
+            <MenuItem as='a' href="/about">
+              About
+            </MenuItem>
+            <MenuItem as='a' href="/sponsors">
+              Sponsors
+            </MenuItem>
+            <MenuItem as='a' href="/articles">
+              Articles
+            </MenuItem>
+            <MenuItem as='a' href="/contact">
+              Contact
+            </MenuItem>
+            <Link onClick={handleSubmit}>
+              <MenuItem>
+                Donate
+              </MenuItem>
+            </Link>
+            <MenuItem as='a' href="/request">
+              Request
+            </MenuItem>
+          </MenuList>
+        </Menu>
         </Flex>
         <Flex width="100%" direction="row">
           
           <Flex direction="column" width="100%">
             <Flex bgColor="#439298" justifyContent="center" fontWeight="semibold" fontSize="3xl" marginLeft={4} marginRight={4} marginBottom={4}>
-                <Text color="white">
+                <Text color="white" fontSize={["2xl", "3xl"]}>
                     Our Sponsors
                 </Text>
             </Flex>
             <Flex justifyContent="center" paddingTop={12} paddingBottom={12} width="100%">
-              <Grid templateColumns="repeat(4, 1fr)" gap={6} width="100%">
+              <Grid templateColumns={["repeat(1, 1fr)","repeat(4, 1fr)"]} gap={6} width="100%">
                   {sponsors && sponsors.map((sponsor) => (
                     <GridItem key={sponsor.name}>
                     <Stack direction="column" alignItems="center" height="100%">
@@ -177,24 +211,22 @@ function Sponsors() {
             
         
         
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10} position="absolute" bottom={0}>
-            <Link href="/"> 
-                <Text fontSize="lg" fontWeight="semibold" color="white">
-                    Healing Funds Inc.
-                </Text>
-            </Link> 
-            <Link href="/contact">
-                <Text fontSize="lg" fontWeight="semibold" color="white">
-                    Contact Us
-                </Text>
-            </Link>
-            <Link onClick={handleSubmit}>
-                <Text fontSize="lg" fontWeight="semibold" color="white">
-                    Donate
-                </Text>
-            </Link>
-            
-            
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10}>
+          <Link href="/"> 
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+              Healing Funds Inc.
+            </Text>
+          </Link> 
+          <Link href="/contact">
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+              Contact Us
+            </Text>
+          </Link>
+          <Link onClick={handleSubmit}>
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+                Donate
+            </Text>
+          </Link>
         </Stack>
       </Stack>
     </Flex>
