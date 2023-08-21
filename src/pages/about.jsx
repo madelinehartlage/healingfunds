@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid, Box } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Menu, MenuButton, MenuList, MenuItem, IconButton } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 function About() {
 
@@ -33,13 +34,13 @@ function About() {
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%" spacing={0}>
-      <Flex width="100%" paddingLeft={4} paddingRight={10} justifyContent="space-between" alignItems="center">
+      <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
           <Link href="/">
-            <Image src="/logoHealing2.jpg"/>
+            <Image src="/logoHealing2.jpg" maxWidth={[200, 800]}/>
           </Link>
         
-        <Stack paddingTop={12} direction="row" spacing={10} alignItems="center">
+          <Stack paddingTop={12} direction="row" spacing={10} alignItems="center" display={["none", "flex"]}>
           <Link href="/about">
             <Text fontSize="xl" fontWeight="bold" color="black">
               ABOUT
@@ -70,27 +71,60 @@ function About() {
                 REQUEST
               </Text>
             </Link>
-          </Stack>
+        </Stack>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            icon={<HamburgerIcon boxSize={"30px"}/>}
+            bgColor="white"
+            _hover={{bgColor: "white"}}
+            _active={{bgColor: "white"}}
+            display={["flex","none"]}
+            boxSize={"30px"}
+          />
+          <MenuList>
+            <MenuItem as='a' href="/about">
+              About
+            </MenuItem>
+            <MenuItem as='a' href="/sponsors">
+              Sponsors
+            </MenuItem>
+            <MenuItem as='a' href="/articles">
+              Articles
+            </MenuItem>
+            <MenuItem as='a' href="/contact">
+              Contact
+            </MenuItem>
+            <Link onClick={handleSubmit}>
+              <MenuItem>
+                Donate
+              </MenuItem>
+            </Link>
+            <MenuItem as='a' href="/request">
+              Request
+            </MenuItem>
+          </MenuList>
+        </Menu>
         </Flex>
-        <Stack direction="row" spacing={8} height="100%">
-        <Flex width="100%" maxWidth="50%">
+        <Stack direction={["column","row"]} spacing={8} height="100%">
+        <Flex width="100%" maxWidth={["100%","50%"]}>
           <Image src="/supportsystem.jpg" width="100%" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
           
           
-        <Flex paddingTop={20} paddingBottom={8} width="100%" maxWIdth="50%" justifyContent="center">
-          <Stack direction="column" paddingLeft={20} paddingTop={20}>
+        <Flex paddingTop={[4,20]} paddingBottom={8} width="100%" maxWidth={["100%","50%"]} justifyContent="center" direction={["column","row"]}>
+          <Stack direction="column" paddingLeft={20} paddingTop={[0,20]}>
             <Flex>
-              <Flex bgColor="#439298" width="100px" height="100px" transform="rotate(45deg) translateX(-15px) translateY(-85px)"></Flex>
-              <Flex bgColor="#F86F8B" width="100px" height="100px" transform="rotate(45deg)"></Flex>
+              <Flex bgColor="#439298" width={["50px","100px"]} height={["50px","100px"]} transform={["rotate(45deg) translateY(-80px) translateX(65px)","rotate(45deg) translateX(-15px) translateY(-85px)"]}></Flex>
+              <Flex bgColor="#F86F8B" width={["50px","100px"]} height={["50px","100px"]} transform={["rotate(45deg) translateY(-10px) translateX(65px)","rotate(45deg)"]}></Flex>
             </Flex>
             <Flex>
-              <Flex bgColor="#F86F8B" width="100px" height="100px" transform="rotate(45deg) translateX(-105px) translateY(-75px)"></Flex>
-              <Flex bgColor="#439298" width="100px" height="100px" transform="rotate(45deg) translateX(-90px) translateY(5px)"></Flex>
-              <Flex bgColor="lightgray" width="100px" height="100px" transform="rotate(45deg) translateX(-200px) translateY(30px)"></Flex>
+              <Flex bgColor="#F86F8B" width={["50px","100px"]} height={["50px","100px"]} transform={["rotate(45deg) translateX(-10px) translateY(-90px)","rotate(45deg) translateX(-105px) translateY(-75px)"]}></Flex>
+              <Flex bgColor="#439298" width={["50px","100px"]} height={["50px","100px"]} transform={["rotate(45deg) translateX(-15px) translateY(-20px)","rotate(45deg) translateX(-90px) translateY(5px)"]}></Flex>
+              <Flex bgColor="lightgray" width={["50px","100px"]} height={["50px","100px"]} transform={["rotate(45deg) translateX(-50px) translateY(-20px)","rotate(45deg) translateX(-200px) translateY(30px)"]}></Flex>
             </Flex>
           </Stack>
-          <Stack direction="column" spacing={4} width="100%" marginRight={20}>
+          <Stack direction="column" spacing={4} width="100%" marginRight={[0,20]} paddingLeft={["30px", "0px"]}>
             <Text fontWeight="bold" fontSize="2xl">
               About Healing Funds Inc.
             </Text>
@@ -108,15 +142,15 @@ function About() {
         </Flex>
         </Stack>
         
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10} position="absolute" bottom={0}>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10}>
           <Link href="/"> 
             <Text fontSize="lg" fontWeight="semibold" color="white">
-                Healing Funds Inc.
+              Healing Funds Inc.
             </Text>
           </Link> 
           <Link href="/contact">
             <Text fontSize="lg" fontWeight="semibold" color="white">
-                Contact Us
+              Contact Us
             </Text>
           </Link>
           <Link onClick={handleSubmit}>
