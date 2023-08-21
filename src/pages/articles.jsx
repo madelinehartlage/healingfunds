@@ -92,7 +92,8 @@ function Articles() {
   }, [])
 
   React.useEffect(() => {
-    setArticleLength();
+    setArticleLength(articles.length);
+    console.log(articleLength);
   }, [articles])
 
   const handleSubmit = async (e) => {

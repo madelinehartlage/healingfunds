@@ -79,7 +79,7 @@ function Sponsors() {
   }, [])
 
   React.useEffect(() => {
-    setSponsorLength();
+    setSponsorLength(sponsors.length);
   }, [sponsors])
 
   const handleSubmit = async (e) => {
