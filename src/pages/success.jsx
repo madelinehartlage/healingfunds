@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid, Menu, MenuButton, MenuList, MenuItem, IconButton } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 function Success() {
 
@@ -33,13 +34,13 @@ function Success() {
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
-      <Flex width="100%" paddingLeft={4} paddingRight={10} justifyContent="space-between" alignItems="center">
+      <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
           <Link href="/">
-            <Image src="/logoHealing2.jpg"/>
+            <Image src="/logoHealing2.jpg" maxWidth={[200, 800]}/>
           </Link>
         
-        <Stack paddingTop={12} direction="row" spacing={10} alignItems="center">
+          <Stack paddingTop={12} direction="row" spacing={10} alignItems="center" display={["none", "flex"]}>
           <Link href="/about">
             <Text fontSize="xl" fontWeight="bold" color="black">
               ABOUT
@@ -70,10 +71,43 @@ function Success() {
                 REQUEST
               </Text>
             </Link>
-          </Stack>
+        </Stack>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            icon={<HamburgerIcon boxSize={"30px"}/>}
+            bgColor="white"
+            _hover={{bgColor: "white"}}
+            _active={{bgColor: "white"}}
+            display={["flex","none"]}
+            boxSize={"30px"}
+          />
+          <MenuList>
+            <MenuItem as='a' href="/about">
+              About
+            </MenuItem>
+            <MenuItem as='a' href="/sponsors">
+              Sponsors
+            </MenuItem>
+            <MenuItem as='a' href="/articles">
+              Articles
+            </MenuItem>
+            <MenuItem as='a' href="/contact">
+              Contact
+            </MenuItem>
+            <Link onClick={handleSubmit}>
+              <MenuItem>
+                Donate
+              </MenuItem>
+            </Link>
+            <MenuItem as='a' href="/request">
+              Request
+            </MenuItem>
+          </MenuList>
+        </Menu>
         </Flex>
-        <Flex justifyContent="center" paddingTop={50} paddingBottom={50}>
-            <Text fontWeight="bold" fontSize="3xl">Thank you for your donation!</Text>
+        <Flex justifyContent="center" width="100%" alignItems="center" paddingTop={50} paddingBottom={50}>
+            <Text fontWeight="bold" fontSize="2xl" width="100%" textAlign="center">Thank you for your donation!</Text>
         </Flex>
       </Stack>
     </Flex>
