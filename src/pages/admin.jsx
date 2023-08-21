@@ -544,7 +544,7 @@ function Admin() {
                           
                           <Flex borderRadius="16px" overflow="hidden" border="1px solid gray">
                             <Stack maxHeight="280px" overflowY="scroll" borderRadius="16px">
-                              {testArticles && testArticles.map((article) => (
+                              {articles && articles.map((article) => (
                                 <Stack direction="row" maxWidth={400} key={article.title} justifyContent="space-between" borderBottom="1px solid lightgray" padding={4} alignItems="center">
                                   <Text>{article.title}</Text>
                                   <Stack direction="row">
@@ -574,7 +574,7 @@ function Admin() {
                         </form>
                         <Flex borderRadius="16px" overflow="hidden" border="1px solid gray">
                           <Stack maxHeight="280px" overflowY="scroll">
-                            {testSponsors && testSponsors.map((sponsor) => (
+                            {sponsors && sponsors.map((sponsor) => (
                               <Stack direction="row" maxWidth={400} key={sponsor.name} justifyContent="space-between" borderBottom="1px solid lightgray" padding={4} alignItems="center">
                                 <Text>{sponsor.name}</Text>
                                 <Stack direction="row">
