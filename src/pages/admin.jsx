@@ -579,7 +579,7 @@ function Admin() {
                                 <Text>{sponsor.name}</Text>
                                 <Stack direction="row">
                                   <AdminEditModal header="Edit Sponsor" title1="Sponsor Name" title2="Sponsor Image" place1={sponsor.name} place2={sponsor.image} setFunc1={setName} setFunc2={setImage} updateFunc={updateSponsors} loading={isModalLoading}/>
-                                  <DeleteModal deleteFunc={deleteArticles} value={sponsor.name} title={"Delete Sponsor"} loading={isModalLoading}/>
+                                  <DeleteModal deleteFunc={deleteSponsors} value={sponsor.name} title={"Delete Sponsor"} loading={isModalLoading}/>
                                 </Stack>
                               </Stack>
                             ))}
