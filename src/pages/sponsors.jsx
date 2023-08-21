@@ -9,6 +9,7 @@ function Sponsors() {
   const [error, setError] = React.useState('')
   const [message, setMessage] = React.useState('')
   const [sponsors, setSponsors] = React.useState([]);
+  const [sponsorLength, setSponsorLength] = React.useState(0);
 
   const testSponsors = [
     {
@@ -76,6 +77,10 @@ function Sponsors() {
     });
 
   }, [])
+
+  React.useEffect(() => {
+    setSponsorLength();
+  }, [sponsors])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -211,7 +216,7 @@ function Sponsors() {
             
         
         
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10}>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10} position={sponsorLength < 5 ? "absolute": "relative"} bottom={0}>
           <Link href="/"> 
             <Text fontSize="lg" fontWeight="semibold" color="white">
               Healing Funds Inc.
