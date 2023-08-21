@@ -5,6 +5,11 @@ export default function AdminEditModel({ header, title1, title2, place1, place2,
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        console.log('The link was clicked.');
+      }
+
     return (
         <>
             <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={onOpen}></IconButton>

@@ -22,7 +22,7 @@ function Admin() {
   const [isArticleLoading, setArticleLoading] = React.useState(false);
   const [isModalLoading, setModalLoading] = React.useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure();
+  
 
   const toast = useToast()
 
@@ -521,11 +521,11 @@ function Admin() {
           </Stack>
         </Flex>
         <Flex justifyContent="center" paddingTop={50} paddingBottom={50}>
-            <Stack direction="column" spacing={8} alignItems="center" width="100%" >
+            <Stack direction="column" spacing={8} alignItems="center" width="100%">
                 <Text fontWeight="bold" fontSize="3xl">
                     Admin
                 </Text>
-                <Stack direction="row" spacing={10} width="100%" justifyContent="space-evenly">
+                <Stack direction="row" spacing={10} justifyContent="center" width='100%' >
                     
                       <Stack direction="row">
                           <form onSubmit={getMetaData}>
@@ -541,23 +541,22 @@ function Admin() {
                                   <Button type="submit" bgColor="#439298" isLoading={isArticleLoading} color="white">Add</Button>
                               </Stack>
                           </form>
-                          <Menu autoSelect={false} closeOnSelect={false} closeOnBlur={false} >
-                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                              Manage Articles
-                            </MenuButton>
-                            <MenuList overflowY="scroll" maxHeight="250px" marginRight={50}>
-                              {articles && articles.map((article) => (
-                              
-                              <MenuItem maxWidth={400} key={article.title} justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
-                                  {article.title}
+                          
+                          <Flex borderRadius="16px" overflow="hidden" border="1px solid gray">
+                            <Stack maxHeight="280px" overflowY="scroll" borderRadius="16px">
+                              {testArticles && testArticles.map((article) => (
+                                <Stack direction="row" maxWidth={400} key={article.title} justifyContent="space-between" borderBottom="1px solid lightgray" padding={4} alignItems="center">
+                                  <Text>{article.title}</Text>
                                   <Stack direction="row">
                                     <AdminEditModal header="Edit Article" title1="Article Title" title2="Article Link" place1={article.title} place2={article.link} setFunc1={setTitle} setFunc2={setLink} updateFunc={updateArticles} loading={isModalLoading}/>
-                                    <DeleteModal deleteFunc={deleteArticles} value={article.title} title={"Delete Articles"} loading={isModalLoading}/>
+                                    <DeleteModal deleteFunc={deleteArticles} value={article.title} title={"Delete Article"} loading={isModalLoading}/>
                                   </Stack>
-                                </MenuItem>))}
-                            </MenuList>
-                          </Menu>
+                                </Stack>
+                              ))}
+                            </Stack>
+                          </Flex>
                         </Stack> 
+                        
                     
                       <Stack direction="row">
                         <form onSubmit={addSponsors}>
@@ -573,23 +572,19 @@ function Admin() {
                                 <Button type="submit" bgColor="#439298" isLoading={isLoading} color="white">Add</Button>
                             </Stack>
                         </form>
-                        <Menu autoSelect={false} closeOnSelect={false} closeOnBlur={false} flip={false}>
-                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                              Manage Sponsors
-                            </MenuButton>
-                            <MenuList overflowY="scroll" maxHeight="250px">
-                              {sponsors && sponsors.map((sponsor) => (
-                              
-                              <MenuItem key={sponsor.name} maxWidth={400}justifyContent="space-between" pointerEvents="none" _hover={{bgColor: "white"}} _focus={{bgColor: "white"}} isDisabled style={{opacity : 1}}>
-                                  {sponsor.name}
-                                  <Stack direction="row">
-                                    <AdminEditModal header="Edit Sponsor" title1="Sponsor Name" title2="Sponsor Image" place1={sponsor.name} place2={sponsor.image} setFunc1={setName} setFunc2={setImage} updateFunc={updateSponsors} loading={isModalLoading}/>
-                                    
-                                    <DeleteModal deleteFunc={deleteSponsors} value={sponsor.name} title={"Delete Sponsors"} loading={isModalLoading}/>
-                                  </Stack>
-                                </MenuItem>))}
-                            </MenuList>
-                          </Menu>
+                        <Flex borderRadius="16px" overflow="hidden" border="1px solid gray">
+                          <Stack maxHeight="280px" overflowY="scroll">
+                            {testSponsors && testSponsors.map((sponsor) => (
+                              <Stack direction="row" maxWidth={400} key={sponsor.name} justifyContent="space-between" borderBottom="1px solid lightgray" padding={4} alignItems="center">
+                                <Text>{sponsor.name}</Text>
+                                <Stack direction="row">
+                                  <AdminEditModal header="Edit Sponsor" title1="Sponsor Name" title2="Sponsor Image" place1={sponsor.name} place2={sponsor.image} setFunc1={setName} setFunc2={setImage} updateFunc={updateSponsors} loading={isModalLoading}/>
+                                  <DeleteModal deleteFunc={deleteArticles} value={sponsor.name} title={"Delete Sponsor"} loading={isModalLoading}/>
+                                </Stack>
+                              </Stack>
+                            ))}
+                          </Stack>
+                        </Flex>
                       </Stack>
                        
                 </Stack>
