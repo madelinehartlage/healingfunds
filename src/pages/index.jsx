@@ -328,7 +328,7 @@ function HealingFundsHome() {
                     />
                   </Flex> 
                   <Flex>
-                    <Text fontWeight="semibold" color="black">{sponsor.name}</Text>
+                    <Text fontWeight="semibold" color="black" maxWidth={[300, 400]}>{sponsor.name}</Text>
                   </Flex>
                 </Stack></GridItem>))}
             

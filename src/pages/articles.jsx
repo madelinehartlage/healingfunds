@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Icon, GridItem } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Icon, GridItem, Menu, MenuList, MenuItem, MenuButton, IconButton } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import {ImNewspaper} from "react-icons/im";
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 function Articles() {
   const [error, setError] = React.useState('')
@@ -141,18 +142,18 @@ function Articles() {
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
-        <Flex width="100%" paddingLeft={4} paddingRight={10} justifyContent="space-between" alignItems="center">
+        <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
             <Link href="/">
-              <Image src="/logoHealing2.jpg"/>
+              <Image src="/logoHealing2.jpg" maxWidth={[200, 800]}/>
             </Link>
           
-          <Stack paddingTop={12} direction="row" spacing={10} alignItems="center">
-            <Link href="/about">
-              <Text fontSize="xl" fontWeight="bold" color="black">
-                ABOUT
-              </Text>
-            </Link>
+            <Stack paddingTop={12} direction="row" spacing={10} alignItems="center" display={["none", "flex"]}>
+          <Link href="/about">
+            <Text fontSize="xl" fontWeight="bold" color="black">
+              ABOUT
+            </Text>
+          </Link>
             <Link href="/sponsors">
               <Text fontSize="xl" fontWeight="bold" color="black">
                 SPONSORS
@@ -178,16 +179,49 @@ function Articles() {
                 REQUEST
               </Text>
             </Link>
-          </Stack>
+        </Stack>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            icon={<HamburgerIcon boxSize={"30px"}/>}
+            bgColor="white"
+            _hover={{bgColor: "white"}}
+            _active={{bgColor: "white"}}
+            display={["flex","none"]}
+            boxSize={"30px"}
+          />
+          <MenuList>
+            <MenuItem as='a' href="/about">
+              About
+            </MenuItem>
+            <MenuItem as='a' href="/sponsors">
+              Sponsors
+            </MenuItem>
+            <MenuItem as='a' href="/articles">
+              Articles
+            </MenuItem>
+            <MenuItem as='a' href="/contact">
+              Contact
+            </MenuItem>
+            <Link onClick={handleSubmit}>
+              <MenuItem>
+                Donate
+              </MenuItem>
+            </Link>
+            <MenuItem as='a' href="/request">
+              Request
+            </MenuItem>
+          </MenuList>
+        </Menu>
         </Flex>
         
-        <Flex bgColor="#439298" justifyContent="center" fontWeight="semibold" fontSize="3xl" marginTop={8}>
+        <Flex bgColor="#439298" justifyContent="center" fontWeight="semibold" fontSize="3xl" marginTop={[4,8]}>
             <Text color="white">
                 Latest Articles
             </Text>
         </Flex>
         <Flex justifyContent="center" paddingTop={12} paddingBottom={12}>
-          <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+          <Grid templateColumns={["repeat(1, 1fr)","repeat(4, 1fr)"]} gap={6}>
                 {articles && articles.map((article) => (
                 <GridItem key={article.title}>
                 <Stack  direction="column" alignItems="center" height="100%">
@@ -200,7 +234,7 @@ function Articles() {
                     </Link>
                   </Flex>
                   <Flex>
-                    <Text fontWeight="semibold" color="black"maxWidth={400}>{article.title}</Text>
+                    <Text fontWeight="semibold" color="black" maxWidth={[300, 400]}>{article.title}</Text>
                   </Flex>
                 </Stack></GridItem>
                 ))}
@@ -208,22 +242,22 @@ function Articles() {
                 
             </Grid>
         </Flex>
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10} position="absolute" bottom={0}>
-            <Link href="/"> 
-                <Text fontSize="lg" fontWeight="semibold" color="white">
-                    Healing Funds Inc.
-                </Text>
-            </Link> 
-            <Link href="/contact">
-                <Text fontSize="lg" fontWeight="semibold" color="white">
-                    Contact Us
-                </Text>
-            </Link>
-            <Link onClick={handleSubmit}>
-                <Text fontSize="lg" fontWeight="semibold" color="white">
-                    Donate
-                </Text>
-            </Link>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10}>
+          <Link href="/"> 
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+              Healing Funds Inc.
+            </Text>
+          </Link> 
+          <Link href="/contact">
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+              Contact Us
+            </Text>
+          </Link>
+          <Link onClick={handleSubmit}>
+            <Text fontSize="lg" fontWeight="semibold" color="white">
+                Donate
+            </Text>
+          </Link>
         </Stack>
       </Stack>
     </Flex>

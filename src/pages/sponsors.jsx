@@ -198,7 +198,7 @@ function Sponsors() {
                         />
                       </Flex>
                         <Flex>
-                          <Text fontWeight="semibold" maxWidth={400}>{sponsor.name}</Text>
+                          <Text fontWeight="semibold" maxWidth={[300, 400]}>{sponsor.name}</Text>
                         </Flex>
                     </Stack>
                     </GridItem>))}
