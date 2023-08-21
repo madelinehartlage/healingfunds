@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { Text, Flex, Stack, Button, Link, Image, Box, Icon, Grid, GridItem } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Link, Image, Box, Icon, Grid, GridItem, IconButton, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import {ImNewspaper} from "react-icons/im";
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 function HealingFundsHome() {
 
@@ -39,6 +40,41 @@ function HealingFundsHome() {
     },
 
 
+  ]
+
+  const testSponsors = [
+    {
+      name: "Test Image 1",
+      image: "https://t3.ftcdn.net/jpg/01/91/85/06/360_F_191850653_IkzN9vZTtOtJ8NTKLKOp8PlaY8iCk6Ls.jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 3",
+      image: "https://media.istockphoto.com/id/1386217759/photo/portrait-of-a-confident-young-businesswoman-standing-against-an-urban-background.webp?b=1&s=170667a&w=0&k=20&c=oikPwsT7yx_9XIsNQYte82Fiqg7rBE1tHrlBXWye5jc=",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+    {
+      name: "Test Image 2",
+      image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
   ]
 
   //let tempColumns = "repeat(" + testArticles.length + ", 1fr)"
@@ -141,13 +177,13 @@ function HealingFundsHome() {
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
-      <Flex width="100%" paddingLeft={4} paddingRight={10} justifyContent="space-between" alignItems="center">
+      <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
-          <Link href="/">
-            <Image src="/logoHealing2.jpg"/>
-          </Link>
+        <Link href="/">
+          <Image src="/logoHealing2.jpg" maxWidth={[200, 800]}/>
+        </Link>
         
-        <Stack paddingTop={12} direction="row" spacing={10} alignItems="center">
+        <Stack paddingTop={12} direction="row" spacing={10} alignItems="center" display={["none", "flex"]}>
           <Link href="/about">
             <Text fontSize="xl" fontWeight="bold" color="black">
               ABOUT
@@ -178,13 +214,46 @@ function HealingFundsHome() {
                 REQUEST
               </Text>
             </Link>
-          </Stack>
-        </Flex>
+        </Stack>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            icon={<HamburgerIcon boxSize={"30px"}/>}
+            bgColor="white"
+            _hover={{bgColor: "white"}}
+            _active={{bgColor: "white"}}
+            display={["flex","none"]}
+            boxSize={"30px"}
+          />
+          <MenuList>
+            <MenuItem as='a' href="/about">
+              About
+            </MenuItem>
+            <MenuItem as='a' href="/sponsors">
+              Sponsors
+            </MenuItem>
+            <MenuItem as='a' href="/articles">
+              Articles
+            </MenuItem>
+            <MenuItem as='a' href="/contact">
+              Contact
+            </MenuItem>
+            <Link onClick={handleSubmit}>
+              <MenuItem>
+                Donate
+              </MenuItem>
+            </Link>
+            <MenuItem as='a' href="/request">
+              Request
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Flex>
         <Flex width="100%">
           <Image src="/image-1000x500.jpg" width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
         <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
-          <Stack direction="column" width="50%">
+          <Stack direction="column" width={["100%","50%"]} paddingRight={["30px", "0px"]} paddingLeft={["30px", "0px"]} spacing={["20px", "10px"]}>
             <Text fontWeight="bold" fontSize="2xl" textAlign="center" color="black">
               Healing Cancer Holistically
             </Text>
@@ -199,17 +268,17 @@ function HealingFundsHome() {
             <Text textAlign="center" fontWeight="semibold" color="black">
               With your donation, Healing Funds can enable a patient in need to receive revitalizing care.
             </Text>
-            <Flex width="100%" justifyContent="space-around" paddingTop={8}>
+            <Stack width="100%" justifyContent={["center","space-around"]} alignItems="center" paddingTop={8} direction={["column", "row"]} spacing={["20px", "0px"]}>
               
-                <Button bgColor="#439298" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#439298", opacity: "60%"}} onClick={handleSubmit}>
+                <Button bgColor="#439298" color="white" width={["50%","20%"]} borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#439298", opacity: "60%"}} onClick={handleSubmit}>
                   DONATE NOW
                 </Button>
               <Link href="/request">
-                <Button bgColor="#F86F8B" color="white" borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#F86F8B", opacity: "60%"}}>
+                <Button bgColor="#F86F8B" color="white"  borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#F86F8B", opacity: "60%"}}>
                   REQUEST FUNDS
                 </Button>
               </Link>
-            </Flex>
+            </Stack>
           </Stack>
         </Flex>
         
@@ -218,8 +287,8 @@ function HealingFundsHome() {
             LATEST ARTICLES
           </Text>
           
-          <Grid templateColumns={"repeat(4, 1fr)"} gap={6}>
-            {articles && articles.slice(0, 4).map((article) => (
+          <Grid templateColumns={["repeat(1, 1fr)","repeat(4, 1fr)"]} gap={6}>
+            {testArticles && testArticles.slice(0, 4).map((article) => (
               <GridItem key={article.title}>
                 <Stack  direction="column" alignItems="center" height="100%">
                   <Flex maxHeight={150} height="100%" alignItems="flex-end">
@@ -231,7 +300,7 @@ function HealingFundsHome() {
                     </Link>
                   </Flex>
                   <Flex>
-                    <Text fontWeight="semibold" color="white"maxWidth={400}>{article.title}</Text>
+                    <Text fontWeight="semibold" color="white" maxWidth={[300, 400]}>{article.title}</Text>
                   </Flex>
                 </Stack>
                 </GridItem>))}
@@ -246,8 +315,8 @@ function HealingFundsHome() {
           <Text fontWeight="semibold" fontSize="2xl" color="black">
             SPONSORS
           </Text>
-          <Grid templateColumns={"repeat(3, 1fr)"} gap={6}>
-            {sponsors && sponsors.slice(0, 3).map((sponsor) => (
+          <Grid templateColumns={["repeat(1, 1fr)","repeat(3, 1fr)"]} gap={6}>
+            {testSponsors && testSponsors.slice(0, 3).map((sponsor) => (
               <GridItem key={sponsor.name}>
                 <Stack key={sponsor.name} direction="column" alignItems="center" height="100%">
                   <Flex maxHeight={200} height="100%" alignItems="flex-end">
@@ -270,7 +339,7 @@ function HealingFundsHome() {
             </Button>
           </Link>
         </Stack>
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10}>
           <Link href="/"> 
             <Text fontSize="lg" fontWeight="semibold" color="white">
               Healing Funds Inc.
