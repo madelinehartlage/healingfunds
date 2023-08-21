@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Menu, MenuItem, MenuList, MenuButton, IconButton } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import RequestForm from "@/components/RequestForm"
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 function Request() {
   const handleSubmit = async (e) => {
@@ -58,13 +59,13 @@ function Request() {
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
-      <Flex width="100%" paddingLeft={4} paddingRight={10} justifyContent="space-between" alignItems="center">
+      <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
           <Link href="/">
-            <Image src="/logoHealing2.jpg"/>
+            <Image src="/logoHealing2.jpg" maxWidth={[200, 800]}/>
           </Link>
         
-        <Stack paddingTop={12} direction="row" spacing={10} alignItems="center">
+          <Stack paddingTop={12} direction="row" spacing={10} alignItems="center" display={["none", "flex"]}>
           <Link href="/about">
             <Text fontSize="xl" fontWeight="bold" color="black">
               ABOUT
@@ -95,14 +96,47 @@ function Request() {
                 REQUEST
               </Text>
             </Link>
-          </Stack>
+        </Stack>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            icon={<HamburgerIcon boxSize={"30px"}/>}
+            bgColor="white"
+            _hover={{bgColor: "white"}}
+            _active={{bgColor: "white"}}
+            display={["flex","none"]}
+            boxSize={"30px"}
+          />
+          <MenuList>
+            <MenuItem as='a' href="/about">
+              About
+            </MenuItem>
+            <MenuItem as='a' href="/sponsors">
+              Sponsors
+            </MenuItem>
+            <MenuItem as='a' href="/articles">
+              Articles
+            </MenuItem>
+            <MenuItem as='a' href="/contact">
+              Contact
+            </MenuItem>
+            <Link onClick={handleSubmit}>
+              <MenuItem>
+                Donate
+              </MenuItem>
+            </Link>
+            <MenuItem as='a' href="/request">
+              Request
+            </MenuItem>
+          </MenuList>
+        </Menu>
         </Flex>
         
         <Stack alignItems="center" direction="column" spacing={5}>
             <Text fontSize="3xl" fontWeight="semibold" padding={4}>Request Funds</Text>
             <RequestForm />
         </Stack>
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent="center" spacing={70} paddingTop={10} paddingBottom={10}>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10}>
           <Link href="/"> 
             <Text fontSize="lg" fontWeight="semibold" color="white">
               Healing Funds Inc.
