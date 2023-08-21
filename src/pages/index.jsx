@@ -288,7 +288,7 @@ function HealingFundsHome() {
           </Text>
           
           <Grid templateColumns={["repeat(1, 1fr)","repeat(4, 1fr)"]} gap={6}>
-            {testArticles && testArticles.slice(0, 4).map((article) => (
+            {articles && articles.slice(0, 4).map((article) => (
               <GridItem key={article.title}>
                 <Stack  direction="column" alignItems="center" height="100%">
                   <Flex maxHeight={150} height="100%" alignItems="flex-end">
@@ -316,7 +316,7 @@ function HealingFundsHome() {
             SPONSORS
           </Text>
           <Grid templateColumns={["repeat(1, 1fr)","repeat(3, 1fr)"]} gap={6}>
-            {testSponsors && testSponsors.slice(0, 3).map((sponsor) => (
+            {sponsors && sponsors.slice(0, 3).map((sponsor) => (
               <GridItem key={sponsor.name}>
                 <Stack key={sponsor.name} direction="column" alignItems="center" height="100%">
                   <Flex maxHeight={200} height="100%" alignItems="flex-end">
