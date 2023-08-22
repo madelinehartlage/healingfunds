@@ -188,7 +188,7 @@ function Admin() {
       });
     } else if (title == "") {
 
-      let res = await fetch(`/api/opengraph?url=${articleLink}`);
+      let res = await fetch(`/api/opengraph?url=${link}`);
 
       if (res.ok) {
         let data = await res.json();
@@ -244,7 +244,7 @@ function Admin() {
 
     } else {
 
-      let res = await fetch(`/api/opengraph?url=${articleLink}`);
+      let res = await fetch(`/api/opengraph?url=${link}`);
 
       if (res.ok) {
         let data = await res.json();
