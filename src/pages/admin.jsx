@@ -187,20 +187,110 @@ function Admin() {
         body: JSON.stringify({ title1: articleTitle, title2: articleTitle, link: articleLink }),
       });
     } else if (title == "") {
-      res = await fetch("/.netlify/functions/updateArticles", {
-        method: 'PUT',
-        body: JSON.stringify({ title1: articleTitle, title2: articleTitle, link: link }),
-      });
+
+      let res = await fetch(`/api/opengraph?url=${articleLink}`);
+
+      if (res.ok) {
+        let data = await res.json();
+
+        res = await fetch("/.netlify/functions/updateArticleMeta", {
+          method: 'PUT',
+          body: JSON.stringify({ title1: articleTitle, title2: articleTitle, link: link, imageData: data.image.url }),
+        });
+
+        let articleData = await res.json();
+        if (articleData.status == "success") {
+          setModalLoading(false);
+          toast({
+            title: 'Success.',
+            description: "You've successfully edited the article.",
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          })
+          loadArticles();
+          return setMessage(articleData.message);
+        }
+        else {
+          setModalLoading(false);
+          toast({
+            title: 'Error.',
+            description: "Failed to edit article.",
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          })
+            return setError(articleData.message);
+        }
+      
+      } else {
+        setModalLoading(false);
+        toast({
+          title: 'Error.',
+          description: "Failed to retrieve meta data.",
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+        return setError(data.message);
+    
+      }
     } else if (link == "") {
-      res = await fetch("/.netlify/functions/updateArticles", {
-        method: 'PUT',
-        body: JSON.stringify({ title1: articleTitle, title2: title, link: articleLink }),
-      });
+
+        res = await fetch("/.netlify/functions/updateArticles", {
+          method: 'PUT',
+          body: JSON.stringify({ title1: articleTitle, title2: title, link: articleLink }),
+        });
+
     } else {
-      res = await fetch("/.netlify/functions/updateArticles", {
-        method: 'PUT',
-        body: JSON.stringify({ title1: articleTitle, title2: title, link: link }),
-      });
+
+      let res = await fetch(`/api/opengraph?url=${articleLink}`);
+
+      if (res.ok) {
+        let data = await res.json();
+
+        res = await fetch("/.netlify/functions/updateArticleMeta", {
+          method: 'PUT',
+          body: JSON.stringify({ title1: articleTitle, title2: title, link: link, imageData: data.image.url }),
+        });
+
+        let articleData = await res.json();
+        if (articleData.status == "success") {
+          setModalLoading(false);
+          toast({
+            title: 'Success.',
+            description: "You've successfully edited the article.",
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          })
+          loadArticles();
+          return setMessage(articleData.message);
+        }
+        else {
+          setModalLoading(false);
+          toast({
+            title: 'Error.',
+            description: "Failed to edit article.",
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          })
+            return setError(articleData.message);
+        }
+      
+      } else {
+        setModalLoading(false);
+        toast({
+          title: 'Error.',
+          description: "Failed to retrieve meta data.",
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+        return setError(data.message);
+    
+      }
     }
     
     // reset error and message
