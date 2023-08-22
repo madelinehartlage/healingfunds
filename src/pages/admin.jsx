@@ -581,7 +581,7 @@ function Admin() {
 
   return (
     <Flex height="100vh" bgColor="white">
-      {user && user.name && user.name == process.env.ADMIN_PASS && (
+      {user && user.name && user.name == "adminpasscode" && (
       <Stack direction="column" width="100%">
       <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
@@ -620,7 +620,7 @@ function Admin() {
                 REQUEST
               </Text>
             </Link>
-            {(user && user.name && user.name == process.env.ADMIN_PASS) ? (
+            {(user && user.name && user.name == "adminpasscode") ? (
               <Link href="/admin">
                 <Text fontSize="xl" fontWeight="bold" color="black">
                   ADMIN
@@ -665,7 +665,7 @@ function Admin() {
             <MenuItem as='a' href="/request">
               Request
             </MenuItem>
-            {(user && user.name && user.name == process.env.ADMIN_PASS) ? (
+            {(user && user.name && user.name == "adminpasscode") ? (
               <MenuItem as='a' href="/admin">
                 
                   Admin

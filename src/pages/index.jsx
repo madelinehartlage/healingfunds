@@ -217,7 +217,7 @@ function HealingFundsHome() {
                 REQUEST
               </Text>
             </Link>
-            {(user && user.name && user.name == process.env.ADMIN_PASS) ? (
+            {(user && user.name && user.name == "adminpasscode") ? (
               <Link href="/admin">
                 <Text fontSize="xl" fontWeight="bold" color="black">
                   ADMIN
@@ -263,7 +263,7 @@ function HealingFundsHome() {
             <MenuItem as='a' href="/request">
               Request
             </MenuItem>
-            {(user && user.name && user.name == process.env.ADMIN_PASS) ? (
+            {(user && user.name && user.name == "adminpasscode") ? (
               <MenuItem as='a' href="/admin">
                 
                   Admin
