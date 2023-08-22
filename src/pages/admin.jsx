@@ -6,8 +6,14 @@ import {EditIcon} from "@chakra-ui/icons";
 import AdminEditModal from "@/components/AdminEditModal";
 import DeleteModal from "@/components/DeleteModal";
 import { HamburgerIcon } from '@chakra-ui/icons';
+import {useSession} from "next-auth/react";
 
 function Admin() {
+  const {data: session} = useSession();
+  
+  const user = session?.user;
+  
+  
   const [adding, setAdding] = React.useState(false);
   const [addingSponsors, setAddingSponsors] = React.useState(false);
   const [name, setName] = React.useState('');
@@ -23,9 +29,13 @@ function Admin() {
   const [isArticleLoading, setArticleLoading] = React.useState(false);
   const [isModalLoading, setModalLoading] = React.useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
   
 
-  const toast = useToast()
+  
+  
+
+  
 
   const testArticles = [
     {
@@ -571,6 +581,7 @@ function Admin() {
 
   return (
     <Flex height="100vh" bgColor="white">
+      {user && (
       <Stack direction="column" width="100%">
       <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
@@ -731,7 +742,7 @@ function Admin() {
             </Text>
           </Link>
         </Stack>
-      </Stack>
+      </Stack>)}
     </Flex>
   );
 };
