@@ -4,8 +4,14 @@ import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import RequestForm from "@/components/RequestForm"
 import { HamburgerIcon } from '@chakra-ui/icons';
+import { signIn, useSession } from "next-auth/react";
 
 function Request() {
+
+  const {data: session} = useSession();
+  
+  const user = session?.user;
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Create a Checkout Session.
@@ -96,6 +102,19 @@ function Request() {
                 REQUEST
               </Text>
             </Link>
+            {(user && user.name && user.name == "adminpasscode") ? (
+              <Link href="/admin">
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  ADMIN
+                </Text>
+              </Link>
+            ) : (
+              <Link onClick={() => signIn()}>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  LOGIN
+                </Text>
+              </Link>
+            )}
         </Stack>
         <Menu>
           <MenuButton
@@ -128,6 +147,19 @@ function Request() {
             <MenuItem as='a' href="/request">
               Request
             </MenuItem>
+            {(user && user.name && user.name == "adminpasscode") ? (
+              <MenuItem as='a' href="/admin">
+                
+                  Admin
+                
+              </MenuItem>
+            ) : (
+              <Link onClick={() => signIn()}>
+                <MenuItem>
+                  Login
+                </MenuItem>
+              </Link>
+            )}
           </MenuList>
         </Menu>
         </Flex>

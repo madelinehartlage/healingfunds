@@ -3,6 +3,7 @@ import { Text, Flex, Stack, Button, Image, Link, Grid, Box, GridItem, Menu, Menu
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import { HamburgerIcon } from '@chakra-ui/icons';
+import { signIn, useSession } from "next-auth/react";
 
 function Sponsors() {
 
@@ -10,6 +11,10 @@ function Sponsors() {
   const [message, setMessage] = React.useState('')
   const [sponsors, setSponsors] = React.useState([]);
   const [sponsorLength, setSponsorLength] = React.useState(0);
+
+  const {data: session} = useSession();
+  
+  const user = session?.user;
 
   const testSponsors = [
     {
@@ -147,6 +152,19 @@ function Sponsors() {
                 REQUEST
               </Text>
             </Link>
+            {(user && user.name && user.name == "adminpasscode") ? (
+              <Link href="/admin">
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  ADMIN
+                </Text>
+              </Link>
+            ) : (
+              <Link onClick={() => signIn()}>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  LOGIN
+                </Text>
+              </Link>
+            )}
         </Stack>
         <Menu>
           <MenuButton
@@ -179,6 +197,19 @@ function Sponsors() {
             <MenuItem as='a' href="/request">
               Request
             </MenuItem>
+            {(user && user.name && user.name == "adminpasscode") ? (
+              <MenuItem as='a' href="/admin">
+                
+                  Admin
+                
+              </MenuItem>
+            ) : (
+              <Link onClick={() => signIn()}>
+                <MenuItem>
+                  Login
+                </MenuItem>
+              </Link>
+            )}
           </MenuList>
         </Menu>
         </Flex>

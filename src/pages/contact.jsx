@@ -3,8 +3,13 @@ import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Menu, MenuItem, Menu
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import { HamburgerIcon } from '@chakra-ui/icons';
+import { signIn, useSession } from "next-auth/react";
 
 function Contact() {
+
+  const {data: session} = useSession();
+  
+  const user = session?.user;
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -71,6 +76,19 @@ function Contact() {
                 REQUEST
               </Text>
             </Link>
+            {(user && user.name && user.name == "adminpasscode") ? (
+              <Link href="/admin">
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  ADMIN
+                </Text>
+              </Link>
+            ) : (
+              <Link onClick={() => signIn()}>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  LOGIN
+                </Text>
+              </Link>
+            )}
         </Stack>
         <Menu>
           <MenuButton
@@ -103,6 +121,19 @@ function Contact() {
             <MenuItem as='a' href="/request">
               Request
             </MenuItem>
+            {(user && user.name && user.name == "adminpasscode") ? (
+              <MenuItem as='a' href="/admin">
+                
+                  Admin
+                
+              </MenuItem>
+            ) : (
+              <Link onClick={() => signIn()}>
+                <MenuItem>
+                  Login
+                </MenuItem>
+              </Link>
+            )}
           </MenuList>
         </Menu>
         </Flex>

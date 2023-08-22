@@ -5,13 +5,16 @@ import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import {ImNewspaper} from "react-icons/im";
 import { HamburgerIcon } from '@chakra-ui/icons';
+import { signIn, useSession } from "next-auth/react";
 
 function HealingFundsHome() {
 
   const [articles, setArticles] = React.useState([]);
   const [sponsors, setSponsors] = React.useState([]);
   
-
+  const {data: session} = useSession();
+  
+  const user = session?.user;
   
 
   const testArticles = [
@@ -214,6 +217,20 @@ function HealingFundsHome() {
                 REQUEST
               </Text>
             </Link>
+            {(user && user.name && user.name == "adminpasscode") ? (
+              <Link href="/admin">
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  ADMIN
+                </Text>
+              </Link>
+            ) : (
+              <Link onClick={() => signIn()}>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  LOGIN
+                </Text>
+              </Link>
+            )}
+            
         </Stack>
         <Menu>
           <MenuButton
@@ -246,6 +263,19 @@ function HealingFundsHome() {
             <MenuItem as='a' href="/request">
               Request
             </MenuItem>
+            {(user && user.name && user.name == "adminpasscode") ? (
+              <MenuItem as='a' href="/admin">
+                
+                  Admin
+                
+              </MenuItem>
+            ) : (
+              <Link onClick={() => signIn()}>
+                <MenuItem>
+                  Login
+                </MenuItem>
+              </Link>
+            )}
           </MenuList>
         </Menu>
       </Flex>
