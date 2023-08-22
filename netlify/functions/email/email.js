@@ -3,13 +3,13 @@ const  nodemailer = require("nodemailer");
 const handler = async (event) => {
   console.log(event.body);
   const body = JSON.parse(event.body);
-  const user = "madeline.hartlage37@gmail.com";
+  const user = process.env.EMAIL_SERVER_USER;
  
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: user,
-        pass: "gdvfqhmvtigzrzkl",
+        pass: process.env.EMAIL_SERVER_PASSWORD,
     },
 
   });
@@ -41,7 +41,7 @@ const handler = async (event) => {
   try {
     const mail = await transporter.sendMail({
       from: user,
-      to: "eaglekeeper37@gmail.com",
+      to: process.env.EMAIL_TO,
       replyTo: body.email,
       subject: `Contact form submission from ${body.name}`,
       text:`

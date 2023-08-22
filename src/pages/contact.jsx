@@ -76,7 +76,7 @@ function Contact() {
                 REQUEST
               </Text>
             </Link>
-            {(user && user.name && user.name == "adminpasscode") ? (
+            {(user && user.name && user.name == process.env.ADMIN_PASS) ? (
               <Link href="/admin">
                 <Text fontSize="xl" fontWeight="bold" color="black">
                   ADMIN
@@ -121,7 +121,7 @@ function Contact() {
             <MenuItem as='a' href="/request">
               Request
             </MenuItem>
-            {(user && user.name && user.name == "adminpasscode") ? (
+            {(user && user.name && user.name == process.env.ADMIN_PASS) ? (
               <MenuItem as='a' href="/admin">
                 
                   Admin
