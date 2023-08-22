@@ -581,7 +581,7 @@ function Admin() {
 
   return (
     <Flex height="100vh" bgColor="white">
-      {user && user.roles.includes("admin") && (
+      {user && user.name && user.name == "adminpasscode" && (
       <Stack direction="column" width="100%">
       <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
