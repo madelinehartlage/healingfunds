@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, Modal, ModalBody, ModalCloseButton, ModalOverlay, ModalHeader, ModalContent, ModalFooter, useDisclosure, useToast, IconButton } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, Modal, ModalBody, ModalCloseButton, ModalOverlay, ModalHeader, ModalContent, ModalFooter, useDisclosure, useToast, IconButton, Textarea, Select } from '@chakra-ui/react';
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {DeleteIcon} from "@chakra-ui/icons";
 import {EditIcon} from "@chakra-ui/icons";
@@ -28,6 +28,11 @@ function Admin() {
   const [isLoading, setLoading] = React.useState(false);
   const [isArticleLoading, setArticleLoading] = React.useState(false);
   const [isModalLoading, setModalLoading] = React.useState(false);
+  const [pageOp, setPageOp] = React.useState('homeOp')
+  const [textAlignOp, setTextAlignOp] = React.useState('centerOp')
+  const [fontSizeOp, setFontSizeOp] = React.useState('oneOp')
+  const [fontWeightOp, setFontWeightOp] = React.useState('semiOp')
+  const [textBoxField, setTextBoxField] = React.useState('')
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   
@@ -476,6 +481,53 @@ function Admin() {
     }
   }
 
+  const addTextBox = async (e) => {
+    e.preventDefault();
+    //setLoading(true);
+
+    // reset error and message
+    setError('');
+    setMessage('');
+
+    let textBox = {
+        textBoxField,
+        fontSizeOp,
+        fontWeightOp,
+        textAlignOp,
+        pageOp,
+    };
+
+    let res = await fetch("/.netlify/functions/addTextBox", {
+        method: 'POST',
+        body: JSON.stringify(textBox),
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+       // setAddingSponsors(false);
+       //setLoading(false);
+        toast({
+          title: 'Success.',
+          description: "You've successfully added a text field.",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
+        return setMessage(data.message);
+    }
+    else {
+      setLoading(false);
+      toast({
+        title: 'Error.',
+        description: "Failed to add text field.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+        return setError(data.message);
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Create a Checkout Session.
@@ -686,6 +738,7 @@ function Admin() {
                 <Text fontWeight="bold" fontSize="3xl">
                     Admin
                 </Text>
+                <Stack direction="column" width="100%">
                 <Stack direction={["column","row"]} spacing={10} justifyContent="center" width='100%' >
                     
                       <Stack direction={["column","row"]}>
@@ -747,7 +800,40 @@ function Admin() {
                           </Stack>
                         </Flex>
                       </Stack>
-                       
+                       </Stack>
+                       <Stack direction="row" >
+                       <Textarea/>
+                       <Stack direction="column" width="100%">
+                        <Stack direction="row">
+                          <Select placeholder="Select Text-Align" value={textAlignOp} onChange={(e) => setTextAlignOp(e.target.value)}>
+                            <option value="centerOp">Center</option>
+                            <option value="leftOp">Left</option>
+                            <option value="rightOp">Right</option>
+                          </Select>
+                          <Select placeholder="Select Font-Weight" value={fontWeightOp} onChange={(e) => setFontWeightOp(e.target.value)}>
+                            <option value="normOp">Normal</option>
+                            <option value="semiOp">Semibold</option>
+                            <option value="boldOp">Bold</option>
+                          </Select>
+                        </Stack>
+                        <Stack direction="row">
+                          <Select placeholder="Select Font-Size" value={fontSizeOp} onChange={(e) => setFontSizeOp(e.target.value)}>
+                            <option value="smallOp">Small</option>
+                            <option value="medOp">Medium</option>
+                            <option value="largeOp">Large</option>
+                            <option value="oneOp">XL</option>
+                            <option value="twoOp">2XL</option>
+                            <option value="threeOp">3XL</option>
+                          </Select>
+                          <Select placeholder="Select Page" value={pageOp} onChange={(e) => setPageOp(e.target.value)}>
+                            <option value="homeOp">Home</option>
+                            <option value="aboutOp">About</option>
+                            <option value="contactOp">Contact</option>
+                          </Select>
+                        </Stack>
+                        <Button bgColor="#439298" color="white" onChange={(e) => setTextBoxField(e.target.value)} onClick={addTextBox}>Add</Button>
+                       </Stack>
+                       </Stack>
                 </Stack>
             </Stack>
         </Flex>
