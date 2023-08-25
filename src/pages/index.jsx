@@ -8,6 +8,7 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import { signIn, useSession } from "next-auth/react";
 import TextBoxModal from "@/components/TextBoxModal";
 import AddTextBoxModal from "@/components/AddTextBoxModal";
+import DeleteModal from "@/components/DeleteModal";
 
 function HealingFundsHome() {
 
@@ -90,6 +91,18 @@ function HealingFundsHome() {
     {
       name: "Test Image 2",
       image: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?cs=srgb&dl=pexels-emmy-e-2381069.jpg&fm=jpg",
+    },
+  ]
+
+  const testText = [
+    {
+      textBoxField: "Test",
+      fontSizeOp: "medium",
+      fontWeightOp: "bold",
+      textAlignOp: "center",
+      pageOp: "homeOp",
+
+
     },
   ]
 
@@ -320,6 +333,46 @@ function HealingFundsHome() {
     }
   }
 
+  const deleteTextBoxes = async (textBoxField) => {
+    setModalLoading(true);
+
+
+    // reset error and message
+    setError('');
+    setMessage('');
+    
+
+    let res = await fetch("/.netlify/functions/deleteTextBoxes", {
+        method: 'DELETE',
+        body: JSON.stringify({textBoxField: textBoxField}),
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+      setModalLoading(false);
+      toast({
+        title: 'Success.',
+        description: "You've successfully deleted the text box.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+      loadTextBoxes();
+      return setMessage(data.message);
+    }
+    else {
+      setModalLoading(false);
+      toast({
+        title: 'Error.',
+        description: "Failed to delete text box.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+        return setError(data.message);
+    }
+  }
+
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
@@ -432,8 +485,10 @@ function HealingFundsHome() {
             <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
               {textBox.textBoxField}
             </Text>
+            <Stack direction="row" justifyContent="center">
             <TextBoxModal header={"Edit Text Area"} fS={textBox.fontSizeOp} fW={textBox.fontWeightOp} pG={textBox.pageOp} tA={textBox.textAlignOp} place={textBox.textBoxField} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} updateFunc={updateTextBoxes} loading={isModalLoading} setFunc5={setTextBoxField} oldText={textBox.textBoxField}/>
-            </>))}
+            <DeleteModal deleteFunc={deleteTextBoxes} value={textBox.textBoxField} title={"Delete Text Box"} loading={isModalLoading}/>
+            </Stack></>))}
             <AddTextBoxModal header={"Add Text Area"} fS={fontSizeOp} fW={fontWeightOp} pG={pageOp} tA={textAlignOp} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} addFunc={addTextBox} loading={isTextBoxLoading} setFunc5={setTextBoxField}/>
             
             
