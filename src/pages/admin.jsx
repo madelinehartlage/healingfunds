@@ -802,28 +802,28 @@ function Admin() {
                       </Stack>
                        </Stack>
                        <Stack direction="row" >
-                       <Textarea/>
+                       <Textarea onChange={(e) => setTextBoxField(e.target.value)}/>
                        <Stack direction="column" width="100%">
                         <Stack direction="row">
                           <Select placeholder="Select Text-Align" value={textAlignOp} onChange={(e) => setTextAlignOp(e.target.value)}>
-                            <option value="centerOp">Center</option>
-                            <option value="leftOp">Left</option>
-                            <option value="rightOp">Right</option>
+                            <option value="center">Center</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
                           </Select>
                           <Select placeholder="Select Font-Weight" value={fontWeightOp} onChange={(e) => setFontWeightOp(e.target.value)}>
-                            <option value="normOp">Normal</option>
-                            <option value="semiOp">Semibold</option>
-                            <option value="boldOp">Bold</option>
+                            <option value="normal">Normal</option>
+                            <option value="semibold">Semibold</option>
+                            <option value="bold">Bold</option>
                           </Select>
                         </Stack>
                         <Stack direction="row">
                           <Select placeholder="Select Font-Size" value={fontSizeOp} onChange={(e) => setFontSizeOp(e.target.value)}>
-                            <option value="smallOp">Small</option>
-                            <option value="medOp">Medium</option>
-                            <option value="largeOp">Large</option>
-                            <option value="oneOp">XL</option>
-                            <option value="twoOp">2XL</option>
-                            <option value="threeOp">3XL</option>
+                            <option value="small">Small</option>
+                            <option value="medium">Medium</option>
+                            <option value="large">Large</option>
+                            <option value="xl">XL</option>
+                            <option value="2xl">2XL</option>
+                            <option value="3xl">3XL</option>
                           </Select>
                           <Select placeholder="Select Page" value={pageOp} onChange={(e) => setPageOp(e.target.value)}>
                             <option value="homeOp">Home</option>

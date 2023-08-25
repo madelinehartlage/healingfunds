@@ -11,6 +11,7 @@ function HealingFundsHome() {
 
   const [articles, setArticles] = React.useState([]);
   const [sponsors, setSponsors] = React.useState([]);
+  const [textBoxes, setTextBoxes] = React.useState([]);
   
   const {data: session} = useSession();
   
@@ -109,6 +110,38 @@ function HealingFundsHome() {
     }
 
     loadSponsors().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
+
+  React.useEffect(() => {
+    async function loadTextBoxes() {
+
+    
+    let res = await fetch("/.netlify/functions/getHomeTextBoxes", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    
+    let data = await res.json();
+
+    if (data.status == "success") {
+        console.log(data.data);
+        setTextBoxes(data.data);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+
+    }
+
+    loadTextBoxes().catch((e) => {
       const error = e;
       console.log(error.message);
     });
@@ -284,20 +317,11 @@ function HealingFundsHome() {
         </Flex>
         <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
           <Stack direction="column" width={["100%","50%"]} paddingRight={["30px", "0px"]} paddingLeft={["30px", "0px"]} spacing={["20px", "10px"]}>
-            <Text fontWeight="bold" fontSize="2xl" textAlign="center" color="black">
-              Healing Cancer Holistically
-            </Text>
-            <Text textAlign="center" fontWeight="semibold" color="black">
-              The mission of Healing Funds is to distribute funds to cancer patients for the purpose of utilizing holistic alternative methods for treatment.
-            </Text>
-            <Text textAlign="center" fontWeight="semibold" color="black">
-              Healing Funds seeks to provide cancer patients with the financial resources necessary to approach healing naturally. 
-              Whether it be exercise, diet, therapy, or other methods, each patient deserves the ability to fight cancer in a way that protects 
-              and enhances their health.
-            </Text>
-            <Text textAlign="center" fontWeight="semibold" color="black">
-              With your donation, Healing Funds can enable a patient in need to receive revitalizing care.
-            </Text>
+            {textBoxes && textBoxes.map((textBox) => (
+            <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
+              {textBox.textBoxField}
+            </Text>))}
+            
             <Stack width="100%" justifyContent={["center","space-around"]} alignItems="center" paddingTop={8} direction={["column", "row"]} spacing={["20px", "0px"]}>
               
                 <Button bgColor="#439298" color="white" width={["50%","20%"]} borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#439298", opacity: "60%"}} onClick={handleSubmit}>
