@@ -176,7 +176,7 @@ function Contact() {
           <Image src="/rocks2.jpg" width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
         <Flex justifyContent="center" paddingTop={[5,50]} paddingBottom={50} alignItems="center" width="100%">
-            <Stack direction="column" spacing={8} >
+            <Stack direction="column" spacing={8} marginRight={[0,20]} paddingLeft={["30px", "0px"]}>
             {textBoxes && textBoxes.map((textBox) => (
             <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
             {textBox.textBoxField}
