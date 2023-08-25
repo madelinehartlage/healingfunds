@@ -3,6 +3,7 @@ import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, 
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {DeleteIcon} from "@chakra-ui/icons";
 import {EditIcon} from "@chakra-ui/icons";
+import TextBoxModal from "@/components/TextBoxModal";
 import AdminEditModal from "@/components/AdminEditModal";
 import DeleteModal from "@/components/DeleteModal";
 import { HamburgerIcon } from '@chakra-ui/icons';
@@ -86,6 +87,22 @@ function Admin() {
       name: "Test Image 3",
       image: "https://media.istockphoto.com/id/1386217759/photo/portrait-of-a-confident-young-businesswoman-standing-against-an-urban-background.webp?b=1&s=170667a&w=0&k=20&c=oikPwsT7yx_9XIsNQYte82Fiqg7rBE1tHrlBXWye5jc=",
     },
+  ]
+
+  const testText = [
+    {
+      textBoxField: "Test",
+      fontSizeOp: "medium",
+      fontWeightOp: "bold",
+      textAlignOp: "center",
+      pageOp: "homeOp",
+
+
+    },
+    
+    
+
+
   ]
 
   async function loadArticles() {
@@ -464,6 +481,56 @@ function Admin() {
       toast({
         title: 'Error.',
         description: "Failed to edit sponsor.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+        return setError(data.message);
+    }
+  }
+
+  const updateTextBoxes = async (oldTextBox) => {
+    setModalLoading(true);
+
+    let textBox = {
+      oldTextBox,
+      textBoxField,
+      fontSizeOp,
+      fontWeightOp,
+      textAlignOp,
+      pageOp,
+  };
+
+    let res = await fetch("/.netlify/functions/updateTextBoxes", {
+        method: 'PUT',
+        body: JSON.stringify(textBox),
+      });
+    
+    
+    // reset error and message
+    setError('');
+    setMessage('');
+
+    
+
+    let data = await res.json();
+    if (data.status == "success") {
+      setModalLoading(false);
+      toast({
+        title: 'Success.',
+        description: "You've successfully edited the text box.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+      loadTextBoxes();
+      return setMessage(data.message);
+    }
+    else {
+      setModalLoading(false);
+      toast({
+        title: 'Error.',
+        description: "Failed to edit text boxes.",
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -917,7 +984,7 @@ function Admin() {
                                 <Stack direction="row" maxWidth={400} key={textBox.textBoxField} justifyContent="space-between" borderBottom="1px solid lightgray" padding={4} alignItems="center">
                                   <Text>{textBox.textBoxField}</Text>
                                   <Stack direction="row">
-                                    
+                                    <TextBoxModal header={"Edit Text Area"} fS={textBox.fontSizeOp} fW={textBox.fontWeightOp} pG={textBox.pageOp} tA={textBox.textAlignOp} place={textBox.textBoxField} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} updateFunc={updateTextBoxes} loading={isModalLoading} setFunc5={setTextBoxField} oldText={textBox.textBoxField}/>
                                     <DeleteModal deleteFunc={deleteTextBoxes} value={textBox.textBoxField} title={"Delete Text Box"} loading={isModalLoading}/>
                                   </Stack>
                                 </Stack>
