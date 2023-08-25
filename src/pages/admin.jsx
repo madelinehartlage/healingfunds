@@ -944,59 +944,11 @@ function Admin() {
                         </Flex>
                       </Stack>
                        </Stack>
-                       <Stack direction="row" justifyContent="center">
-                       <Stack direction="column">
-                       <Textarea onChange={(e) => setTextBoxField(e.target.value)}/>
-                       <Stack direction="column" width="100%">
-                        <Stack direction="row">
-                          <Select placeholder="Select Text-Align" value={textAlignOp} onChange={(e) => setTextAlignOp(e.target.value)}>
-                            <option value="center">Center</option>
-                            <option value="left">Left</option>
-                            <option value="right">Right</option>
-                          </Select>
-                          <Select placeholder="Select Font-Weight" value={fontWeightOp} onChange={(e) => setFontWeightOp(e.target.value)}>
-                            <option value="normal">Normal</option>
-                            <option value="semibold">Semibold</option>
-                            <option value="bold">Bold</option>
-                          </Select>
-                          
-                        </Stack>
-                        <Stack direction="row">
-                          <Select placeholder="Select Font-Size" value={fontSizeOp} onChange={(e) => setFontSizeOp(e.target.value)}>
-                            <option value="small">Small</option>
-                            <option value="medium">Medium</option>
-                            <option value="large">Large</option>
-                            <option value="xl">XL</option>
-                            <option value="2xl">2XL</option>
-                            <option value="3xl">3XL</option>
-                          </Select>
-                          <Select placeholder="Select Page" value={pageOp} onChange={(e) => setPageOp(e.target.value)}>
-                            <option value="homeOp">Home</option>
-                            <option value="aboutOp">About</option>
-                            <option value="contactOp">Contact</option>
-                          </Select>
-                        </Stack>
-                        <Button bgColor="#439298" color="white" onChange={(e) => setTextBoxField(e.target.value)} isLoading={isTextBoxLoading} onClick={addTextBox}>Add</Button>
-                       </Stack>
-                       </Stack>
-                       <Flex borderRadius="16px" overflow="hidden" border="1px solid gray">
-                            <Stack maxHeight="280px" overflowY="scroll" borderRadius="16px">
-                              {textBoxes && textBoxes.map((textBox) => (
-                                <Stack direction="row" maxWidth={400} key={textBox.textBoxField} justifyContent="space-between" borderBottom="1px solid lightgray" padding={4} alignItems="center">
-                                  <Text>{textBox.textBoxField}</Text>
-                                  <Stack direction="row">
-                                    <TextBoxModal header={"Edit Text Area"} fS={textBox.fontSizeOp} fW={textBox.fontWeightOp} pG={textBox.pageOp} tA={textBox.textAlignOp} place={textBox.textBoxField} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} updateFunc={updateTextBoxes} loading={isModalLoading} setFunc5={setTextBoxField} oldText={textBox.textBoxField}/>
-                                    <DeleteModal deleteFunc={deleteTextBoxes} value={textBox.textBoxField} title={"Delete Text Box"} loading={isModalLoading}/>
-                                  </Stack>
-                                </Stack>
-                              ))}
-                            </Stack>
-                          </Flex>
-                        </Stack>
+                       
                 </Stack>
             </Stack>
         </Flex>
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10} position={"relative"} bottom={0}>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10} position={["relative", "absolute"]} bottom={0}>
           <Link href="/"> 
             <Text fontSize="lg" fontWeight="semibold" color="white">
               Healing Funds Inc.
