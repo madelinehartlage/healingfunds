@@ -227,7 +227,6 @@ function HealingFundsHome() {
       fontWeightOp,
       textAlignOp,
       pageOp,
-      positionOp,
   };
 
     let res = await fetch("/.netlify/functions/updateTextBoxes", {
