@@ -329,7 +329,7 @@ function Contact() {
         </Flex>
         <Flex justifyContent="center" paddingTop={[5,50]} paddingBottom={50} alignItems="center" width="100%">
         
-            <Stack direction="column" spacing={8} marginRight={[0,20]} paddingLeft={["30px", "0px"]}>
+            <Stack direction="column" spacing={8} marginRight={[0,20]} paddingLeft={["30px", "0px"]} paddingRight={["30px", "0px"]}>
               
             {textBoxes && textBoxes.map((textBox) => (
               <>
