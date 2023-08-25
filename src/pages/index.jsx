@@ -222,8 +222,8 @@ function HealingFundsHome() {
     console.warn(error.message)
   }
 
-  const addTextBox = async (e) => {
-    e.preventDefault();
+  const addTextBox = async () => {
+    
     setTextBoxLoading(true);
 
     // reset error and message

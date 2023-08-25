@@ -9,7 +9,7 @@ export default function AddTextBoxModal({ header, pG, fS, fW, tA, setFunc1, setF
 
     return (
         <>
-            <Button bgColor="#439298" color="white" pointerEvents="initial" onClick={() => {onOpen();}}></Button>
+            <Button bgColor="#439298" color="white" pointerEvents="initial" onClick={() => {onOpen();}}>Add</Button>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
