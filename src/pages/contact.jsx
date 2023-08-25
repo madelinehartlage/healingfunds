@@ -328,20 +328,25 @@ function Contact() {
           <Image src="/rocks2.jpg" width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
         <Flex justifyContent="center" paddingTop={[5,50]} paddingBottom={50} alignItems="center" width="100%">
+        
             <Stack direction="column" spacing={8} marginRight={[0,20]} paddingLeft={["30px", "0px"]}>
+              
             {textBoxes && textBoxes.map((textBox) => (
               <>
             <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
               {textBox.textBoxField}
             </Text>
+            {user && user.name && user.name == "adminpasscode" && (
             <Stack direction="row" justifyContent="center">
             <TextBoxModal header={"Edit Text Area"} fS={textBox.fontSizeOp} fW={textBox.fontWeightOp} pG={textBox.pageOp} tA={textBox.textAlignOp} place={textBox.textBoxField} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} updateFunc={updateTextBoxes} loading={isModalLoading} setFunc5={setTextBoxField} oldText={textBox.textBoxField}/>
             <DeleteModal deleteFunc={deleteTextBoxes} value={textBox.textBoxField} title={"Delete Text Box"} loading={isModalLoading}/>
-            </Stack></>))}
+            </Stack>)}</>))}
+            {user && user.name && user.name == "adminpasscode" && (
             <AddTextBoxModal header={"Add Text Area"} fS={fontSizeOp} fW={fontWeightOp} pG={pageOp} tA={textAlignOp} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} addFunc={addTextBox} loading={isTextBoxLoading} setFunc5={setTextBoxField}/>
-            
+            )}
                 
             </Stack>
+            
         </Flex>
         </Stack>
         <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10} position={"relative"} bottom={0}>

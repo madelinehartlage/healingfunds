@@ -485,12 +485,14 @@ function HealingFundsHome() {
             <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
               {textBox.textBoxField}
             </Text>
+            {user && user.name && user.name == "adminpasscode" && (
             <Stack direction="row" justifyContent="center">
             <TextBoxModal header={"Edit Text Area"} fS={textBox.fontSizeOp} fW={textBox.fontWeightOp} pG={textBox.pageOp} tA={textBox.textAlignOp} place={textBox.textBoxField} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} updateFunc={updateTextBoxes} loading={isModalLoading} setFunc5={setTextBoxField} oldText={textBox.textBoxField}/>
             <DeleteModal deleteFunc={deleteTextBoxes} value={textBox.textBoxField} title={"Delete Text Box"} loading={isModalLoading}/>
-            </Stack></>))}
+            </Stack>)}</>))}
+            {user && user.name && user.name == "adminpasscode" && (
             <AddTextBoxModal header={"Add Text Area"} fS={fontSizeOp} fW={fontWeightOp} pG={pageOp} tA={textAlignOp} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} addFunc={addTextBox} loading={isTextBoxLoading} setFunc5={setTextBoxField}/>
-            
+            )}
             
             <Stack width="100%" justifyContent={["center","space-around"]} alignItems="center" paddingTop={8} direction={["column", "row"]} spacing={["20px", "0px"]}>
               
