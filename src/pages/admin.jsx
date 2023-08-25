@@ -24,9 +24,11 @@ function Admin() {
   const [message, setMessage] = React.useState('')
   const [articles, setArticles] = React.useState([]);
   const [sponsors, setSponsors] = React.useState([]);
+  const [textBoxes, setTextBoxes] = React.useState([]);
   const [imageData, setImageData] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
   const [isArticleLoading, setArticleLoading] = React.useState(false);
+  const [isTextBoxLoading, setTextBoxLoading] = React.useState(false);
   const [isModalLoading, setModalLoading] = React.useState(false);
   const [pageOp, setPageOp] = React.useState('')
   const [textAlignOp, setTextAlignOp] = React.useState('center')
@@ -119,6 +121,39 @@ function Admin() {
 
   }, [])
 
+  async function loadTextBoxes() {
+
+    
+    let res = await fetch("/.netlify/functions/getTextBoxes", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    
+    let data = await res.json();
+
+    if (data.status == "success") {
+        console.log(data.data);
+        setTextBoxes(data.data);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+
+    }
+
+  React.useEffect(() => {
+
+    loadTextBoxes().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
+
   async function loadSponsors() {
 
     
@@ -185,6 +220,46 @@ function Admin() {
       toast({
         title: 'Error.',
         description: "Failed to delete article.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+        return setError(data.message);
+    }
+  }
+
+  const deleteTextBoxes = async (textBoxField) => {
+    setModalLoading(true);
+
+
+    // reset error and message
+    setError('');
+    setMessage('');
+    
+
+    let res = await fetch("/.netlify/functions/deleteTextBoxes", {
+        method: 'DELETE',
+        body: JSON.stringify({textBoxField: textBoxField}),
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+      setModalLoading(false);
+      toast({
+        title: 'Success.',
+        description: "You've successfully deleted the text box.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+      loadTextBoxes();
+      return setMessage(data.message);
+    }
+    else {
+      setModalLoading(false);
+      toast({
+        title: 'Error.',
+        description: "Failed to delete text box.",
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -483,7 +558,7 @@ function Admin() {
 
   const addTextBox = async (e) => {
     e.preventDefault();
-    //setLoading(true);
+    setTextBoxLoading(true);
 
     // reset error and message
     setError('');
@@ -505,7 +580,7 @@ function Admin() {
     let data = await res.json();
     if (data.status == "success") {
        // setAddingSponsors(false);
-       //setLoading(false);
+       setTextBoxLoading(false);
         toast({
           title: 'Success.',
           description: "You've successfully added a text field.",
@@ -513,10 +588,11 @@ function Admin() {
           duration: 5000,
           isClosable: true,
         })
+        loadTextBoxes();
         return setMessage(data.message);
     }
     else {
-      setLoading(false);
+      setTextBoxLoading(false);
       toast({
         title: 'Error.',
         description: "Failed to add text field.",
@@ -801,7 +877,8 @@ function Admin() {
                         </Flex>
                       </Stack>
                        </Stack>
-                       <Stack direction="row" >
+                       <Stack direction="row" justifyContent="center">
+                       <Stack direction="column">
                        <Textarea onChange={(e) => setTextBoxField(e.target.value)}/>
                        <Stack direction="column" width="100%">
                         <Stack direction="row">
@@ -831,13 +908,27 @@ function Admin() {
                             <option value="contactOp">Contact</option>
                           </Select>
                         </Stack>
-                        <Button bgColor="#439298" color="white" onChange={(e) => setTextBoxField(e.target.value)} onClick={addTextBox}>Add</Button>
+                        <Button bgColor="#439298" color="white" onChange={(e) => setTextBoxField(e.target.value)} isLoading={isTextBoxLoading} onClick={addTextBox}>Add</Button>
                        </Stack>
                        </Stack>
+                       <Flex borderRadius="16px" overflow="hidden" border="1px solid gray">
+                            <Stack maxHeight="280px" overflowY="scroll" borderRadius="16px">
+                              {textBoxes && textBoxes.map((textBox) => (
+                                <Stack direction="row" maxWidth={400} key={textBox.textBoxField} justifyContent="space-between" borderBottom="1px solid lightgray" padding={4} alignItems="center">
+                                  <Text>{textBox.textBoxField}</Text>
+                                  <Stack direction="row">
+                                    
+                                    <DeleteModal deleteFunc={deleteTextBoxes} value={textBox.textBoxField} title={"Delete Text Box"} loading={isModalLoading}/>
+                                  </Stack>
+                                </Stack>
+                              ))}
+                            </Stack>
+                          </Flex>
+                        </Stack>
                 </Stack>
             </Stack>
         </Flex>
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10} position={["relative","absolute"]} bottom={0}>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10} position={"relative"} bottom={0}>
           <Link href="/"> 
             <Text fontSize="lg" fontWeight="semibold" color="white">
               Healing Funds Inc.
