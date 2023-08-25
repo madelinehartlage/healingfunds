@@ -9,7 +9,7 @@ export default function TextBoxModal({ header, pG, fS, fW, tA, place, oldText, s
 
     return (
         <>
-            <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => {setFunc1(tA); setFunc2(fW); setFunc3(fS); setFunc4(pG); setFunc5(place); setFunc6(pos); onOpen();}}></IconButton>
+            <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => {setFunc1(tA); setFunc2(fW); setFunc3(fS); setFunc4(pG); setFunc5(place); onOpen();}}></IconButton>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
