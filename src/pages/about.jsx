@@ -7,6 +7,8 @@ import { signIn, useSession } from "next-auth/react";
 
 function About() {
 
+  const [textBoxes, setTextBoxes] = React.useState([]);
+
   const {data: session} = useSession();
   
   const user = session?.user;
@@ -35,6 +37,38 @@ function About() {
     // using `error.message`.
     console.warn(error.message)
   }
+
+  React.useEffect(() => {
+    async function loadTextBoxes() {
+
+    
+    let res = await fetch("/.netlify/functions/getAboutTextBoxes", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    
+    let data = await res.json();
+
+    if (data.status == "success") {
+        console.log(data.data);
+        setTextBoxes(data.data);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+
+    }
+
+    loadTextBoxes().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
 
   return (
     <Flex height="100vh" bgColor="white">
@@ -156,19 +190,11 @@ function About() {
             </Flex>
           </Stack>
           <Stack direction="column" spacing={4} width="100%" marginRight={[0,20]} paddingLeft={["30px", "0px"]}>
-            <Text fontWeight="bold" fontSize="2xl">
-              About Healing Funds Inc.
-            </Text>
-            <Text fontWeight="semibold" fontSize="md">
-              Healing Funds seeks to provide cancer patients with the financial resources necessary to approach healing naturally. 
-            </Text>
-            <Text fontWeight="semibold" fontSize="md">
-              Whether it be exercise, diet, therapy, or other methods, each patient deserves the ability to fight cancer in a way that protects 
-              and enhances their health.
-            </Text>
-            <Text fontWeight="semibold" fontSize="md">
-              With your donation, Healing Funds can enable a patient in need to receive revitalizing care.
-            </Text>
+            {textBoxes && textBoxes.map((textBox) => (
+            <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
+            {textBox.textBoxField}
+          </Text>))}
+            
           </Stack>
         </Flex>
         </Stack>

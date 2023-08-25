@@ -7,6 +7,8 @@ import { signIn, useSession } from "next-auth/react";
 
 function Contact() {
 
+  const [textBoxes, setTextBoxes] = React.useState([]);
+
   const {data: session} = useSession();
   
   const user = session?.user;
@@ -35,6 +37,38 @@ function Contact() {
     // using `error.message`.
     console.warn(error.message)
   }
+
+  React.useEffect(() => {
+    async function loadTextBoxes() {
+
+    
+    let res = await fetch("/.netlify/functions/getContactTextBoxes", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    
+    let data = await res.json();
+
+    if (data.status == "success") {
+        console.log(data.data);
+        setTextBoxes(data.data);
+        return setMessage(data.message);
+    }
+    else {
+        return setError(data.message);
+    }
+
+    }
+
+    loadTextBoxes().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
 
   return (
     <Flex height="100vh" bgColor="white">
@@ -142,33 +176,12 @@ function Contact() {
           <Image src="/rocks2.jpg" width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
         <Flex justifyContent="center" paddingTop={[5,50]} paddingBottom={50} alignItems="center" width="100%">
-            <Stack direction="column" spacing={8} alignItems="center">
-                <Text fontWeight="bold" fontSize="3xl">
-                    Contact Us Today
-                </Text>
-                <Stack direction={["column","row"]} spacing={[5,20]}>
-                    <Stack direction="column" paddingBottom={[5,0]} borderBottom={["1px solid gray","none"]}>
-                        <Link href="mailto:healingfunds@gmail.com">
-                            <Text fontWeight="semibold" fontSize="lg">
-                                Email: healingfunds@gmail.com
-                            </Text>
-                        </Link>
-                        <Text fontWeight="semibold" fontSize="lg">
-                            Phone: (937)-750-3305
-                        </Text>
-                    </Stack>
-                    <Stack direction="column">
-                        <Text fontWeight="semibold" fontSize="lg">
-                            Mailing Address
-                        </Text>
-                        <Text fontWeight="semibold" fontSize="lg">
-                            1867 S. Highgate Ct.
-                        </Text>
-                        <Text fontWeight="semibold" fontSize="lg">
-                            Beavercreek, OH 45432
-                        </Text>
-                    </Stack>
-                </Stack>
+            <Stack direction="column" spacing={8} >
+            {textBoxes && textBoxes.map((textBox) => (
+            <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
+            {textBox.textBoxField}
+          </Text>))}
+                
             </Stack>
         </Flex>
         </Stack>

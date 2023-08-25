@@ -29,10 +29,10 @@ function Admin() {
   const [isArticleLoading, setArticleLoading] = React.useState(false);
   const [isModalLoading, setModalLoading] = React.useState(false);
   const [pageOp, setPageOp] = React.useState('')
-  const [textAlignOp, setTextAlignOp] = React.useState('')
-  const [fontSizeOp, setFontSizeOp] = React.useState('')
-  const [fontWeightOp, setFontWeightOp] = React.useState('')
-  const [textBoxField, setTextBoxField] = React.useState('')
+  const [textAlignOp, setTextAlignOp] = React.useState('center')
+  const [fontSizeOp, setFontSizeOp] = React.useState('md')
+  const [fontWeightOp, setFontWeightOp] = React.useState('semibold')
+  const [textBoxField, setTextBoxField] = React.useState('home')
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   
