@@ -19,6 +19,7 @@ function HealingFundsHome() {
   const [fontWeightOp, setFontWeightOp] = React.useState('semibold')
   const [textBoxField, setTextBoxField] = React.useState('')
   const [isModalLoading, setModalLoading] = React.useState(false);
+  const [isTextBoxLoading, setTextBoxLoading] = React.useState(false);
   const [error, setError] = React.useState('');
   const [message, setMessage] = React.useState('');
   const toast = useToast();
@@ -220,6 +221,54 @@ function HealingFundsHome() {
     console.warn(error.message)
   }
 
+  const addTextBox = async (e) => {
+    e.preventDefault();
+    setTextBoxLoading(true);
+
+    // reset error and message
+    setError('');
+    setMessage('');
+
+    let textBox = {
+        textBoxField,
+        fontSizeOp,
+        fontWeightOp,
+        textAlignOp,
+        pageOp,
+    };
+
+    let res = await fetch("/.netlify/functions/addTextBox", {
+        method: 'POST',
+        body: JSON.stringify(textBox),
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+       // setAddingSponsors(false);
+       setTextBoxLoading(false);
+        toast({
+          title: 'Success.',
+          description: "You've successfully added a text field.",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
+        loadTextBoxes();
+        return setMessage(data.message);
+    }
+    else {
+      setTextBoxLoading(false);
+      toast({
+        title: 'Error.',
+        description: "Failed to add text field.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+        return setError(data.message);
+    }
+  }
+
   const updateTextBoxes = async (oldTextBox) => {
     setModalLoading(true);
 
@@ -384,11 +433,11 @@ function HealingFundsHome() {
             </Text>
             <TextBoxModal header={"Edit Text Area"} fS={textBox.fontSizeOp} fW={textBox.fontWeightOp} pG={textBox.pageOp} tA={textBox.textAlignOp} place={textBox.textBoxField} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} updateFunc={updateTextBoxes} loading={isModalLoading} setFunc5={setTextBoxField} oldText={textBox.textBoxField}/>
             </>))}
-            <Button bgColor="#439298" color="white">+</Button>
+            <Button bgColor="#439298" color="white" isLoading={isTextBoxLoading} onClick={addTextBox}>Add</Button>
             <Stack width="100%" justifyContent={["center","space-around"]} alignItems="center" paddingTop={8} direction={["column", "row"]} spacing={["20px", "0px"]}>
               
                 <Button bgColor="#439298" color="white" width={["50%","20%"]} borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#439298", opacity: "60%"}} onClick={handleSubmit}>
-                  DONATE NOW
+                  DONATE NOW 
                 </Button>
               <Link href="/request">
                 <Button bgColor="#F86F8B" color="white"  borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#F86F8B", opacity: "60%"}}>
