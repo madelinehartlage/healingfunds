@@ -18,6 +18,8 @@ function About() {
   const [textBoxField, setTextBoxField] = React.useState('')
   const [isModalLoading, setModalLoading] = React.useState(false);
   const [isTextBoxLoading, setTextBoxLoading] = React.useState(false);
+  const [error, setError] = React.useState('');
+  const [message, setMessage] = React.useState('');
 
   const toast = useToast();
 
@@ -51,7 +53,14 @@ function About() {
   }
 
   React.useEffect(() => {
-    async function loadTextBoxes() {
+    loadTextBoxes().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
+
+  async function loadTextBoxes() {
 
     
     let res = await fetch("/.netlify/functions/getAboutTextBoxes", {
@@ -74,13 +83,6 @@ function About() {
     }
 
     }
-
-    loadTextBoxes().catch((e) => {
-      const error = e;
-      console.log(error.message);
-    });
-
-  }, [])
 
   const addTextBox = async () => {
     
