@@ -329,7 +329,7 @@ function About() {
         </Flex>
           
           
-        <Flex paddingTop={[4,20]} paddingBottom={8} width="100%" maxWidth={["100%","50%"]} justifyContent="center" direction={["column","row"]}>
+        <Flex paddingTop={[4,20]} paddingBottom={50} width="100%" maxWidth={["100%","50%"]} justifyContent="center" direction={["column","row"]}>
           <Stack direction="column" paddingLeft={20} paddingTop={[0,20]}>
             <Flex>
               <Flex bgColor="#439298" width={["50px","100px"]} height={["50px","100px"]} transform={["rotate(45deg) translateY(-80px) translateX(65px)","rotate(45deg) translateX(-15px) translateY(-85px)"]}></Flex>
