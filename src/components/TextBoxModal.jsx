@@ -23,19 +23,19 @@ export default function TextBoxModal({ header, pG, fS, fW, tA, place, oldText, s
                     <Stack>
                     <Stack direction="column" width="100%">
                         <Stack direction="row">
-                          <Select placeholder="Select Text-Align" value={tA} onChange={(e) => setFunc1(e.target.value)}>
+                          <Select placeholder="Select Text-Align" onChange={(e) => setFunc1(e.target.value)}>
                             <option value="center">Center</option>
                             <option value="left">Left</option>
                             <option value="right">Right</option>
                           </Select>
-                          <Select placeholder="Select Font-Weight" value={fW} onChange={(e) => setFunc2(e.target.value)}>
+                          <Select placeholder="Select Font-Weight" onChange={(e) => setFunc2(e.target.value)}>
                             <option value="normal">Normal</option>
                             <option value="semibold">Semibold</option>
                             <option value="bold">Bold</option>
                           </Select>
                         </Stack>
                         <Stack direction="row">
-                          <Select placeholder="Select Font-Size" value={fS} onChange={(e) => setFunc3(e.target.value)}>
+                          <Select placeholder="Select Font-Size" onChange={(e) => setFunc3(e.target.value)}>
                             <option value="small">Small</option>
                             <option value="medium">Medium</option>
                             <option value="large">Large</option>
@@ -43,7 +43,7 @@ export default function TextBoxModal({ header, pG, fS, fW, tA, place, oldText, s
                             <option value="2xl">2XL</option>
                             <option value="3xl">3XL</option>
                           </Select>
-                          <Select placeholder="Select Page" value={pG} onChange={(e) => setFunc4(e.target.value)}>
+                          <Select placeholder="Select Page" onChange={(e) => setFunc4(e.target.value)}>
                             <option value="homeOp">Home</option>
                             <option value="aboutOp">About</option>
                             <option value="contactOp">Contact</option>
