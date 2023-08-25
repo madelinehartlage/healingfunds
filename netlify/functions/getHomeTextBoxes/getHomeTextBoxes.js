@@ -8,7 +8,7 @@ const handler = async () => {
     try {
         const database = (await clientPromise).db(process.env.MONGODB_DATABASE);
         const collection = database.collection("textFields");
-        const textBoxes = await collection.find({page: "home"}).toArray();
+        const textBoxes = await collection.find({page: "homeOp"}).toArray();
         return {
             statusCode: 200,
             headers: { "Content-Type": "application/json" },
