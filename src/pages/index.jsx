@@ -126,8 +126,7 @@ function HealingFundsHome() {
 
   }, [])
 
-  React.useEffect(() => {
-    async function loadTextBoxes() {
+  async function loadTextBoxes() {
 
     
     let res = await fetch("/.netlify/functions/getHomeTextBoxes", {
@@ -151,6 +150,7 @@ function HealingFundsHome() {
 
     }
 
+  React.useEffect(() => {
     loadTextBoxes().catch((e) => {
       const error = e;
       console.log(error.message);
