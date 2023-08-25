@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, IconButton, Modal, ModalBody, ModalCloseButton, ModalOverlay, ModalHeader, ModalContent, ModalFooter, useDisclosure, Textarea, Select } from '@chakra-ui/react';
 import {EditIcon} from "@chakra-ui/icons";
-export default function TextBoxModal({ header, pG, fS, fW, tA, place, oldText, pos, setFunc1, setFunc2, setFunc3, setFunc4, setFunc5, setFunc6, updateFunc, loading}) {
+export default function TextBoxModal({ header, pG, fS, fW, tA, place, oldText, setFunc1, setFunc2, setFunc3, setFunc4, setFunc5, updateFunc, loading}) {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -35,7 +35,7 @@ export default function TextBoxModal({ header, pG, fS, fW, tA, place, oldText, p
                           </Select>
                         </Stack>
                         <Stack direction="row">
-                          <Input type="number" defaultValue={pos} onChange={(e) => setFunc6(e.target.value)}></Input>
+                          
                           <Select placeholder="Select Font-Size" defaultValue={fS} onChange={(e) => setFunc3(e.target.value)}>
                             <option value="small">Small</option>
                             <option value="medium">Medium</option>

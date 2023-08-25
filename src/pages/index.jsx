@@ -1,17 +1,24 @@
 import React from 'react';
 
-import { Text, Flex, Stack, Button, Link, Image, Box, Icon, Grid, GridItem, IconButton, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Link, Image, Box, Icon, Grid, GridItem, IconButton, Menu, MenuButton, MenuList, MenuItem, Textarea } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import {ImNewspaper} from "react-icons/im";
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { signIn, useSession } from "next-auth/react";
+import TextBoxModal from "@/components/TextBoxModal";
 
 function HealingFundsHome() {
 
   const [articles, setArticles] = React.useState([]);
   const [sponsors, setSponsors] = React.useState([]);
   const [textBoxes, setTextBoxes] = React.useState([]);
+  const [pageOp, setPageOp] = React.useState('homeOp')
+  const [textAlignOp, setTextAlignOp] = React.useState('center')
+  const [fontSizeOp, setFontSizeOp] = React.useState('medium')
+  const [fontWeightOp, setFontWeightOp] = React.useState('semibold')
+  const [textBoxField, setTextBoxField] = React.useState('')
+  const [isModalLoading, setModalLoading] = React.useState(false);
   
   const {data: session} = useSession();
   
@@ -210,6 +217,57 @@ function HealingFundsHome() {
     console.warn(error.message)
   }
 
+  const updateTextBoxes = async (oldTextBox) => {
+    setModalLoading(true);
+
+    let textBox = {
+      oldTextBox,
+      textBoxField,
+      fontSizeOp,
+      fontWeightOp,
+      textAlignOp,
+      pageOp,
+      positionOp,
+  };
+
+    let res = await fetch("/.netlify/functions/updateTextBoxes", {
+        method: 'PUT',
+        body: JSON.stringify(textBox),
+      });
+    
+    
+    // reset error and message
+    setError('');
+    setMessage('');
+
+    
+
+    let data = await res.json();
+    if (data.status == "success") {
+      setModalLoading(false);
+      toast({
+        title: 'Success.',
+        description: "You've successfully edited the text box.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+      loadTextBoxes();
+      return setMessage(data.message);
+    }
+    else {
+      setModalLoading(false);
+      toast({
+        title: 'Error.',
+        description: "Failed to edit text boxes.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+        return setError(data.message);
+    }
+  }
+
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
@@ -318,10 +376,12 @@ function HealingFundsHome() {
         <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
           <Stack direction="column" width={["100%","50%"]} paddingRight={["30px", "0px"]} paddingLeft={["30px", "0px"]} spacing={["20px", "10px"]}>
             {textBoxes && textBoxes.map((textBox) => (
+              <>
             <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
               {textBox.textBoxField}
-            </Text>))}
-            
+            </Text>
+            <TextBoxModal header={"Edit Text Area"} fS={textBox.fontSizeOp} fW={textBox.fontWeightOp} pG={textBox.pageOp} tA={textBox.textAlignOp} place={textBox.textBoxField} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} updateFunc={updateTextBoxes} loading={isModalLoading} setFunc5={setTextBoxField} oldText={textBox.textBoxField}/>
+            </>))}
             <Stack width="100%" justifyContent={["center","space-around"]} alignItems="center" paddingTop={8} direction={["column", "row"]} spacing={["20px", "0px"]}>
               
                 <Button bgColor="#439298" color="white" width={["50%","20%"]} borderRadius="0%" paddingRight={6} paddingLeft={6} paddingTop={4} paddingBottom={4} _hover={{bgColor: "#439298", opacity: "60%"}} onClick={handleSubmit}>
