@@ -36,6 +36,7 @@ function Admin() {
   const [fontSizeOp, setFontSizeOp] = React.useState('medium')
   const [fontWeightOp, setFontWeightOp] = React.useState('semibold')
   const [textBoxField, setTextBoxField] = React.useState('')
+  const [positionOp, setPositionOp] = React.useState('1')
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   
@@ -499,6 +500,7 @@ function Admin() {
       fontWeightOp,
       textAlignOp,
       pageOp,
+      positionOp,
   };
 
     let res = await fetch("/.netlify/functions/updateTextBoxes", {
@@ -959,8 +961,10 @@ function Admin() {
                             <option value="semibold">Semibold</option>
                             <option value="bold">Bold</option>
                           </Select>
+                          
                         </Stack>
                         <Stack direction="row">
+                          <Input type="number" value={positionOp} onChange={(e) => setPositionOp(e.target.value)}></Input>
                           <Select placeholder="Select Font-Size" value={fontSizeOp} onChange={(e) => setFontSizeOp(e.target.value)}>
                             <option value="small">Small</option>
                             <option value="medium">Medium</option>
@@ -984,7 +988,7 @@ function Admin() {
                                 <Stack direction="row" maxWidth={400} key={textBox.textBoxField} justifyContent="space-between" borderBottom="1px solid lightgray" padding={4} alignItems="center">
                                   <Text>{textBox.textBoxField}</Text>
                                   <Stack direction="row">
-                                    <TextBoxModal header={"Edit Text Area"} fS={textBox.fontSizeOp} fW={textBox.fontWeightOp} pG={textBox.pageOp} tA={textBox.textAlignOp} place={textBox.textBoxField} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} updateFunc={updateTextBoxes} loading={isModalLoading} setFunc5={setTextBoxField} oldText={textBox.textBoxField}/>
+                                    <TextBoxModal header={"Edit Text Area"} fS={textBox.fontSizeOp} fW={textBox.fontWeightOp} pG={textBox.pageOp} tA={textBox.textAlignOp} place={textBox.textBoxField} pos={textBox.positionOp} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} updateFunc={updateTextBoxes} loading={isModalLoading} setFunc5={setTextBoxField} setFunc6={setPositionOp} oldText={textBox.textBoxField}/>
                                     <DeleteModal deleteFunc={deleteTextBoxes} value={textBox.textBoxField} title={"Delete Text Box"} loading={isModalLoading}/>
                                   </Stack>
                                 </Stack>
