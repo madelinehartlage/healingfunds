@@ -11,7 +11,7 @@ import DeleteModal from "@/components/DeleteModal";
 function About() {
 
   const [textBoxes, setTextBoxes] = React.useState([]);
-  const [pageOp, setPageOp] = React.useState('homeOp')
+  const [pageOp, setPageOp] = React.useState('aboutOp')
   const [textAlignOp, setTextAlignOp] = React.useState('center')
   const [fontSizeOp, setFontSizeOp] = React.useState('medium')
   const [fontWeightOp, setFontWeightOp] = React.useState('semibold')

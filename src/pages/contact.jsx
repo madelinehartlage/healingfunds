@@ -11,7 +11,7 @@ import DeleteModal from "@/components/DeleteModal";
 function Contact() {
 
   const [textBoxes, setTextBoxes] = React.useState([]);
-  const [pageOp, setPageOp] = React.useState('homeOp')
+  const [pageOp, setPageOp] = React.useState('contactOp')
   const [textAlignOp, setTextAlignOp] = React.useState('center')
   const [fontSizeOp, setFontSizeOp] = React.useState('medium')
   const [fontWeightOp, setFontWeightOp] = React.useState('semibold')
@@ -349,7 +349,7 @@ function Contact() {
             
         </Flex>
         </Stack>
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10} position={"relative"} bottom={0}>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10} position={user && user.name && user.name == "adminpasscode" ? "relative": "absolute"} bottom={0}>
           <Link href="/"> 
             <Text fontSize="lg" fontWeight="semibold" color="white">
               Healing Funds Inc.
