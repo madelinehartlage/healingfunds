@@ -19,6 +19,8 @@ function HealingFundsHome() {
   const [fontWeightOp, setFontWeightOp] = React.useState('semibold')
   const [textBoxField, setTextBoxField] = React.useState('')
   const [isModalLoading, setModalLoading] = React.useState(false);
+  const [error, setError] = React.useState('');
+  const [message, setMessage] = React.useState('');
   
   const {data: session} = useSession();
   
