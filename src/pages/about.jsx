@@ -341,7 +341,7 @@ function About() {
               <Flex bgColor="lightgray" width={["50px","100px"]} height={["50px","100px"]} transform={["rotate(45deg) translateX(-50px) translateY(-20px)","rotate(45deg) translateX(-200px) translateY(30px)"]}></Flex>
             </Flex>
           </Stack>
-          <Stack direction="column" spacing={4} width="100%" marginRight={[0,20]} paddingLeft={["30px", "0px"]}>
+          <Stack direction="column" spacing={4} width="100%" marginRight={[0,20]} paddingLeft={["30px", "0px"]} paddingRight={["30px", "0px"]}>
           {textBoxes && textBoxes.map((textBox) => (
               <>
             <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
