@@ -21,6 +21,7 @@ function HealingFundsHome() {
   const [isModalLoading, setModalLoading] = React.useState(false);
   const [error, setError] = React.useState('');
   const [message, setMessage] = React.useState('');
+  const toast = useToast();
   
   const {data: session} = useSession();
   
