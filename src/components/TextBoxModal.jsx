@@ -9,7 +9,7 @@ export default function TextBoxModal({ header, pG, fS, fW, tA, place, oldText, p
 
     return (
         <>
-            <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => {setFunc1(tA); setFunc2(fW); setFunc3(fS); setFunc4(pG); setFunc5(place); onOpen();}}></IconButton>
+            <IconButton isRound={true} variant="outline" icon={<EditIcon />} pointerEvents="initial" onClick={() => {setFunc1(tA); setFunc2(fW); setFunc3(fS); setFunc4(pG); setFunc5(place); setFunc6(pos); onOpen();}}></IconButton>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
@@ -35,7 +35,7 @@ export default function TextBoxModal({ header, pG, fS, fW, tA, place, oldText, p
                           </Select>
                         </Stack>
                         <Stack direction="row">
-                          <Input type="number" value={pos} onChange={(e) => setFunc6(e.target.value)}></Input>
+                          <Input type="number" defaultValue={pos} onChange={(e) => setFunc6(e.target.value)}></Input>
                           <Select placeholder="Select Font-Size" defaultValue={fS} onChange={(e) => setFunc3(e.target.value)}>
                             <option value="small">Small</option>
                             <option value="medium">Medium</option>
