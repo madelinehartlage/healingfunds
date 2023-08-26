@@ -154,7 +154,7 @@ function Articles() {
         <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
             <Link href="/">
-              <Image src="/logoHealing3.JPG" maxWidth={[200, 800]}/>
+              <Image src="/logoHealing3.JPG" maxWidth={[200, 400]}/>
             </Link>
           
             <Stack paddingTop={12} direction="row" spacing={10} alignItems="center" display={["none", "flex"]}>
