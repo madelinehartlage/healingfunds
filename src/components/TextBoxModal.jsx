@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Flex, Stack, Button, Image, Link, Grid, Box, Input, FormControl, FormLabel, Menu, MenuButton, MenuList, MenuItem, IconButton, Modal, ModalBody, ModalCloseButton, ModalOverlay, ModalHeader, ModalContent, ModalFooter, useDisclosure, Textarea, Select } from '@chakra-ui/react';
 import {EditIcon} from "@chakra-ui/icons";
-export default function TextBoxModal({ header, pG, fS, fW, tA, place, id, setFunc1, setFunc2, setFunc3, setFunc4, setFunc5, updateFunc, loading}) {
+export default function TextBoxModal({ header, pG, fS, fW, tA, oldText, place, id, setFunc1, setFunc2, setFunc3, setFunc4, setFunc5, updateFunc, loading}) {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
