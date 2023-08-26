@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text, Flex, Stack, Button, Link, Image, Box, Icon, Grid, GridItem, IconButton, Menu, MenuButton, MenuList, MenuItem, Textarea, useToast } from '@chakra-ui/react';
+import { Text, Flex, Stack, Button, Link, Image, Box, Icon, Grid, GridItem, IconButton, Menu, MenuButton, MenuList, MenuItem, Textarea, useToast, Input } from '@chakra-ui/react';
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
 import {ImNewspaper} from "react-icons/im";
@@ -22,6 +22,7 @@ function HealingFundsHome() {
   const [textBoxField, setTextBoxField] = React.useState('')
   const [isModalLoading, setModalLoading] = React.useState(false);
   const [isTextBoxLoading, setTextBoxLoading] = React.useState(false);
+  const [landingImage, setLandingImage] = React.useState("");
   const [error, setError] = React.useState('');
   const [message, setMessage] = React.useState('');
   const toast = useToast();
@@ -373,6 +374,45 @@ function HealingFundsHome() {
     }
   }
 
+  const addImage = async () => {
+    
+
+
+    // reset error and message
+    setError('');
+    setMessage('');
+    
+
+    let res = await fetch("/.netlify/functions/addImage", {
+        method: 'POST',
+        body: JSON.stringify(landingImage),
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+      
+      toast({
+        title: 'Success.',
+        description: "You've successfully added an image.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+      return setMessage(data.message);
+    }
+    else {
+      
+      toast({
+        title: 'Error.',
+        description: "Failed to add image.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+        return setError(data.message);
+    }
+  }
+
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%">
@@ -477,6 +517,10 @@ function HealingFundsHome() {
       </Flex>
         <Flex width="100%">
           <Image src="/image-1000x500.jpg" width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
+        </Flex>
+        <Flex>
+          <Input type="file" onChange={(e) => setLandingImage(e.target.files[0])}></Input>
+          <Button onClick={addImage}></Button>
         </Flex>
         <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
           <Stack direction="column" width={["100%","50%"]} paddingRight={["30px", "0px"]} paddingLeft={["30px", "0px"]} spacing={["20px", "10px"]}>
