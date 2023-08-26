@@ -283,11 +283,11 @@ function HealingFundsHome() {
     }
   }
 
-  const updateTextBoxes = async (oldTextBox) => {
+  const updateTextBoxes = async (id) => {
     setModalLoading(true);
 
     let textBox = {
-      oldTextBox,
+      id,
       textBoxField,
       fontSizeOp,
       fontWeightOp,
@@ -482,12 +482,12 @@ function HealingFundsHome() {
           <Stack direction="column" width={["100%","50%"]} paddingRight={["30px", "0px"]} paddingLeft={["30px", "0px"]} spacing={["20px", "10px"]}>
             {textBoxes && textBoxes.map((textBox) => (
               <>
-            <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
+            <Text key={textBox._id} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
               {textBox.textBoxField}
             </Text>
             {user && user.name && user.name == "adminpasscode" && (
             <Stack direction="row" justifyContent="center">
-            <TextBoxModal header={"Edit Text Area"} fS={textBox.fontSizeOp} fW={textBox.fontWeightOp} pG={textBox.pageOp} tA={textBox.textAlignOp} place={textBox.textBoxField} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} updateFunc={updateTextBoxes} loading={isModalLoading} setFunc5={setTextBoxField} oldText={textBox.textBoxField}/>
+            <TextBoxModal header={"Edit Text Area"} fS={textBox.fontSizeOp} fW={textBox.fontWeightOp} pG={textBox.pageOp} tA={textBox.textAlignOp} place={textBox.textBoxField} setFunc1={setTextAlignOp} setFunc2={setFontWeightOp} setFunc3={setFontSizeOp} setFunc4={setPageOp} updateFunc={updateTextBoxes} loading={isModalLoading} setFunc5={setTextBoxField} id={textBox._id}/>
             <DeleteModal deleteFunc={deleteTextBoxes} value={textBox.textBoxField} title={"Delete Text Box"} loading={isModalLoading}/>
             </Stack>)}</>))}
             {user && user.name && user.name == "adminpasscode" && (
