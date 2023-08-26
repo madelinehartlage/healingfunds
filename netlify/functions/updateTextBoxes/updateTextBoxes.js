@@ -10,7 +10,7 @@ const handler = async (event) => {
         const eventBody = JSON.parse(event.body);
         const database = (await clientPromise).db(process.env.MONGODB_DATABASE);
         const collection = database.collection("textFields");
-        const textBoxField = await collection.updateOne({_id: ObjectId(eventBody.id)}, {$set: {textBoxField: eventBody.textBoxField, fontSizeOp: eventBody.fontSizeOp, fontWeightOp: eventBody.fontWeightOp, textAlignOp: eventBody.textAlignOp, pageOp: eventBody.pageOp}});
+        const textBoxField = await collection.updateOne({_id: new ObjectId(eventBody.id)}, {$set: {textBoxField: eventBody.textBoxField, fontSizeOp: eventBody.fontSizeOp, fontWeightOp: eventBody.fontWeightOp, textAlignOp: eventBody.textAlignOp, pageOp: eventBody.pageOp}});
         return {
             statusCode: 200,
             headers: { "Content-Type": "application/json" },
