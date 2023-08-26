@@ -175,6 +175,11 @@ function HealingFundsHome() {
   }, [])
 
   React.useEffect(() => {
+    console.log(landingImage)
+
+  }, [landingImage])
+
+  React.useEffect(() => {
     async function loadArticles() {
 
     
