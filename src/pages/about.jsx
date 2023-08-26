@@ -27,6 +27,37 @@ function About() {
   
   const user = session?.user;
 
+  const testText = [
+    {
+      textBoxField: "About Healing Funds Inc.",
+      fontSizeOp: "2xl",
+      fontWeightOp: "bold",
+      textAlignOp: "left",
+      pageOp: "about",
+    },
+    {
+      textBoxField: "Healing Funds seeks to provide cancer patients with the financial resources nexessary to approach healing naturally.",
+      fontSizeOp: "medium",
+      fontWeightOp: "semibold",
+      textAlignOp: "left",
+      pageOp: "about",
+    },
+    {
+      textBoxField: "Whether it be exercise, diet, therapy, or other methods, each patient deservers the ability to fight cancer in a way that protects and enhances their health.",
+      fontSizeOp: "medium",
+      fontWeightOp: "semibold",
+      textAlignOp: "left",
+      pageOp: "about",
+    },
+    {
+      textBoxField: "With your donation, Healing Funds can enable a patient in need to receive revitalizing care.",
+      fontSizeOp: "medium",
+      fontWeightOp: "semibold",
+      textAlignOp: "left",
+      pageOp: "about",
+    },
+  ]
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Create a Checkout Session.
@@ -329,7 +360,7 @@ function About() {
         </Flex>
           
           
-        <Flex paddingTop={[4,20]} paddingBottom={50} width="100%" maxWidth={["100%","50%"]} justifyContent="center" direction={["column","row"]}>
+        <Flex paddingTop={[4,20]} width="100%" maxWidth={["100%","50%"]} justifyContent="center" direction={["column","row"]}>
           <Stack direction="column" paddingLeft={20} paddingTop={[0,20]}>
             <Flex>
               <Flex bgColor="#439298" width={["50px","100px"]} height={["50px","100px"]} transform={["rotate(45deg) translateY(-80px) translateX(65px)","rotate(45deg) translateX(-15px) translateY(-85px)"]}></Flex>
@@ -342,7 +373,7 @@ function About() {
             </Flex>
           </Stack>
           <Stack direction="column" spacing={4} width="100%" marginRight={[0,20]} paddingLeft={["30px", "0px"]} paddingRight={["30px", "0px"]}>
-          {textBoxes && textBoxes.map((textBox) => (
+          {testText && testText.map((textBox) => (
               <>
             <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
               {textBox.textBoxField}
@@ -359,7 +390,7 @@ function About() {
         </Flex>
         </Stack>
         
-        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} paddingTop={10} paddingBottom={10} position={user && user.name && user.name == "adminpasscode" ? "relative": "absolute"} bottom={0}>
+        <Stack bgColor="#439298" width="100%" direction="row" justifyContent={["space-around","center"]} spacing={[0, 70]} marginTop={[0, 40]} paddingTop={10} paddingBottom={10} position={(user && user.name && user.name == "adminpasscode") ? "relative" : "absolute"} bottom={0}>
           <Link href="/"> 
             <Text fontSize="lg" fontWeight="semibold" color="white">
               Healing Funds Inc.
