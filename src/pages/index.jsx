@@ -476,7 +476,7 @@ function HealingFundsHome() {
         </Menu>
       </Flex>
         <Flex width="100%">
-          <Image src="/image-1000x500.jpg" width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
+          <Image src="/logoHealing3.JPG" width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
         <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
           <Stack direction="column" width={["100%","50%"]} paddingRight={["30px", "0px"]} paddingLeft={["30px", "0px"]} spacing={["20px", "10px"]}>
