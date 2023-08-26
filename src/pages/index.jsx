@@ -379,7 +379,7 @@ function HealingFundsHome() {
       <Flex width="100%" paddingLeft={4} paddingRight={[5,10]} justifyContent="space-between" alignItems="center">
           
         <Link href="/">
-          <Image src="/logoHealing2.jpg" maxWidth={[200, 800]}/>
+          <Image src="/logoHealing3.JPG" maxWidth={[200, 800]}/>
         </Link>
         
         <Stack paddingTop={12} direction="row" spacing={10} alignItems="center" display={["none", "flex"]}>
@@ -476,7 +476,7 @@ function HealingFundsHome() {
         </Menu>
       </Flex>
         <Flex width="100%">
-          <Image src="/logoHealing3.JPG" width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
+          <Image src="/image-1000x500.jpg" width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
         <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
           <Stack direction="column" width={["100%","50%"]} paddingRight={["30px", "0px"]} paddingLeft={["30px", "0px"]} spacing={["20px", "10px"]}>
