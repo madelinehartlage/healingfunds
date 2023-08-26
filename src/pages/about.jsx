@@ -36,7 +36,7 @@ function About() {
       pageOp: "about",
     },
     {
-      textBoxField: "Healing Funds seeks to provide cancer patients with the financial resources nexessary to approach healing naturally.",
+      textBoxField: "Healing Funds seeks to provide cancer patients with the financial resources necessary to approach healing naturally.",
       fontSizeOp: "medium",
       fontWeightOp: "semibold",
       textAlignOp: "left",
@@ -373,7 +373,7 @@ function About() {
             </Flex>
           </Stack>
           <Stack direction="column" spacing={4} width="100%" marginRight={[0,20]} paddingLeft={["30px", "0px"]} paddingRight={["30px", "0px"]}>
-          {testText && testText.map((textBox) => (
+          {textBoxes && textBoxes.map((textBox) => (
               <>
             <Text key={textBox.textBoxField} fontWeight={textBox.fontWeightOp} fontSize={textBox.fontSizeOp} textAlign={textBox.textAlignOp} color="black">
               {textBox.textBoxField}
