@@ -9,7 +9,7 @@ const handler = async (event) => {
         
         const database = (await clientPromise).db(process.env.MONGODB_DATABASE);
         const collection = database.collection("images");
-        const images = await collection.find({page: event.queryStringParameters.page}).sort({$natural: -1}).toArray();
+        const images = await collection.find({page: event.queryStringParameters.page}).toArray();
         return {
             statusCode: 200,
             headers: { "Content-Type": "application/json" },
