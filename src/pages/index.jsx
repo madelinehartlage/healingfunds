@@ -23,6 +23,7 @@ function HealingFundsHome() {
   const [textBoxField, setTextBoxField] = React.useState('')
   const [isModalLoading, setModalLoading] = React.useState(false);
   const [isTextBoxLoading, setTextBoxLoading] = React.useState(false);
+  const [isImageLoading, setImageLoading] = React.useState(false);
   const [error, setError] = React.useState('');
   const [message, setMessage] = React.useState('');
   const toast = useToast();
@@ -189,7 +190,7 @@ function HealingFundsHome() {
     setMessage('');
     
 
-    let res = await fetch("/.netlify/functions/getImage", {
+    let res = await fetch("/.netlify/functions/getImage?page=home", {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
@@ -419,6 +420,7 @@ function HealingFundsHome() {
   }
 
   const addImage = async (landingImage) => {
+    setImageLoading(true);
     
     const postImage = {
       url: landingImage,
@@ -437,7 +439,7 @@ function HealingFundsHome() {
 
     let data = await res.json();
     if (data.status == "success") {
-      
+      setImageLoading(false);
       toast({
         title: 'Success.',
         description: "You've successfully added an image.",
@@ -449,7 +451,7 @@ function HealingFundsHome() {
       return setMessage(data.message);
     }
     else {
-      
+      setImageLoading(false);
       toast({
         title: 'Error.',
         description: "Failed to add image.",
@@ -615,7 +617,7 @@ function HealingFundsHome() {
           
           {imageSrc && !uploadData && (
             
-              <Button type="submit">Upload Files</Button>
+              <Button type="submit" isLoading={isImageLoading}>Upload File</Button>
             
           )}
 
