@@ -448,7 +448,7 @@ function Contact() {
         <Stack direction={["column","row"]} spacing={8}>
         {user && user.name && user.name == "adminpasscode" ? (
           <Stack direction="column">
-        <Flex width="100%" maxWidth={["100%","50%"]} maxHeight="650px">
+        <Flex width="100%" maxHeight="650px">
         {landingImages && landingImages[0] && (
           <Image key={landingImages[0].url} src={landingImages[0].url} width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         )}</Flex>
