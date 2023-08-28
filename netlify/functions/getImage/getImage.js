@@ -4,12 +4,12 @@ const mongoClient = new MongoClient(process.env.MONGODB_URI);
 
 const clientPromise = mongoClient.connect();
 
-const handler = async () => {
+const handler = async (event) => {
     try {
         
         const database = (await clientPromise).db(process.env.MONGODB_DATABASE);
         const collection = database.collection("images");
-        const images = await collection.find({page: "home"}).sort({$natural: -1}).toArray();
+        const images = await collection.find({page: event.queryStringParameters.page}).sort({$natural: -1}).toArray();
         return {
             statusCode: 200,
             headers: { "Content-Type": "application/json" },
