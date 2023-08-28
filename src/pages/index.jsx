@@ -180,6 +180,35 @@ function HealingFundsHome() {
 
   }, [])
 
+  async function loadImages() {
+    
+    
+
+    // reset error and message
+    setError('');
+    setMessage('');
+    
+
+    let res = await fetch("/.netlify/functions/getImage", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+      
+      setLandingImages(data.data);
+      console.log(data.data);
+      return setMessage(data.message);
+    }
+    else {
+      
+        return setError(data.message);
+    }
+  }
+
   React.useEffect(() => {
     loadImages().catch((e) => {
       const error = e;
@@ -432,33 +461,6 @@ function HealingFundsHome() {
     }
   }
 
-  async function loadImages() {
-    
-    
-
-    // reset error and message
-    setError('');
-    setMessage('');
-    
-
-    let res = await fetch("/.netlify/functions/getImage", {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    let data = await res.json();
-    if (data.status == "success") {
-      
-      setLandingImages(data.data);
-      return setMessage(data.message);
-    }
-    else {
-      
-        return setError(data.message);
-    }
-  }
 
   function handleOnChange(changeEvent) {
     const reader = new FileReader();
@@ -599,9 +601,9 @@ function HealingFundsHome() {
         </Menu>
       </Flex>
         <Flex width="100%">
-          {landingImages && (
-          <Image src={landingImages[0]} width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
-        )}</Flex>
+          {landingImages && landingImages.map((landingImage) => (
+          <Image src={landingImage.url} width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
+        ))}</Flex>
         <Flex>
         <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
           
