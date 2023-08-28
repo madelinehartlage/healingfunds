@@ -459,7 +459,7 @@ function Contact() {
             <Input type="file" name="file" onChange={uploadToClient}/>
           
           
-          <Image src={imageSrc} />
+          
           
           {imageSrc && !uploadData && (
             
