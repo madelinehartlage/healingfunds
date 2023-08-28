@@ -382,7 +382,9 @@ function HealingFundsHome() {
 
   const addImage = async (landingImage) => {
     
-
+    const postImage = {
+      url: landingImage,
+    }
 
     // reset error and message
     setError('');
@@ -391,7 +393,7 @@ function HealingFundsHome() {
 
     let res = await fetch("/.netlify/functions/addImage", {
         method: 'POST',
-        body: JSON.stringify(landingImage),
+        body: JSON.stringify(postImage),
     });
 
     let data = await res.json();
