@@ -22,14 +22,19 @@ function HealingFundsHome() {
   const [textBoxField, setTextBoxField] = React.useState('')
   const [isModalLoading, setModalLoading] = React.useState(false);
   const [isTextBoxLoading, setTextBoxLoading] = React.useState(false);
-  const [landingImage, setLandingImage] = React.useState("");
   const [error, setError] = React.useState('');
   const [message, setMessage] = React.useState('');
   const toast = useToast();
+  const [imageSrc, setImageSrc] = React.useState();
+  const [uploadData, setUploadData] = React.useState();
+  const [image, setImage] = React.useState(null);
   
   const {data: session} = useSession();
   
   const user = session?.user;
+
+  const CLOUD_NAME = process.env.CLOUD_NAME;
+  
   
 
   const testArticles = [
@@ -174,10 +179,6 @@ function HealingFundsHome() {
 
   }, [])
 
-  React.useEffect(() => {
-    console.log(landingImage)
-
-  }, [landingImage])
 
   React.useEffect(() => {
     async function loadArticles() {
@@ -379,7 +380,7 @@ function HealingFundsHome() {
     }
   }
 
-  const addImage = async () => {
+  const addImage = async (landingImage) => {
     
 
 
@@ -417,6 +418,42 @@ function HealingFundsHome() {
         return setError(data.message);
     }
   }
+
+  function handleOnChange(changeEvent) {
+    const reader = new FileReader();
+
+    reader.onload = function(onLoadEvent) {
+      setImageSrc(onLoadEvent.target.result);
+      setUploadData(undefined);
+    }
+
+    reader.readAsDataURL(changeEvent.target.files[0]);
+  }
+
+  async function handleOnSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('file', image);
+    formData.append('upload_preset', 'test_uploads');
+
+    const data = await fetch("https://api.cloudinary.com/v1_1/dvmgdgrpv/image/upload", {
+      method: "POST",
+      body: formData
+    }).then(r => r.json());
+
+    console.log("data",data.secure_url);
+    addImage(data.secure_url);
+  }
+
+  const uploadToClient = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const i = event.target.files[0];
+
+      setImage(i);
+      
+    }
+  };
+
 
   return (
     <Flex height="100vh" bgColor="white">
@@ -524,8 +561,21 @@ function HealingFundsHome() {
           <Image src="/image-1000x500.jpg" width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         </Flex>
         <Flex>
-          <Input type="file" onChange={(e) => setLandingImage(e.target.files[0])}></Input>
-          <Button onClick={addImage}></Button>
+        <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
+          
+            <Input type="file" name="file" onChange={uploadToClient}/>
+          
+          
+          <Image src={imageSrc} />
+          
+          {imageSrc && !uploadData && (
+            
+              <Button type="submit">Upload Files</Button>
+            
+          )}
+
+          
+        </form>
         </Flex>
         <Flex width="100%" justifyContent="center" paddingTop={8} paddingBottom={8}>
           <Stack direction="column" width={["100%","50%"]} paddingRight={["30px", "0px"]} paddingLeft={["30px", "0px"]} spacing={["20px", "10px"]}>
