@@ -602,7 +602,7 @@ function HealingFundsHome() {
       </Flex>
         <Flex width="100%">
           {landingImages && landingImages.map((landingImage) => (
-          <Image src={landingImage.url} width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
+          <Image key={landingImage.url} src={landingImage.url} width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         ))}</Flex>
         <Flex>
         <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
