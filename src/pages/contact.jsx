@@ -21,6 +21,11 @@ function Contact() {
   const [error, setError] = React.useState('');
   const [message, setMessage] = React.useState('');
   const toast = useToast();
+  const [isImageLoading, setImageLoading] = React.useState(false);
+  const [landingImages, setLandingImages] = React.useState([]);
+  const [imageSrc, setImageSrc] = React.useState();
+  const [uploadData, setUploadData] = React.useState();
+  const [image, setImage] = React.useState(null);
 
   const {data: session} = useSession();
   
@@ -222,6 +227,123 @@ function Contact() {
     }
   }
 
+  async function loadImages() {
+    
+    
+
+    // reset error and message
+    setError('');
+    setMessage('');
+    
+
+    let res = await fetch(`/.netlify/functions/getImage?page=contact`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+      
+      setLandingImages(data.data);
+      console.log(data.data);
+      return setMessage(data.message);
+    }
+    else {
+      
+        return setError(data.message);
+    }
+  }
+
+  React.useEffect(() => {
+    loadImages().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
+
+  const addImage = async (landingImage) => {
+    setImageLoading(true);
+    
+    const postImage = {
+      url: landingImage,
+      page: "contact",
+    }
+
+    // reset error and message
+    setError('');
+    setMessage('');
+    
+
+    let res = await fetch("/.netlify/functions/addImage", {
+        method: 'POST',
+        body: JSON.stringify(postImage),
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+      setImageLoading(false);
+      toast({
+        title: 'Success.',
+        description: "You've successfully added an image.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+      loadImages();
+      return setMessage(data.message);
+    }
+    else {
+      setImageLoading(false);
+      toast({
+        title: 'Error.',
+        description: "Failed to add image.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+        return setError(data.message);
+    }
+  }
+
+
+  function handleOnChange(changeEvent) {
+    const reader = new FileReader();
+
+    reader.onload = function(onLoadEvent) {
+      setImageSrc(onLoadEvent.target.result);
+      setUploadData(undefined);
+    }
+
+    reader.readAsDataURL(changeEvent.target.files[0]);
+  }
+
+  async function handleOnSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('file', image);
+    formData.append('upload_preset', 'test_uploads');
+
+    const data = await fetch("https://api.cloudinary.com/v1_1/dvmgdgrpv/image/upload", {
+      method: "POST",
+      body: formData
+    }).then(r => r.json());
+
+    console.log("data",data.secure_url);
+    addImage(data.secure_url);
+  }
+
+  const uploadToClient = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const i = event.target.files[0];
+
+      setImage(i);
+      
+    }
+  };
+
   return (
     <Flex height="100vh" bgColor="white">
       <Stack direction="column" width="100%" spacing={0}>
@@ -325,8 +447,27 @@ function Contact() {
         </Flex>
         <Stack direction={["column","row"]} spacing={8}>
         <Flex width="100%" maxWidth={["100%","50%"]} maxHeight="650px">
-          <Image src="/rocks2.jpg" width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
-        </Flex>
+        {landingImages && landingImages[0] && (
+          <Image key={landingImages[0].url} src={landingImages[0].url} width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
+        )}</Flex>
+        {user && user.name && user.name == "adminpasscode" && (
+        <Flex>
+        <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
+          
+            <Input type="file" name="file" onChange={uploadToClient}/>
+          
+          
+          <Image src={imageSrc} />
+          
+          {imageSrc && !uploadData && (
+            
+              <Button type="submit" isLoading={isImageLoading}>Upload File</Button>
+            
+          )}
+
+          
+        </form>
+        </Flex>)}
         <Flex justifyContent="center" paddingTop={[5,50]} paddingBottom={50} alignItems="center" width="100%">
         
             <Stack direction="column" spacing={8} marginRight={[0,20]} paddingLeft={["30px", "0px"]} paddingRight={["30px", "0px"]}>

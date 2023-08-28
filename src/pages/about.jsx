@@ -477,8 +477,9 @@ function About() {
         </Menu>
         </Flex>
         <Stack direction={["column","row"]} spacing={8} height="100%">
-          
+        <Stack direction="column" width="100%">
         <Flex width="100%" maxWidth={["100%","50%"]}>
+          
         {landingImages && landingImages[0] && (
           <Image key={landingImages[0].url} src={landingImages[0].url} width="100%" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         )}</Flex>
@@ -500,7 +501,7 @@ function About() {
           
         </form>
         </Flex>)}
-          
+        </Stack>  
           
         <Flex paddingTop={[4,20]} width="100%" maxWidth={["100%","50%"]} justifyContent="center" direction={["column","row"]}>
           <Stack direction="column" paddingLeft={20} paddingTop={[0,20]}>
