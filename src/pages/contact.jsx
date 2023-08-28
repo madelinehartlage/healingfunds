@@ -446,11 +446,13 @@ function Contact() {
         </Menu>
         </Flex>
         <Stack direction={["column","row"]} spacing={8}>
+        {user && user.name && user.name == "adminpasscode" ? (
+          <Stack direction="column">
         <Flex width="100%" maxWidth={["100%","50%"]} maxHeight="650px">
         {landingImages && landingImages[0] && (
           <Image key={landingImages[0].url} src={landingImages[0].url} width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         )}</Flex>
-        {user && user.name && user.name == "adminpasscode" && (
+        
         <Flex>
         <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
           
@@ -467,7 +469,12 @@ function Contact() {
 
           
         </form>
-        </Flex>)}
+        </Flex></Stack>) :(
+          <Flex width="100%" maxWidth={["100%","50%"]} maxHeight="650px">
+          {landingImages && landingImages[0] && (
+            <Image key={landingImages[0].url} src={landingImages[0].url} width="100%" fallback={<Box width={500} height={500} bgColor="white"/>}/>
+          )}</Flex>
+        )}
         <Flex justifyContent="center" paddingTop={[5,50]} paddingBottom={50} alignItems="center" width="100%">
         
             <Stack direction="column" spacing={8} marginRight={[0,20]} paddingLeft={["30px", "0px"]} paddingRight={["30px", "0px"]}>
