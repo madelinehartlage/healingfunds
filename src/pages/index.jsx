@@ -434,9 +434,7 @@ function HealingFundsHome() {
 
   async function loadImages() {
     
-    const imageData = {
-      page: "home",
-    }
+    
 
     // reset error and message
     setError('');
@@ -448,7 +446,6 @@ function HealingFundsHome() {
       headers: {
         "Content-Type": "application/json",
       },
-        body: JSON.stringify(imageData),
     });
 
     let data = await res.json();
