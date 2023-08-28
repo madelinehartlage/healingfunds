@@ -601,7 +601,7 @@ function HealingFundsHome() {
         </Menu>
       </Flex>
         <Flex width="100%">
-          {landingImages && (
+          {landingImages && landingImages[0] && (
           <Image key={landingImages[0].url} src={landingImages[0].url} width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
         )}</Flex>
         <Flex>
