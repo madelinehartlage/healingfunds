@@ -15,6 +15,7 @@ function HealingFundsHome() {
   const [articles, setArticles] = React.useState([]);
   const [sponsors, setSponsors] = React.useState([]);
   const [textBoxes, setTextBoxes] = React.useState([]);
+  const [landingImages, setLandingImages] = React.useState([]);
   const [pageOp, setPageOp] = React.useState('homeOp')
   const [textAlignOp, setTextAlignOp] = React.useState('center')
   const [fontSizeOp, setFontSizeOp] = React.useState('medium')
@@ -173,6 +174,14 @@ function HealingFundsHome() {
 
   React.useEffect(() => {
     loadTextBoxes().catch((e) => {
+      const error = e;
+      console.log(error.message);
+    });
+
+  }, [])
+
+  React.useEffect(() => {
+    loadImages().catch((e) => {
       const error = e;
       console.log(error.message);
     });
@@ -384,6 +393,7 @@ function HealingFundsHome() {
     
     const postImage = {
       url: landingImage,
+      page: "home",
     }
 
     // reset error and message
@@ -406,6 +416,7 @@ function HealingFundsHome() {
         duration: 5000,
         isClosable: true,
       })
+      loadImages();
       return setMessage(data.message);
     }
     else {
@@ -417,6 +428,37 @@ function HealingFundsHome() {
         duration: 5000,
         isClosable: true,
       })
+        return setError(data.message);
+    }
+  }
+
+  async function loadImages() {
+    
+    const imageData = {
+      page: "home",
+    }
+
+    // reset error and message
+    setError('');
+    setMessage('');
+    
+
+    let res = await fetch("/.netlify/functions/getImage", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+        body: JSON.stringify(imageData),
+    });
+
+    let data = await res.json();
+    if (data.status == "success") {
+      
+      setLandingImages(data.data);
+      return setMessage(data.message);
+    }
+    else {
+      
         return setError(data.message);
     }
   }
@@ -560,8 +602,9 @@ function HealingFundsHome() {
         </Menu>
       </Flex>
         <Flex width="100%">
-          <Image src="/image-1000x500.jpg" width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
-        </Flex>
+          {landingImages && (
+          <Image src={landingImages[0]} width="100%" maxHeight="650px" objectFit="cover" fallback={<Box width={500} height={500} bgColor="white"/>}/>
+        )}</Flex>
         <Flex>
         <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
           
